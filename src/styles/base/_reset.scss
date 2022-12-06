@@ -1,0 +1,26 @@
+@use '../abstract/colors' as *;
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.light {
+    .text-theme {
+        color: $light-text-87;
+    }
+
+    .background-theme {
+        background-color: $light-background;
+    }
+}
+
+.dark {
+    .text-theme {
+        color: $dark-text-87;
+    }
+
+    .background-theme {
+        background-color: $dark-background;
+    }
+}

@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, useContext } from "react";
+import { Route, Routes } from "react-router-dom";
 
+import { ThemeContext } from "./context/ThemeContext";
+import Home from "./Pages/Home/Home";
+import Navigation from "./Components/Navigation/Navigation";
+import Gallery from "./Pages/Gallery/Gallery";
+import News from "./Pages/News/News";
+import AboutUs from "./Pages/AboutUs/AboutUs";
+
+import "./styles/_main.scss";
+
+// prettier-ignore
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const { theme } = useContext(ThemeContext)
+    
+    return (
+        <div className={theme}>
+            <Navigation />
+            <div id="content">
+                <Routes>
+                    <Route exact path="/" element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Home />
+                        </Suspense>
+                    } />
+                    <Route path="/gallery" element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Gallery />
+                        </Suspense>
+                    } />
+                    <Route path="/news" element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <News />
+                        </Suspense>
+                    } />
+                    <Route path="/aboutus" element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <AboutUs />
+                        </Suspense>
+                    } />
+                </Routes>
+            </div>
+        </div>
+    );
 }
 
 export default App;

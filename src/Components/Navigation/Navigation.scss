@@ -1,0 +1,13 @@
+.navbar {
+
+    .navbar-nav {
+        justify-content: end;
+        width: 100%;
+
+        .active {
+            color: white;
+            background-color: #0047AB;
+            border-radius: 5px;
+        }
+    }
+}
