@@ -10,10 +10,29 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./context/ThemeContext";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import {
+    fab,
+    faInstagram,
+    faLinkedinIn,
+    faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+    faEnvelope,
+    faLocationDot,
+    faMoon,
+    faSun,
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(fab, faSun, faMoon);
+library.add(
+    fab,
+    faSun,
+    faMoon,
+    faLocationDot,
+    faEnvelope,
+    faInstagram,
+    faLinkedinIn,
+    faWhatsapp
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

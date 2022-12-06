@@ -17,7 +17,7 @@ function App() {
     const { theme } = useContext(ThemeContext)
     
     return (
-        <div className={`App ${theme}`}>
+        <div className={`App ${theme} d-flex flex-column justify-content-between`}>
             <Navigation />
             <div className="main-content-theme">
                 <Routes>

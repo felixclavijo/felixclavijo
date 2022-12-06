@@ -15,26 +15,31 @@ body {
 
 .light {
     background-color: $light-background;
+    transition: ease-in-out 0.2s;
 
     .text-theme {
         color: $light-text-87;
+        transition: ease-in-out 0.2s;
     }
 
     .background-theme {
         background-color: $light-background;
+        transition: ease-in-out 0.2s;
     }
 
     .transparent-theme {
         background-color: transparent;
+        transition: ease-in-out 0.2s;
     }
 
     .main-content-theme {
-        background-color: $light-background;
         color: $light-text-87;
+        transition: ease-in-out 0.2s;
     }
 
     .border-theme {
         border: 1px solid $light-border;
+        transition: ease-in-out 0.2s;
     }
 
     .button-theme {
@@ -43,27 +48,45 @@ body {
         background-color: $primary;
         color: $dark-text-87;
         border-radius: 5px;
+        transition: ease-in-out 0.2s;
+    }
+
+    .icon-theme {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: $dark-text-87;
+        background-color: $dark-background;
+        transition: ease-in-out 0.2s;
     }
 }
 
 .dark {
     background-color: $dark-level1;
+    transition: ease-in-out 0.2s;
 
     .text-theme {
         color: $dark-text-87;
+        transition: ease-in-out 0.2s;
     }
 
     .background-theme {
         background-color: $dark-level2;
+        transition: ease-in-out 0.2s;
     }
 
     .main-content-theme {
-        background-color: $dark-level1;
         color: $dark-text-87;
+        transition: ease-in-out 0.2s;
     }
 
     .border-theme {
         border: 1px solid $light-border;
+        transition: ease-in-out 0.2s;
     }
 
     .button-theme {
@@ -72,10 +95,24 @@ body {
         background-color: $primary;
         color: $dark-text-87;
         border-radius: 5px;
+        transition: ease-in-out 0.2s;
+    }
+
+    .icon-theme {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: $light-text-87;
+        background-color: $light-background;
+        transition: ease-in-out 0.2s;
     }
 
 }
 
 .primary-theme {
-    background-color: $primary-70;
+    background-color: $primary-80;
 }

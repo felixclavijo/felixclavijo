@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context/ThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,9 +10,9 @@ import "./Navigation.scss";
 // prettier-ignore
 function Navigation() {
 
-    const { theme, setTheme } = useContext(ThemeContext)
+    const { theme, setTheme, pathname, setPathname } = useContext(ThemeContext)
 
-    const [pathname, setPathname] = useState('/')
+    // const [pathname, setPathname] = useState('/')
 
     // useEffect(() => {
     //     console.log('The Pathname Changed: ', window.location.pathname)
