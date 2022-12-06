@@ -18,7 +18,7 @@ function App() {
     return (
         <div className={theme}>
             <Navigation />
-            <div id="content">
+            <div className="main-content-theme">
                 <Routes>
                     <Route exact path="/" element={
                         <Suspense fallback={<div>Loading...</div>}>

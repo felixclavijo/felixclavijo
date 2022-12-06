@@ -19,7 +19,7 @@ function Navigation() {
     // }, [window.location.pathname])
 
     return (
-        <nav className="navbar navbar-expand-lg background-theme">
+        <nav className={`navbar navbar-expand-lg background-theme ${pathname === '/' ? 'transparent-theme' : ''}`}>
             <div className="container-fluid">
                 <h3 className="navbar-brand text-theme">Navbar</h3>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
