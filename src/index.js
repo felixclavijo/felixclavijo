@@ -21,6 +21,7 @@ import {
     faLocationDot,
     faMoon,
     faSun,
+    faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -31,7 +32,8 @@ library.add(
     faEnvelope,
     faInstagram,
     faLinkedinIn,
-    faWhatsapp
+    faWhatsapp,
+    faBars
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

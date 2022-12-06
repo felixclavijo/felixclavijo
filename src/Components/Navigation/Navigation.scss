@@ -3,6 +3,13 @@
 
 .navbar {
 
+    .navbar-toggler {
+
+        &:focus {
+            box-shadow: 0;
+        }
+    }
+
     .navbar-nav {
         justify-content: end;
         width: 100%;
