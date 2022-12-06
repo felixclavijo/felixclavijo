@@ -3,9 +3,19 @@
 body {
     padding: 0;
     margin: 0;
+    height: 100vh;
+}
+
+.App {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .light {
+    background-color: $light-background;
+
     .text-theme {
         color: $light-text-87;
     }
@@ -37,6 +47,8 @@ body {
 }
 
 .dark {
+    background-color: $dark-level1;
+
     .text-theme {
         color: $dark-text-87;
     }

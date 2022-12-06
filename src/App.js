@@ -9,6 +9,7 @@ import News from "./Pages/News/News";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 
 import "./styles/_main.scss";
+import Footer from "./Components/Footer/Footer";
 
 // prettier-ignore
 function App() {
@@ -16,7 +17,7 @@ function App() {
     const { theme } = useContext(ThemeContext)
     
     return (
-        <div className={theme}>
+        <div className={`App ${theme}`}>
             <Navigation />
             <div className="main-content-theme">
                 <Routes>
@@ -42,6 +43,7 @@ function App() {
                     } />
                 </Routes>
             </div>
+            <Footer />
         </div>
     );
 }
