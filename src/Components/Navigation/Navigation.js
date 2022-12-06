@@ -30,18 +30,22 @@ function Navigation() {
                         {
                             navigation_data?.map((navigation, i) =>
                                 <li className="nav-item" key={i}>
-                                    <Link to={navigation.path} className={`nav-link text-theme ${pathname === navigation.path ? 'active' : ''}`} onClick={() => setPathname(navigation.path)}>
+                                    <Link to={navigation.path} className={`nav-link text-theme ${pathname === navigation.path ? 'active primary-theme' : ''}`} onClick={() => setPathname(navigation.path)}>
                                         {navigation.title}
                                     </Link>
                                 </li>
                             )
                         }
-                        <li>
-                            <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+                        <li className="nav-item">
+                            <button className="button-theme">Contact Us</button>
+                        </li>
+                        <li className="nav-item">
+                            <button className="border-theme bg-transparent" style={{ width: 35, height: 35, borderRadius: 20 }} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
                                 {
-                                    theme === ''
+                                    theme === 'light'
+                                    ? <FontAwesomeIcon icon="sun" className='text-theme' />
+                                    : <FontAwesomeIcon icon="moon" className='text-theme'/>
                                 }
-                                <FontAwesomeIcon icon="sun"/>
                             </button>
                         </li>
                     </ul>

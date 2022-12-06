@@ -1,13 +1,36 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
 .navbar {
 
     .navbar-nav {
         justify-content: end;
         width: 100%;
 
+        .nav-item {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px 5px;
+
+            @include respond(tab-port) {
+                display: block;
+            }
+        }
+
         .active {
             color: white;
-            background-color: #0047AB;
             border-radius: 5px;
         }
+    }
+
+    .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+    }
+
+    .navbar-brand {
+        margin: 1px 0px;
     }
 }

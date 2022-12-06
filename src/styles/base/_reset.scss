@@ -13,6 +13,18 @@ body {
     .background-theme {
         background-color: $light-background;
     }
+
+    .border-theme {
+        border: 1px solid $light-border;
+    }
+
+    .button-theme {
+        padding: 5px 10px;
+        border: 1px solid $dark-border;
+        background-color: $primary;
+        color: $dark-text-87;
+        border-radius: 5px;
+    }
 }
 
 .dark {
@@ -21,6 +33,23 @@ body {
     }
 
     .background-theme {
-        background-color: $dark-background;
+        background-color: $dark-level2;
     }
+
+    .border-theme {
+        border: 1px solid $light-border;
+    }
+
+    .button-theme {
+        padding: 5px 10px;
+        border: 1px solid $dark-border;
+        background-color: $primary;
+        color: $dark-text-87;
+        border-radius: 5px;
+    }
+
+}
+
+.primary-theme {
+    background-color: $primary-70;
 }

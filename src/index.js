@@ -13,7 +13,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faSun, faMoon);
+library.add(fab, faSun, faMoon);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
