@@ -4,11 +4,17 @@
 .footer {
     padding: 50px;
 
+    .col_margin {
+        display: flex;
+        justify-content: center;
+    }
+
     @include respond(tab-port) {
         padding: 50px 5px;
 
         .col_margin {
             margin-bottom: 30px;
+            display: block;
         }
 
         .image_align {
