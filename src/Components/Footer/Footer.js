@@ -9,7 +9,7 @@ import "./Footer.scss";
 // prettier-ignore
 function Footer() {
 
-    const { pathname, setPathname } = useContext(ThemeContext)
+    const { theme, pathname, setPathname } = useContext(ThemeContext)
 
     return (
         <div className="footer background-theme text-theme">
@@ -17,7 +17,13 @@ function Footer() {
                 <div className="row">
                     <div className="col-lg col_margin">
                         <div>
-                            <img src={require('../../assets/Felix Clavijo 1.png')} alt='footerLogo' style={{ borderRadius: 5 }} className="image_style" />
+                            <div className="d-flex align-items-center justify-content-center p-4" style={{borderRadius: 8}}>
+                                <img src={require('../../assets/Removal-623 1.png')} style={{ height: 90, borderRadius: 5, marginRight: 5 }} alt="Logo" />
+                                <div className="d-flex flex-column">
+                                    <img src={theme === 'light' ? require('../../assets/Light-FELIX CLAVIJO.png') : require('../../assets/Dark-FELIX CLAVIJO.png')} style={{ width: 120, borderRadius: 5, marginBottom: 5 }} alt="Logo" />
+                                    <img src={theme === 'light' ? require('../../assets/Light-ARQUITECTURA.png') : require('../../assets/Dark-ARQUITECTURA.png')} style={{ width: 90, borderRadius: 5 }} alt="Logo" />
+                                </div>
+                            </div>
                             <p className="my-4">Diseñamos personas inspiradas Experiencias que crean positivo cambio en la vida de las personas.</p>
                             <div className="image_align">
                                 <img src={require('../../assets/QR-code-obituary.svg.webp')} alt='footerLogo' style={{ height: 90, borderRadius: 5 }} />

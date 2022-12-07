@@ -2,6 +2,20 @@
 @import '../../responsive/mixin';
 
 .navbar {
+    padding: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    transition: ease-in-out 0.2s;
+    
+    // &.nav_deactive {
+    //     padding: 50px;
+    // }
+    
+    // &.nav_active {
+    //     padding: 0px;
+    // }
 
     .navbar-toggler {
 
