@@ -2,7 +2,7 @@
 @import '../../responsive/mixin';
 
 .hero {
-    background-color: $dark-level1;
+    background-color: $dark-level0;
     height: 100vh;
     position: relative;
     display: flex;
@@ -19,7 +19,7 @@
         .hero_img {
             min-height: 100%;
             width: 100%;
-            opacity: 0.3;
+            opacity: 0.15;
         }
 
         @include respond(tab-land) {

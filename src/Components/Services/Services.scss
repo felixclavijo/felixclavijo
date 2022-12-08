@@ -1,0 +1,9 @@
+@use '../../styles/abstract/colors' as *;
+
+.services {
+
+    .check_icon {
+        color: $primary;
+        font-size: 25px;
+    }
+}

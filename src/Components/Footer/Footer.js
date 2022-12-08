@@ -12,7 +12,7 @@ function Footer() {
     const { theme, pathname, setPathname } = useContext(ThemeContext)
 
     return (
-        <div className="footer background-theme text-theme">
+        <div className="footer background-theme text-theme padding-whole-theme">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-lg col_margin">

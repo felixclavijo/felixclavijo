@@ -7,7 +7,7 @@ function Hero() {
     return (
         <div className="hero">
             <div className="hero_wrapper">
-                <img src={require('../../assets/Hero2.jpg')} alt="Hero" className="hero_img" />
+                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM (1).jpeg')} alt="Hero" className="hero_img" />
             </div>
             <div className="hero_title">
                 <img src={require('../../assets/5.png')} style={{ height: 150, borderRadius: 5, marginRight: 5 }} alt="Logo" />

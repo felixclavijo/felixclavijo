@@ -1,4 +1,5 @@
 @use '../abstract/colors' as *;
+@import '../../responsive/mixin';
 
 body {
     padding: 0;
@@ -117,6 +118,14 @@ body {
 
 .primary-theme {
     background-color: $primary-80;
+}
+
+.padding-whole-theme {
+    padding: 50px;
+
+    @include respond(tab-port) {
+        padding: 50px 5px;
+    }
 }
 
 /* width */
