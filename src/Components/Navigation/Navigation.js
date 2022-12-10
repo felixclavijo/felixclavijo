@@ -12,19 +12,6 @@ function Navigation() {
 
     const { theme, setTheme, pathname, setPathname } = useContext(ThemeContext)
 
-    // const [navbar, setNavbar] = useState(false)
-
-    // const scrolling_effect = () => {
-    //     var hero_height = document.getElementsByClassName('hero')[0]?.clientHeight - 200
-    //     if(window.scrollY > hero_height) setNavbar(true)
-    //     else setNavbar(false)
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', scrolling_effect)
-    //     return () => window.addEventListener('scroll', scrolling_effect)
-    // }, [])
-
     return (
         <nav className={`navbar navbar-expand-lg background-theme`}>
             <div className="container-fluid">

@@ -3,6 +3,7 @@
 .home {
 
     .side_border {
+        overflow: hidden;
         border-left: 6px solid $primary;
         padding: 0px 20px;
         max-width: 650px;

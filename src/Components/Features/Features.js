@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
 import "./Features.scss";
 
@@ -6,6 +7,8 @@ import "./Features.scss";
 function Features({ image, title, desc, reverse=false }) {
 
     const [changing, setChanging] = useState(true)
+
+    const { setImg_height } = useContext(ThemeContext)
 
     const interChange = () => {
         if(window.innerWidth < 768) {
@@ -15,8 +18,14 @@ function Features({ image, title, desc, reverse=false }) {
         }
     }
 
+    const handleImg = (e) => {
+        setImg_height(e.target.clientHeight)
+    }
+
     useEffect(() => {
         window.addEventListener('resize', interChange)
+        
+        return () => window.removeEventListener('resize', interChange)
     }, [])
     return (
         <div className="features padding-whole-theme">
@@ -25,13 +34,13 @@ function Features({ image, title, desc, reverse=false }) {
                     <div className={`col-md  d-flex justify-content-center ${reverse && changing ? 'flex-column' : ''}`}>
                         {
                             reverse && changing
-                            ? <>
-                                <h1>{title}</h1>
+                            ? <div className="FadeLeft">
+                                <h1 >{title}</h1>
                                 <hr className="line_hr" />
                                 <span>{desc}</span>
-                            </>
-                            : <div className="features_wrapper">
-                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM.jpeg')} alt="features" className="features_img" />
+                            </div>
+                            : <div className="features_wrapper FadeLeft">
+                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM.jpeg')} alt="features" className="features_img" onLoad={handleImg} />
                             </div>
                             
                         }
@@ -39,14 +48,14 @@ function Features({ image, title, desc, reverse=false }) {
                     <div className={`col-md  d-flex justify-content-center ${reverse && changing ? '' : 'flex-column'}`}>
                         {
                             reverse && changing
-                            ? <div className="features_wrapper">
-                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM.jpeg')} alt="features" className="features_img" />
+                            ? <div className="features_wrapper FadeRight">
+                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM (1).jpeg')} alt="features" className="features_img" />
                             </div>
-                            : <>
-                                <h1>Analizamos cada caso</h1>
+                            : <div className="FadeRight">
+                                <h1>{title}</h1>
                                 <hr className="line_hr" />
-                                <span>Arreglamos una reunion para hablar del proyecto, ideas, propuestas, etc</span>
-                            </>
+                                <span>{desc}</span>
+                            </div>
                             
                         }
                     </div>

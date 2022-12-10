@@ -1,4 +1,5 @@
-import { Suspense, useContext } from "react";
+// prettier-ignore
+import { Suspense, useContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { ThemeContext } from "./context/ThemeContext";
@@ -14,10 +15,37 @@ import Footer from "./Components/Footer/Footer";
 // prettier-ignore
 function App() {
 
-    const { theme } = useContext(ThemeContext)
+    const [height_arr, setHeight_arr] = useState([])
+
+    const { theme, img_height, app_height } = useContext(ThemeContext)
+
+    useEffect(() => {
+        console.log(img_height)
+        if(img_height !== 0) {
+            var height_design = document.getElementsByClassName('design')[0].clientHeight === 0 ? 500 : document.getElementsByClassName('design')[0].clientHeight
+            var total_circle = Math.round(document.getElementsByClassName('App')[0].clientHeight / height_design)
+            var overall = []
+            var tot_overall = 0
+            for(var i=0; i < total_circle; i++) {
+                overall.push(tot_overall)
+                tot_overall = tot_overall + 500
+            }
+            setHeight_arr(overall)
+        }
+    }, [img_height, app_height])
+    console.log(height_arr)
     
     return (
-        <div className={`App ${theme} d-flex flex-column justify-content-between`}>
+        <div className={`App ${theme} d-flex flex-column justify-content-between`} >
+            <div className="design">
+            {
+                height_arr?.map((he,i) => 
+                    i%2 === 0
+                    ? <div className="liquid_shape" style={{ top: he, right: 0 }} key={i}></div>
+                    : <div className="liquid_shape" style={{ top: he, left: 0 }} key={i}></div>
+                )
+            }
+            </div>
             <Navigation />
             <div className="main-content-theme">
                 <Routes>

@@ -8,8 +8,10 @@ body {
 }
 
 .App {
+    position: relative;
     padding: 0;
     margin: 0;
+    overflow: hidden;
     // height: 100vh;
     // overflow-y: scroll;
 }
@@ -125,6 +127,127 @@ body {
 
     @include respond(tab-port) {
         padding: 50px 5px;
+    }
+}
+
+.fadeInLeft {
+    animation: fadeInLeft 1.2s both;
+}
+.fadeOutLeft {
+    animation: fadeOutLeft 1.2s both;
+}
+
+@keyframes fadeInLeft {
+    0% {
+       opacity: 0;
+       transform: translateX(-20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+}
+@keyframes fadeOutLeft {
+    0% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+    100% {
+       opacity: 0;
+       transform: translateX(-20px);
+    }
+}
+
+.fadeInRight {
+    animation: fadeInRight 1.2s both;
+}
+.fadeOutRight {
+    animation: fadeOutRight 1.2s both;
+}
+
+@keyframes fadeInRight {
+    0% {
+       opacity: 0;
+       transform: translateX(20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+}
+@keyframes fadeOutRight {
+    0% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+    100% {
+       opacity: 0;
+       transform: translateX(20px);
+    }
+}
+
+.leftIn {
+    animation: leftIn 1.2s both;
+}
+.leftOut {
+    animation: leftOut 1.2s both;
+}
+
+@keyframes leftIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes leftOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-500px);
+    }
+}
+
+.design {
+    
+    .liquid_shape {
+        position: absolute;
+        background: linear-gradient(45deg, $primary-80 0%, $primary 100%);
+        width: 500px;
+        height: 500px;
+        box-shadow: 0 0 20px #000;
+        opacity: 0.1;
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        animation: infinite liquid 3s linear;
+    }
+
+    @keyframes liquid {
+        0% {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background-size: 100% 100%;
+        }
+        25% {
+            border-radius: 70% 70% 70% 70% / 70% 70% 70% 70%;
+            background-size: 100% 100%;
+        }
+        50% {
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            background-size: 100% 100%;
+        }
+        75% {
+            border-radius: 60% 30% 70% 40% / 60% 40% 30% 70%;
+            background-size: 100% 100%;
+        }
+        100% {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background-size: 100% 100%;
+        }
     }
 }
 
