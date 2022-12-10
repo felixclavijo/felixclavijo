@@ -12,16 +12,29 @@ function Navigation() {
 
     const { theme, setTheme, pathname, setPathname } = useContext(ThemeContext)
 
-    // const [pathname, setPathname] = useState('/')
+    // const [navbar, setNavbar] = useState(false)
+
+    // const scrolling_effect = () => {
+    //     var hero_height = document.getElementsByClassName('hero')[0]?.clientHeight - 200
+    //     if(window.scrollY > hero_height) setNavbar(true)
+    //     else setNavbar(false)
+    // }
 
     // useEffect(() => {
-    //     console.log('The Pathname Changed: ', window.location.pathname)
-    // }, [window.location.pathname])
+    //     window.addEventListener('scroll', scrolling_effect)
+    //     return () => window.addEventListener('scroll', scrolling_effect)
+    // }, [])
 
     return (
-        <nav className={`navbar navbar-expand-lg background-theme ${pathname === '/' ? 'transparent-theme' : ''}`}>
+        <nav className={`navbar navbar-expand-lg background-theme`}>
             <div className="container-fluid">
-                <img src={require('../../assets/5.png')} style={{ height: 45, borderRadius: 5 }} alt="Logo" />
+                <div className="d-flex align-items-center">
+                    <img src={require('../../assets/Removal-623 1.png')} style={{ height: 70, borderRadius: 5, marginRight: 5 }} alt="Logo" />
+                    <div className="d-flex flex-column">
+                        <img src={theme === 'light' ? require('../../assets/Light-FELIX CLAVIJO.png') : require('../../assets/Dark-FELIX CLAVIJO.png')} style={{ width: 100, borderRadius: 5, marginBottom: 5 }} alt="Logo" />
+                        <img src={theme === 'light' ? require('../../assets/Light-ARQUITECTURA.png') : require('../../assets/Dark-ARQUITECTURA.png')} style={{ width: 80, borderRadius: 5 }} alt="Logo" />
+                    </div>
+                </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <FontAwesomeIcon icon="bars" className="text-theme" />
                     {/* <span className="navbar-toggler-icon"></span> */}

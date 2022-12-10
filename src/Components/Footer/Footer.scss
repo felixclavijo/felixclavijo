@@ -2,7 +2,8 @@
 @import '../../responsive/mixin';
 
 .footer {
-    padding: 50px;
+    // padding: 50px;
+    box-shadow: 0px -1px 10px $dark-level5;
 
     .col_margin {
         display: flex;
@@ -10,7 +11,7 @@
     }
 
     @include respond(tab-port) {
-        padding: 50px 5px;
+        // padding: 50px 5px;
 
         .col_margin {
             margin-bottom: 30px;

@@ -1,22 +1,28 @@
 import React from "react";
 import "./ModalGallery.scss";
-import { motion } from "framer-motion";
+import {BiLeftArrow, BiRightArrow} from 'react-icons/bi'
+
 function ModalGallery({ modalg, setModalg, tempImageSrc }) {
   const CloseModalg = (e) => {
     setModalg(false);
   };
-  console.log(modalg, "modalg");
-
 
   return (
-    <div className="modal_content">
-      <img src={tempImageSrc} alt="modal" />
-      <p style={{ color: "white", fontSize: "20px" }}>
-        {" "}
-        Casa de verano de los angeles, contruida con mano de obra y materiales
-        reciclabes, el enfoque fue en la comodidad del cliente
-      </p>
-    </div>
+    <>
+      <div className="overlay_modal " onClick={CloseModalg}>
+        <span className="dismiss">X</span>
+        <div>
+          <img src={tempImageSrc} alt="bigger pic" />
+
+          <div className="overlay-arrows_left">
+         <BiLeftArrow className="icon"/>
+          </div>
+          <div className="overlay-arrows_right">
+        <BiRightArrow className="icon"/>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 export default ModalGallery;

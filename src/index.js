@@ -22,6 +22,7 @@ import {
     faMoon,
     faSun,
     faBars,
+    faCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -33,7 +34,8 @@ library.add(
     faInstagram,
     faLinkedinIn,
     faWhatsapp,
-    faBars
+    faBars,
+    faCircleCheck
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

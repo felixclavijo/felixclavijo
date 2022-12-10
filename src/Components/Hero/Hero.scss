@@ -1,0 +1,88 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
+.hero {
+    background-color: $dark-level0;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    .hero_wrapper {
+        height: 100%;
+        min-width: 100%;
+        position: absolute;
+        overflow: hidden;
+
+        .hero_img {
+            min-height: 100%;
+            width: 100%;
+            opacity: 0.15;
+        }
+
+        @include respond(tab-land) {
+            display: flex;
+            justify-content: center;
+
+            .hero_img {
+                height: 100%;
+                width: auto;
+            }
+        }
+    }
+
+    .hero_title {
+        z-index: 2;
+        left: 100px;
+        color: $dark-text-87;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 600px;
+
+        .format_clavijo {
+            color: $primary;
+        }
+    }
+
+    .mouse {
+        bottom: 15px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        transform: rotate(180deg);
+        animation: bounce 0.5s;
+        animation-direction: alternate;
+        animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
+        animation-iteration-count: infinite;
+
+        .mouse_outer {
+            width: 18px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid white;
+        }
+
+        .mouse_scrollwheel {
+            position: absolute;
+            top: 8px;
+            width: 6px;
+            height: 10px;
+            border-radius: 10px;
+            background-color: white;
+        }
+    }
+
+    @keyframes bounce {
+        from {
+            transform: translate3d(0, -20px, 0) rotate(180deg);
+        }
+        to {
+            transform: translate3d(0, 0, 0) rotate(180deg);
+        }
+    }
+
+}
