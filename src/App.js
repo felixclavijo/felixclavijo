@@ -20,8 +20,8 @@ function App() {
     const { theme, img_height, app_height } = useContext(ThemeContext)
 
     useEffect(() => {
-        console.log(img_height)
-        if(img_height !== 0) {
+        // console.log(img_height, app_height)
+        if(img_height !== 0 || app_height !== 0) {
             var height_design = document.getElementsByClassName('design')[0].clientHeight === 0 ? 500 : document.getElementsByClassName('design')[0].clientHeight
             var total_circle = Math.round(document.getElementsByClassName('App')[0].clientHeight / height_design)
             var overall = []
@@ -33,7 +33,7 @@ function App() {
             setHeight_arr(overall)
         }
     }, [img_height, app_height])
-    console.log(height_arr)
+    // console.log(height_arr)
     
     return (
         <div className={`App ${theme} d-flex flex-column justify-content-between`} >
