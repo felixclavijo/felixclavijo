@@ -31,8 +31,6 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
         var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
         var cal = window.innerWidth / 2
         var final = ele - cal
-        // console.log(ele - final - 250, (500*ind))
-        // console.log(ele, cal, final, 250)
         setMove(ele - final - 250 - (500*ind))
 
         var all_inside = document.getElementsByClassName("overlay_img_big")
@@ -57,7 +55,6 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
 			}
 
             for(var t=0; t < img_all.length; t++) {
-                // console.log(img_all[ind].clientHeight, all_inside[ind].clientHeight)
                 if(img_all[t].clientHeight < all_inside[t].clientHeight) {
                     all_inside[t].style.height = '100%'
                     all_inside[t].style.width = null
@@ -72,7 +69,6 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
 			}
 		} else {
 			for(var j=0; j < all_img.length; j++) {
-                // console.log(all_col.clientWidth, all_img[j].clientWidth)
 				if(all_col.clientWidth === all_img[j].clientWidth) {
                     if(all_col.clientHeight > all_img[j].clientHeight) {
                         all_img[j].style.height = '100%'
@@ -111,12 +107,9 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
     }
 
     useEffect(() => {
-        
         var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
         var cal = window.innerWidth / 2
         var final = ele - cal
-        // console.log(ele - final - 250, (500*ind))
-        // console.log(ele, cal, final, 250)
         setMove(ele - final - 250 - (500*imageindex))
 
         window.addEventListener('resize', () => imagechange(imageindex))
@@ -126,7 +119,6 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
     return (
         <>
             <div className={`overlay_modal ${modal ? 'show' : ''}`}>
-                {/* <span className="dismiss">X</span> */}
                 <div className="overlay_container" onClick={() => setModal(false)}>
                 {
                     data?.map((gallery_img, i) => 
@@ -154,36 +146,7 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
                             )
                         }
                     </div>
-                    {/* <div className="overlay_img_main">
-                        {
-                            data?.map((gallery_img, i) => 
-                                1 === i
-                                ? <img src={gallery_img.image} alt="bigger pic" key={i} className="overlay_img_big" />
-                                : null
-                            )
-                        }
-                    </div>
-                    <div className="overlay_img_left">
-                        {
-                            data?.map((gallery_img, i) => 
-                                1 <= i
-                                ? null
-                                : <img src={gallery_img.image} alt="bigger pic" key={i} className="overlay_img_small" />
-                            )
-                        }
-                    </div>
-                    <div className="overlay_img_right">
-                        {
-                            data?.map((gallery_img, i) => 
-                                1 >= i
-                                ? null
-                                : <img src={gallery_img.image} alt="bigger pic" key={i} className="overlay_img_small" />
-                            )
-                        }
-                    </div> */}
                 </div>
-
-
             </div>
         </>
     );
