@@ -5,14 +5,14 @@ import "./Gallery.scss";
 
 // prettier-ignore
 function Gallery() {
-	const [modalg, setModalg] = useState(null);
-	const [tempImageSrc, setTempImageSrc] = useState("");
+	const [modal, setModal] = useState(false);
+	const [imageindex, setImageIndex] = useState();
 
 	const { setApp_height } = useContext(ThemeContext)
 
-	const getImage = (imgSrc) => {
-		setTempImageSrc(imgSrc);
-		setModalg(true);
+	const getImage = (index) => {
+		setImageIndex(index);
+		setModal(true);
 	};
 
 	let data = [
@@ -114,7 +114,7 @@ function Gallery() {
 				{
 					data?.map((d, i) => 
 						<div className="col-md p-1" key={i}>
-							<div className="overlay" onClick={() => getImage(i.image)}>
+							<div className="overlay" onClick={() => getImage(i)}>
 								<div className="img_container">
 									<img src={d.image} alt="gallery" className="gallery_img" onLoad={(e) => galleryImg(e, i)}/>
 								</div>
@@ -128,64 +128,13 @@ function Gallery() {
 				}
 			</div>
 		</div>
-
-		<div className="containerg">
-			<div className="row grid-gall">
-				{/* {
-					data?.map((i, index) => (
-						<div className="col-md" key={index}>
-							<div className="overlay" onClick={() => getImage(i.image)}>
-								<div className="containeri">
-								<div className="img_container">
-									<img src={i.image} alt="img" className="img_fe" />
-								</div>
-								<div className="bottom-left">
-									<h3 style={{ float: "left", textAlign: "left" }}>
-										{i.title}
-									</h3>
-									<p className="p-subtitle">
-										{i.subtitle}
-									</p>
-								</div>
-								</div>
-							</div>
-						</div>
-					))
-				} */}
-				{/* <div className="containerg">
-					<div className="row grid-gall">
-						{
-							data?.map((i) => (
-								<div className="col-sm">
-									<div className="overlay" onClick={() => getImage(i.image)}>
-										<img src={i.image} alt="img" />
-									</div>
-									<div className="bottom-left">{i.title}</div>
-								</div>
-							))
-						}
-					</div>
-				</div> */}
-				{
-					modalg && (
-						<ModalGallery
-							setModalg={setModalg}
-							modalg={modalg}
-							tempImageSrc={tempImageSrc}
-						/>
-					)
-				}
-			</div>
-		</div>
-		{
-			modalg && (
-				<ModalGallery
-					setModalg={setModalg}
-					modalg={modalg}
-					tempImageSrc={tempImageSrc}
-				/>
-			)
-		}
+		<ModalGallery
+			data={data}
+			setModal={setModal}
+			modal={modal}
+			imageindex={imageindex}
+			setImageIndex={setImageIndex}
+		/>
 		</div>
 	);
 }
