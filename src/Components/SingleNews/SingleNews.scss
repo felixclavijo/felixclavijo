@@ -1,0 +1,39 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
+.singlenews {
+    margin: 10px 0px;
+
+    .news_wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        // max-height: 550px;
+        overflow: hidden;
+        border-radius: 10px;
+
+        @include respond(tab-port) {
+            max-width: 100%;
+            // max-height: 300px;
+        }
+        
+        .news_img {
+            box-shadow: 10px 10px 20px $dark-level5;
+        }
+    }
+
+    .news_id {
+        color: $primary;
+    }
+
+    .line_hr {
+        width: 100px;
+        border-width: 5px;
+        margin: 0;
+        margin-bottom: 10px;
+        color: $primary;
+        opacity: 1;
+        border-radius: 5px;
+    }
+}

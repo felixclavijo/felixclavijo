@@ -38,13 +38,13 @@ function App() {
     return (
         <div className={`App ${theme} d-flex flex-column justify-content-between`} >
             <div className="design">
-            {
-                height_arr?.map((he,i) => 
-                    i%2 === 0
-                    ? <div className="liquid_shape" style={{ top: he, right: 0 }} key={i}></div>
-                    : <div className="liquid_shape" style={{ top: he, left: 0 }} key={i}></div>
-                )
-            }
+                {
+                    height_arr?.map((he,i) => 
+                        i%2 === 0
+                        ? <div className="liquid_shape" style={{ top: he, right: 0 }} key={i}></div>
+                        : <div className="liquid_shape" style={{ top: he, left: 0 }} key={i}></div>
+                    )
+                }
             </div>
             <Navigation />
             <div className="main-content-theme">

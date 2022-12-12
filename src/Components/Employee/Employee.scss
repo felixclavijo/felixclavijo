@@ -1,0 +1,48 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
+.employee {
+    position: relative;
+    overflow: hidden;
+
+    .employee_img_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 600px;
+        width: 380px;
+        overflow: hidden;
+        
+        .employee_img {
+            height: 100%;
+        }
+
+        @include respond(tab-port) {
+            width: 100%;
+            height: auto;
+
+            .employee_img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+    }
+    
+    .employee_details {
+        width: 380px;
+
+        @include respond(tab-port) {
+            width: 100%;
+        }
+    }
+
+    .download_btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border: 0;
+        color: $light-border;
+        background-color: transparent;
+    }
+}

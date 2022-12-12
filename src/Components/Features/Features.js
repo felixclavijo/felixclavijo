@@ -40,7 +40,7 @@ function Features({ image, title, desc, reverse=false }) {
                                 <span>{desc}</span>
                             </div>
                             : <div className="features_wrapper FadeLeft">
-                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM.jpeg')} alt="features" className="features_img" onLoad={handleImg} />
+                                <img src={image} alt="features" className="features_img" onLoad={handleImg} />
                             </div>
                             
                         }
@@ -49,7 +49,7 @@ function Features({ image, title, desc, reverse=false }) {
                         {
                             reverse && changing
                             ? <div className="features_wrapper FadeRight">
-                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM (1).jpeg')} alt="features" className="features_img" />
+                                <img src={image} alt="features" className="features_img" />
                             </div>
                             : <div className="FadeRight my-4">
                                 <h1>{title}</h1>

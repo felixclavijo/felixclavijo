@@ -53,8 +53,8 @@ export const AnimationIn = (nameClass) => {
             }
         })
     }, {
-        rootMargin: '0px',
-        threshold: 0.0
+        // rootMargin: '0px',
+        // threshold: 0.0
     });
     
     if (document.getElementsByClassName(nameClass).length !== 0) {
