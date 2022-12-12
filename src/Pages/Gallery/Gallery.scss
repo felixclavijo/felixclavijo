@@ -34,8 +34,12 @@
 		}
 
 		.col-md {
-			height: 450px;
+			max-height: 400px;
 			overflow: hidden;
+
+			@include respond(tab-land) {
+				max-height: 300px;
+			}
 			
 			.overlay {
 				overflow: hidden;

@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ModalGallery.scss";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 
 // prettier-ignore
-function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
+function ModalGallery({ data, modal, setModal, imageindex, setImageIndex }) {
 
     const [move, setMove] = useState(imageindex !== undefined ? window.innerWidth / 2 - (500*imageindex) : 0)
     // console.log(move, imageindex,  window.innerWidth / 2 - (500*imageindex))
 
+    const loop = useRef(true)
+
     const ChangeImage = (direction) => {
         var myEl = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
+        var small_he = document.getElementsByClassName("small")[0].clientHeight
+        console.log(small_he)
         if(direction === 'left') {
             if(imageindex !== 0) {
-                var val1 = myEl + 500
+                var val1 = myEl + small_he
                 document.getElementsByClassName('box_main')[0].style.transform = 'translateX('+val1+'px)'
                 setImageIndex(imageindex-1)
                 setMove(val1)
             }
         } else {
             if(data.length-1 !== imageindex) {
-                var val2 = myEl - 500
+                var val2 = myEl - small_he
                 document.getElementsByClassName('box_main')[0].style.transform = 'translateX('+val2+'px)'
                 setImageIndex(imageindex+1)
                 setMove(val2)
@@ -28,10 +32,13 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
     }
 
     const imagechange = (ind, e, i) => {
-        var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
-        var cal = window.innerWidth / 2
-        var final = ele - cal
-        setMove(ele - final - 250 - (500*ind))
+        if(ind) {
+            var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
+            var small = document.getElementsByClassName("small")[0].clientHeight
+            var cal = window.innerWidth / 2
+            var final = ele - cal
+            setMove(ele - final - (small/2) - (small*ind))
+        }
 
         var all_inside = document.getElementsByClassName("overlay_img_big")
         var all_col = document.getElementsByClassName('overlay_container')[0]
@@ -107,10 +114,17 @@ function ModalGallery({ data, modal, setModal, imageindex=0, setImageIndex }) {
     }
 
     useEffect(() => {
-        var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
-        var cal = window.innerWidth / 2
-        var final = ele - cal
-        setMove(ele - final - 250 - (500*imageindex))
+        if(loop.current || imageindex !== undefined) {
+            if(document.getElementsByClassName("big")[0]) {
+                var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
+                var small_2 = document.getElementsByClassName("big")[0].clientHeight
+                var extra = small_2 < 300 ? 50 : 0
+                var cal = window.innerWidth / 2
+                var final = ele - cal
+                setMove(ele - final - (small_2/2+extra) - (small_2*imageindex))
+                loop.current = false
+            }
+        }
 
         window.addEventListener('resize', () => imagechange(imageindex))
         return () => window.removeEventListener('resize',  () => imagechange(imageindex))

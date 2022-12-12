@@ -34,8 +34,8 @@ function Features({ image, title, desc, reverse=false }) {
                     <div className={`col-md  d-flex justify-content-center ${reverse && changing ? 'flex-column' : ''}`}>
                         {
                             reverse && changing
-                            ? <div className="FadeLeft">
-                                <h1 >{title}</h1>
+                            ? <div className="FadeLeft my-4">
+                                <h1>{title}</h1>
                                 <hr className="line_hr" />
                                 <span>{desc}</span>
                             </div>
@@ -51,7 +51,7 @@ function Features({ image, title, desc, reverse=false }) {
                             ? <div className="features_wrapper FadeRight">
                                 <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.50 PM (1).jpeg')} alt="features" className="features_img" />
                             </div>
-                            : <div className="FadeRight">
+                            : <div className="FadeRight my-4">
                                 <h1>{title}</h1>
                                 <hr className="line_hr" />
                                 <span>{desc}</span>

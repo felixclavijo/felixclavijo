@@ -188,9 +188,16 @@ body {
 
 .leftIn {
     animation: leftIn 1.2s both;
+    @include respond(phone) {
+        animation: leftIn2 1.2s both;
+    }
 }
 .leftOut {
     animation: leftOut 1.2s both;
+
+    @include respond(phone) {
+        animation: leftOut2 1.2s both;
+    }
 }
 
 @keyframes leftIn {
@@ -211,6 +218,27 @@ body {
     100% {
         opacity: 0;
         transform: translateX(-500px);
+    }
+}
+
+@keyframes leftIn2 {
+    0% {
+        opacity: 0;
+        transform: translateX(-145px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes leftOut2 {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-145px);
     }
 }
 
