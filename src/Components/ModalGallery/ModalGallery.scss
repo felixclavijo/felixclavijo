@@ -61,9 +61,12 @@
 			transition: all 0.3s ease-in-out;
 
 			.big {
+				position: relative;
 				padding: 5px;
 				width: 600px;
 				height: 600px;
+				border-radius: 10px;
+				overflow: hidden;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -76,16 +79,20 @@
 			}
 			
 			.small {
+				position: relative;
 				padding: 5px;
 				width: 500px;
 				height: 500px;
 				display: flex;
+				border-radius: 10px;
+				overflow: hidden;
 				justify-content: center;
 				align-items: center;
 				transition: all 0.3s ease-in-out;
 
 				.overlay_img_big {
-					opacity: 0.5;
+					border-radius: 10px;
+					opacity: 0.7;
 				}
 
 				@include respond(tab-port) {
@@ -93,6 +100,11 @@
 					height: 200px;
 				}
 			}
+
+			.overlay_img_big {
+				border-radius: 10px;
+			}
+
 		}
 	}
 
