@@ -6,6 +6,7 @@ import { ThemeContext } from "./context/ThemeContext";
 import Home from "./Pages/Home/Home";
 import Navigation from "./Components/Navigation/Navigation";
 import Gallery from "./Pages/Gallery/Gallery";
+import NewsDesarrollo from "./Pages/NewsDesarrollo/NewsDesarrollo";
 import News from "./Pages/News/News";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 
@@ -61,7 +62,7 @@ function App() {
                     } />
                     <Route path="/news" element={
                         <Suspense fallback={<div>Loading...</div>}>
-                            <News />
+                            <NewsDesarrollo />
                         </Suspense>
                     } />
                     <Route path="/aboutus" element={

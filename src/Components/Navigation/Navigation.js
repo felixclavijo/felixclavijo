@@ -4,6 +4,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { navigation_data } from "../../Data/Navigation_data";
+import ModalContact from './../ModalContact/ModalContact'
 
 import "./Navigation.scss";
 
@@ -13,6 +14,8 @@ function Navigation() {
     const { theme, setTheme, pathname, setPathname } = useContext(ThemeContext)
 
     return (
+        <>
+     
         <nav className={`navbar navbar-expand-lg background-theme`}>
             <div className="container-fluid">
                 <div className="d-flex align-items-center">
@@ -38,7 +41,7 @@ function Navigation() {
                             )
                         }
                         <li className="nav-item">
-                            <button className="button-theme">Contact Us</button>
+                            <button className="button-theme" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Us</button>
                         </li>
                         <li className="nav-item">
                             <button className="border-theme bg-transparent" style={{ width: 35, height: 35, borderRadius: 20 }} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
@@ -51,8 +54,11 @@ function Navigation() {
                         </li>
                     </ul>
                 </div>
+            
             </div>
         </nav>
+        <ModalContact/>
+        </>
     );
 }
 
