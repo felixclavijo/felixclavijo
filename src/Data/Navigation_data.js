@@ -12,6 +12,10 @@ export const navigation_data = [
         path: "/news",
     },
     {
+        title: "Development",
+        path: "/devpro",
+    },
+    {
         title: "About Us",
         path: "/aboutus",
     },

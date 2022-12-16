@@ -6,8 +6,9 @@ import { ThemeContext } from "./context/ThemeContext";
 import Home from "./Pages/Home/Home";
 import Navigation from "./Components/Navigation/Navigation";
 import Gallery from "./Pages/Gallery/Gallery";
-import News from "./Pages/News/News";
+import DevPro from "./Pages/DevPro/DevPro";
 import AboutUs from "./Pages/AboutUs/AboutUs";
+import News from "./Pages/News/News";
 
 import "./styles/_main.scss";
 import Footer from "./Components/Footer/Footer";
@@ -62,6 +63,11 @@ function App() {
                     <Route path="/news" element={
                         <Suspense fallback={<div>Loading...</div>}>
                             <News />
+                        </Suspense>
+                    } />
+                    <Route path="/devpro" element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <DevPro />
                         </Suspense>
                     } />
                     <Route path="/aboutus" element={
