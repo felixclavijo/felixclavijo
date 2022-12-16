@@ -1,0 +1,36 @@
+@import '../../responsive/mixin';
+
+.newsdisplay {
+    margin-bottom: 150px;
+    width: 100%;
+    
+    @include respond(tab-port) {
+        margin-bottom: 0px;
+    }
+
+    .newsdisplay_details {
+        position: relative;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include respond(tab-port) {
+            top: 0 !important;
+        }
+        
+        .newsdisplay_img_container {
+            overflow: hidden;
+            max-height: 600px;
+            width: 100%;
+        }
+
+        .newsdisplay_name {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import SingleNews from "../../Components/SingleNews/SingleNews";
-import SubTitle from "../../Components/SubTitle/SubTitle";
+import NewsDisplay from "../../Components/NewsDisplay/NewsDisplay";
 import { ThemeContext } from "../../context/ThemeContext";
-import { news_data } from "../../Data/News_data";
-import { AnimationFade, AnimationIn } from "../../styles/animations/fadein";
+import { projects_data } from "../../Data/Projects_data";
+import {
+    AnimationFade,
+    AnimationIn,
+    FadeIn,
+} from "../../styles/animations/fadein";
 
 import "./News.scss";
 
@@ -16,48 +19,79 @@ function News() {
         AnimationFade('FadeLeft')
         AnimationFade('FadeRight')
         AnimationIn('LeftIn')
+        AnimationIn('RightIn')
+        FadeIn('FadeIn')
         setApp_height(document.getElementsByClassName('App')[0].clientHeight)
-        // AnimationIn('LeftOut')
     }, [setApp_height])
 
+    const image_resize2 = () => {
+        var all_col2 = document.getElementsByClassName('news_commercial')
+        var all_img2 = document.getElementsByClassName('new_com_img')
+        var p=0
+        // for(var p=0; p < all_col2.length; p++) {
+            // console.log(all_col[j].clientHeight, all_img[j].clientHeight)
+            if(all_col2[p].clientHeight > all_img2[p].clientHeight) {
+                all_img2[p].style.height = '100%'
+                all_img2[p].style.width = null
+            } else {
+                all_img2[p].style.width = '100%'
+                all_img2[p].style.height = null
+            }
+            if(all_col2[p].clientWidth > all_img2[p].clientWidth) {
+                all_img2[p].style.width = '100%'
+                all_img2[p].style.height = null
+            }
+        // }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', image_resize2)
+        return () => window.removeEventListener('resize', image_resize2)
+    }, [])
+
     return (
-        <div className="news padding-whole-theme">
-            <SubTitle 
-                title="NUESTRA PROPUESTA PARA VOS !" 
-                desc="Brindamos un amplio servicio de arquitectura acompañando a nuestros clientes en todo el proceso 
-                de la obra, desde el comienzo en la concepción de la misma hasta una vez finalizada y ya en uso. Presentes 
-                desde la etapa inicial en la  coordinando las visitas necesarias hasta la elección definitiva." 
-            />
-            <div className="news_features">
-                <div className="container-fluid my-5">
-                    <div className="row">
-                        <div className="col-md">
-                            <div className="news_img_container d-flex justify-content-center">
-                                <img src={require('../../assets/Group 20.png')} alt="news_icons" className="news_img" />
-                            </div>
-                        </div>
-                        <div className="col-md">
-                            <div className="news_img_container d-flex justify-content-center">
-                                <img src={require('../../assets/Group 21.png')} alt="news_icons" className="news_img" />
-                            </div>
-                        </div>
-                        <div className="col-md">
-                            <div className="news_img_container d-flex justify-content-center">
-                                <img src={require('../../assets/Group 22.png')} alt="news_icons" className="news_img" />
-                            </div>
-                        </div>
-                    </div>
+        <div className="news">
+            <div className="news_pharse_container">
+                <div className="hr_top LeftIn">
+                    <hr className="line_top" />
+                </div>
+                <h2 className="FadeIn">¡ Inverti en el mundo de las ocnstrucciones !</h2>
+                <p className="FadeIn">Invertí en desarrollos de la más alta calidad, de forma transparente y profesional</p>
+                <div className="hr_bottom RightIn">
+                    <hr className="line_bottom" />
                 </div>
             </div>
-            <div className="news_all">
-                {
-                    news_data?.map((news, i) => 
-                        i%2 === 0
-                        ? <SingleNews id={news.id} image={news.image} title={news.title} desc={news.desc} reverse={true} key={i} />
-                        : <SingleNews id={news.id} image={news.image} title={news.title} desc={news.desc} key={i} />
-                    )
-                }
-                {/* <SingleNews id={news_data[1].id} image={news_data[1].image} title={news_data[1].title} desc={news_data[1].desc} /> */}
+            <div className="keys_on_hand">
+                <img src={require('../../assets/NewsImg.png')} alt="new_keys" className="new_img FadeIn" />
+                <div className="details">
+                    <p className="text-center">
+                        Nos tomamos cada proyecto como un desafío, y buscamos que el cliente sea parte activa en el desarrollo de la idea para brindarles 
+                        un servicio totalmente personalizado
+                    </p>
+                    <div className="py-4">
+                        <h2 className="FadeIn">LLAVE EN MANO</h2>
+                        <hr className="line_details LeftIn" />
+                        <ul>
+                            <li className="FadeLeft">Evaluación de Proyectos / Estudios de Factibilidad.</li>
+                            <li className="FadeLeft">Proyectos y Pliegos Licitatorios.</li>
+                            <li className="FadeLeft">Estimaciones de Costos y Tiempos de ejecución de Obras</li>
+                            <li className="FadeLeft">Evaluación Técnica - Económica de Ofertas de Construcción</li>
+                            <li className="FadeLeft">Gestión y Aprobación Municipal</li>
+                            <li className="FadeLeft">Dirección y Administración de Obras</li>
+                        </ul>
+                    </div>
+                </div>
+                <img src={require('../../assets/Hero.png')} alt="new_keys" className="new_img" />
+                <div className="keys_projects">
+                    <h1>PROYECTOS</h1>
+                    <NewsDisplay data={projects_data} reverse={true} />
+                </div>
+                <div className="news_commercial FadeIn">
+                    <div className="overlay_box_com"></div>
+                    <img src={require('../../assets/ImagesGallery/test2.png')} alt="new_keys" className="new_com_img" onLoad={image_resize2} />
+                    <h1>Galeria comercial</h1>
+                </div>
+                <NewsDisplay data={projects_data} />
             </div>
         </div>
     );

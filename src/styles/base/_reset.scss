@@ -242,6 +242,77 @@ body {
     }
 }
 
+.rightIn {
+    animation: rightIn 1.2s both;
+    @include respond(phone) {
+        animation: rightIn2 1.2s both;
+    }
+}
+.rightOut {
+    animation: rightOut 1.2s both;
+
+    @include respond(phone) {
+        animation: rightOut2 1.2s both;
+    }
+}
+
+@keyframes rightIn {
+    0% {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes rightOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+}
+
+@keyframes rightIn2 {
+    0% {
+        opacity: 0;
+        transform: translateX(145px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes rightOut2 {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(145px);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 1.2s both;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .design {
     
     .liquid_shape {
