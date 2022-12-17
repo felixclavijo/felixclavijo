@@ -56,7 +56,7 @@ function ImagesDisplay() {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md">
-                        <Link to='/news' onClick={() => setPathname('/news')}>
+                        <Link to='/gallery' onClick={() => setPathname('/gallery')}>
                             <div className="image_container">
                                 <div className="title">
                                     <h2>ARQUITECTURA</h2>
