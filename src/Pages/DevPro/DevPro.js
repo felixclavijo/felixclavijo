@@ -33,17 +33,17 @@ function DevPro() {
                     <div className="row">
                         <div className="col-md">
                             <div className="devpro_img_container d-flex justify-content-center">
-                                <img src={require('../../assets/Group 20.png')} alt="news_icons" className="news_img" />
+                                <img src={require('../../assets/Group 20.png')} alt="news_icons" className="devpro_img" />
                             </div>
                         </div>
                         <div className="col-md">
                             <div className="devpro_img_container d-flex justify-content-center">
-                                <img src={require('../../assets/Group 21.png')} alt="news_icons" className="news_img" />
+                                <img src={require('../../assets/Group 21.png')} alt="news_icons" className="devpro_img" />
                             </div>
                         </div>
                         <div className="col-md">
                             <div className="devpro_img_container d-flex justify-content-center">
-                                <img src={require('../../assets/Group 22.png')} alt="news_icons" className="news_img" />
+                                <img src={require('../../assets/Group 22.png')} alt="news_icons" className="devpro_img" />
                             </div>
                         </div>
                     </div>

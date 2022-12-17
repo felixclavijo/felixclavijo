@@ -33,10 +33,10 @@ function AboutUs() {
                         aboutus?.map((emp, i) =>
                             i%2 === 0
                             ? <div className="col-md-6 d-flex justify-content-center align-items-center" key={i}>
-                                <Employee name={emp.name} image={emp.image} role={emp.role} anim="FadeLeft" />
+                                <Employee name={emp.name} image={emp.image} role={emp.role} resume={emp.resume} anim="FadeLeft" />
                             </div>
                             : <div className="col-md-6 d-flex justify-content-center align-items-center" key={i}>
-                                <Employee name={emp.name} image={emp.image} role={emp.role} anim="FadeRight" />
+                                <Employee name={emp.name} image={emp.image} role={emp.role} resume={emp.resume} anim="FadeRight" />
                             </div>
                         )
                     }

@@ -4,7 +4,7 @@ import React from "react";
 import "./Employee.scss";
 
 // prettier-ignore
-function Employee({ name, image, role, anim }) {
+function Employee({ name, image, role, resume, anim }) {
 
     return (
         <div className={`employee ${anim}`}>
@@ -15,7 +15,7 @@ function Employee({ name, image, role, anim }) {
                 <p className="text-center m-0 px-3" style={{fontWeight: '700', fontSize: 20}}>{name}</p>
                 <p className="text-center" style={{fontSize: 18}}>{role}</p>
             </div>
-            <a href={image} className="download_btn" download>
+            <a href={resume} className="download_btn" download>
                 <FontAwesomeIcon icon="download" fontSize={22} />
             </a>
         </div>

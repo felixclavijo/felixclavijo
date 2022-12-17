@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ModalGallery from "../../Components/ModalGallery/ModalGallery";
 import { ThemeContext } from "../../context/ThemeContext";
+import { gallery_data } from "../../Data/Gallery_data";
 import "./Gallery.scss";
 
 // prettier-ignore
@@ -14,49 +15,6 @@ function Gallery() {
 		setImageIndex(index);
 		setModal(true);
 	};
-
-	let data = [
-		{
-			id: 1,
-			title: "Obra Publica",
-			subtitle: "Construcción de edificio municipal",
-			image: require("../../assets/ImagesGallery/test1.png"),
-		},
-		{
-			id: 2,
-			image: require("../../assets/ImagesGallery/test2.png"),
-		},
-		{
-			id: 3,
-			title: "Casa Mercedes",
-			subtitle: "Casa contemporanea con tecnologia",
-			image: require("../../assets/ImagesGallery/test3.png"),
-		},
-		{
-			id: 4,
-			image: require("../../assets/ImagesGallery/test4.png"),
-		},
-		{
-			id: 5,
-			image: require("../../assets/ImagesGallery/test5.png"),
-		},
-		{
-			id: 6,
-			title: "Galeria Comercial",
-			subtitle: "Diferentes locales de comercio en una galeria",
-			image: require("../../assets/ImagesGallery/79246728-front-view-of-a-well-maintained-front-yard-of-home-during-a-nice-spring-day.jpg"),
-		},
-		{
-			id: 7,
-			image: require("../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.48 PM.jpeg"),
-		},
-		{
-			id: 8,
-			title: "Obra de desarrollo",
-			subtitle: "Desarrollo de obra",
-			image: require("../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM.jpeg"),
-		},
-	];
 
 	const galleryImg = (e, i) => {
 		if(e.target.clientHeight) {
@@ -112,11 +70,11 @@ function Gallery() {
 		<div className="container-fluid">
 			<div className="grid">
 				{
-					data?.map((d, i) => 
+					gallery_data?.map((d, i) => 
 						<div className="col-md p-1" key={i}>
 							<div className="overlay" onClick={() => getImage(i)}>
 								<div className="img_container">
-									<img src={d.image} alt="gallery" className="gallery_img" onLoad={(e) => galleryImg(e, i)}/>
+									<img src={d.image[0]} alt="gallery" className="gallery_img" onLoad={(e) => galleryImg(e, i)}/>
 								</div>
 								<div className="gallery_text">
 									<h3 className="title">{d.title}</h3>
@@ -129,11 +87,10 @@ function Gallery() {
 			</div>
 		</div>
 		<ModalGallery
-			data={data}
+			data={gallery_data[imageindex]?.image}
 			setModal={setModal}
 			modal={modal}
 			imageindex={imageindex}
-			setImageIndex={setImageIndex}
 		/>
 		</div>
 	);
