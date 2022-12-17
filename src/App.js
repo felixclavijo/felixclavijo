@@ -12,6 +12,7 @@ import News from "./Pages/News/News";
 
 import "./styles/_main.scss";
 import Footer from "./Components/Footer/Footer";
+import GoToTop from "./Components/GoToTop/GoToTop";
 
 // prettier-ignore
 function App() {
@@ -49,6 +50,7 @@ function App() {
             </div>
             <Navigation />
             <div className="main-content-theme">
+                <GoToTop />
                 <Routes>
                     <Route exact path="/" element={
                         <Suspense fallback={<div>Loading...</div>}>

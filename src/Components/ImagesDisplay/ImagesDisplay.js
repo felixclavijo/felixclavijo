@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
 
 import "./ImagesDisplay.scss";
 
 // prettier-ignore
 function ImagesDisplay() {
+
+    const { setPathname } = useContext(ThemeContext)
 
     const image_resize = (e, i) => {
         // if(e.target.clientHeight) {
@@ -46,29 +50,34 @@ function ImagesDisplay() {
         window.addEventListener('resize', image_resize)
         return () => window.removeEventListener('resize', image_resize)
     }, [])
+
     return (
         <div className="imagesdisplay padding-whole-theme">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md">
-                        <div className="image_container">
-                            <div className="title">
-                                <h2>ARQUITECTURA</h2>
+                        <Link to='/news' onClick={() => setPathname('/news')}>
+                            <div className="image_container">
+                                <div className="title">
+                                    <h2>ARQUITECTURA</h2>
+                                </div>
+                                <div className="img_wrapper">
+                                    <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.48 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 0)}/>
+                                </div>
                             </div>
-                            <div className="img_wrapper">
-                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.48 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 0)}/>
-                            </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="col-md">
-                        <div className="image_container">
-                            <div className="title">
-                                <h2>DESARROLLO</h2>
+                        <Link to='/devpro' onClick={() => setPathname('/devpro')}>
+                            <div className="image_container">
+                                <div className="title">
+                                    <h2>DESARROLLO</h2>
+                                </div>
+                                <div className="img_wrapper">
+                                    <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 1)} />
+                                </div>
                             </div>
-                            <div className="img_wrapper">
-                                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 1)} />
-                            </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

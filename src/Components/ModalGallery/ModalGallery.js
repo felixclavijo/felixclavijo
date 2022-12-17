@@ -3,42 +3,45 @@ import "./ModalGallery.scss";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 
 // prettier-ignore
-function ModalGallery({ data, modal, setModal, imageindex, setImageIndex }) {
+function ModalGallery({ data, modal, setModal, imageindex }) {
 
-    const [move, setMove] = useState(imageindex !== undefined ? window.innerWidth / 2 - (500*imageindex) : 0)
-    // console.log(move, imageindex,  window.innerWidth / 2 - (500*imageindex))
+    const [img_index, setImgIndex] = useState(0)
+    const [move, setMove] = useState(img_index !== undefined ? window.innerWidth / 2 - (500*img_index) : 0)
+    // console.log(move, img_index, imageindex,  window.innerWidth / 2 - (500*0))
 
     const loop = useRef(true)
 
     const ChangeImage = (direction) => {
         var myEl = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
-        var small_he = document.getElementsByClassName("small")[0].clientHeight
-        console.log(small_he)
+        var small_he = document.getElementsByClassName("small")[0]?.clientHeight
+        // console.log(small_he)
         if(direction === 'left') {
-            if(imageindex !== 0) {
+            if(img_index !== 0) {
                 var val1 = myEl + small_he
                 document.getElementsByClassName('box_main')[0].style.transform = 'translateX('+val1+'px)'
-                setImageIndex(imageindex-1)
+                setImgIndex(img_index-1)
                 setMove(val1)
             }
         } else {
-            if(data.length-1 !== imageindex) {
+            if(data.length-1 !== img_index) {
                 var val2 = myEl - small_he
                 document.getElementsByClassName('box_main')[0].style.transform = 'translateX('+val2+'px)'
-                setImageIndex(imageindex+1)
+                setImgIndex(img_index+1)
                 setMove(val2)
             }
         }
     }
 
     const imagechange = (ind, e, i) => {
-        if(ind) {
-            var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
-            var small = document.getElementsByClassName("small")[0].clientHeight
+        // if(ind) {
+            var ele = parseInt(document.getElementsByClassName('box_main')[0]?.style.transform.replace(/[^\d.\W]|[()]/g, ''))
+            var small = document.getElementsByClassName("small")[0]?.clientHeight
+            var extra = small < 300 ? 50 : 0
             var cal = window.innerWidth / 2
             var final = ele - cal
-            setMove(ele - final - (small/2) - (small*ind))
-        }
+            // console.log(ele, final, (small/2+extra), (small*ind), extra, small, window.innerWidth)
+            setMove(ele - final - (small/2+extra) - (small*ind))
+        // }
 
         var all_inside = document.getElementsByClassName("overlay_img_big")
         var all_col = document.getElementsByClassName('overlay_container')[0]
@@ -114,31 +117,37 @@ function ModalGallery({ data, modal, setModal, imageindex, setImageIndex }) {
     }
 
     useEffect(() => {
-        if(loop.current || imageindex !== undefined) {
+        if(loop.current || img_index !== undefined) {
             if(document.getElementsByClassName("big")[0]) {
                 var ele = parseInt(document.getElementsByClassName('box_main')[0].style.transform.replace(/[^\d.\W]|[()]/g, ''))
-                var small_2 = document.getElementsByClassName("big")[0].clientHeight
-                var extra = small_2 < 300 ? 50 : 0
+                var small_2 = document.getElementsByClassName("big")[0]?.clientHeight
+                var extra_2 = small_2 < 300 ? 50 : 0
                 var cal = window.innerWidth / 2
                 var final = ele - cal
-                setMove(ele - final - (small_2/2+extra) - (small_2*imageindex))
+                // console.log(ele - final - (small_2/2+extra_2) - (small_2*img_index))
+                setMove(ele - final - (small_2/2+extra_2) - (small_2*img_index))
                 loop.current = false
             }
         }
 
-        window.addEventListener('resize', () => imagechange(imageindex))
-        return () => window.removeEventListener('resize',  () => imagechange(imageindex))
-    }, [imageindex])
+        window.addEventListener('resize', () => imagechange(img_index))
+        return () => window.removeEventListener('resize',  () => imagechange(img_index))
+    }, [img_index, imageindex])
 
     return (
         <>
             <div className={`overlay_modal ${modal ? 'show' : ''}`}>
-                <div className="overlay_container" onClick={() => setModal(false)}>
+                <div className="overlay_container" 
+                    onClick={() => {
+                        setImgIndex(0)
+                        setModal(false)
+                    }}
+                >
                 {
                     data?.map((gallery_img, i) => 
-                        imageindex === i
-                        ? <img src={gallery_img.image} alt="bigger pic" className="overlay_bg img_active" key={i} onLoad={(e) => imagechange(imageindex, e, i)} />
-                        : <img src={gallery_img.image} alt="bigger pic" className="overlay_bg" key={i} onLoad={(e) => imagechange(imageindex, e, i)} />
+                        img_index === i
+                        ? <img src={gallery_img} alt="bigger pic" className="overlay_bg img_active" key={i} onLoad={(e) => imagechange(img_index, e, i)} />
+                        : <img src={gallery_img} alt="bigger pic" className="overlay_bg" key={i} onLoad={(e) => imagechange(img_index, e, i)} />
                     )
                 }
                 </div>
@@ -150,12 +159,17 @@ function ModalGallery({ data, modal, setModal, imageindex, setImageIndex }) {
                         <BiRightArrow className="icon" onClick={() => ChangeImage('right')} />
                     </button>
                 </div>
-                <div className="overlay_img_container" onClick={() => setModal(false)}>
+                <div className="overlay_img_container" 
+                    onClick={() => {
+                        setImgIndex(0)
+                        setModal(false)
+                    }}
+                >
                     <div className="box_main" style={{transform: "translateX("+move+"px)"}}>
                         {
                             data?.map((gallery_img, i) => 
-                                <div className={`img_all ${imageindex === i ? 'big' : 'small'}`} key={i}>
-                                    <img src={gallery_img.image} alt="bigger pic" key={i} className='overlay_img_big' />
+                                <div className={`img_all ${img_index === i ? 'big' : 'small'}`} key={i}>
+                                    <img src={gallery_img} alt="bigger pic" key={i} className='overlay_img_big' />
                                 </div>
                             )
                         }

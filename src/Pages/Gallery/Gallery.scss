@@ -21,16 +21,20 @@
 			border-radius: 5px;
 		}
 	}
+	.container-fluid {
+		padding: 0;
+	}
+
 
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 
 		@include respond(tab-port) {
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(3, 1fr);
 		}
 		@include respond(phone) {
-			grid-template-columns: repeat(1, 1fr);
+			grid-template-columns: repeat(2, 1fr);
 		}
 
 		.col-md {
@@ -38,7 +42,7 @@
 			overflow: hidden;
 
 			@include respond(tab-land) {
-				max-height: 300px;
+				max-height: 180px;
 			}
 			
 			.overlay {
@@ -81,6 +85,10 @@
 		
 					.title {
 						color: $dark-text-87;
+
+						@include respond(tab-port) {
+							font-size: 18px;
+						}
 					}
 		
 					.p-subtitle {
@@ -91,7 +99,7 @@
 						width: 90%;
 		
 						@include respond(tab-port) {
-							font-size: 16px;
+							font-size: 15px;
 						}
 					}
 				}

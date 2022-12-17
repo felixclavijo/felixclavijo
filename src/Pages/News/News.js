@@ -69,16 +69,28 @@ function News() {
                         un servicio totalmente personalizado
                     </p>
                     <div className="py-4">
-                        <h2 className="FadeIn">LLAVE EN MANO</h2>
-                        <hr className="line_details LeftIn" />
-                        <ul>
-                            <li className="FadeLeft">Evaluación de Proyectos / Estudios de Factibilidad.</li>
-                            <li className="FadeLeft">Proyectos y Pliegos Licitatorios.</li>
-                            <li className="FadeLeft">Estimaciones de Costos y Tiempos de ejecución de Obras</li>
-                            <li className="FadeLeft">Evaluación Técnica - Económica de Ofertas de Construcción</li>
-                            <li className="FadeLeft">Gestión y Aprobación Municipal</li>
-                            <li className="FadeLeft">Dirección y Administración de Obras</li>
-                        </ul>
+                        <div className="container-fluid">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <ul>
+                                        <li className="FadeLeft">Evaluación de Proyectos / Estudios de Factibilidad.</li>
+                                        <li className="FadeLeft">Proyectos y Pliegos Licitatorios.</li>
+                                        <li className="FadeLeft">Estimaciones de Costos y Tiempos de ejecución de Obras</li>
+                                        <li className="FadeLeft">Evaluación Técnica - Económica de Ofertas de Construcción</li>
+                                        <li className="FadeLeft">Gestión y Aprobación Municipal</li>
+                                        <li className="FadeLeft">Dirección y Administración de Obras</li>
+                                    </ul>
+                                </div>
+                                <div className="col-md-6">
+                                    <h2 className="FadeIn">LLAVE EN MANO</h2>
+                                    <hr className="line_details FadeIn" />
+                                    <p className="FadeIn">
+                                        Trabajamos también bajo la modalidad “llave en mano” donde nos encargamos de las 
+                                        diferentes fases del proceso, desde el inicio proyectual hasta la entrega final de la obra terminada.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <img src={require('../../assets/Hero.png')} alt="new_keys" className="new_img" />
