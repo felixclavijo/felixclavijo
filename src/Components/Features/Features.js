@@ -4,7 +4,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import "./Features.scss";
 
 // prettier-ignore
-function Features({ image, title, desc, reverse=false }) {
+function Features({ image, video, title, desc, reverse=false }) {
 
     const [changing, setChanging] = useState(true)
 
@@ -40,7 +40,13 @@ function Features({ image, title, desc, reverse=false }) {
                                 <span>{desc}</span>
                             </div>
                             : <div className="features_wrapper FadeLeft">
-                                <img src={image} alt="features" className="features_img" onLoad={handleImg} />
+                                {
+                                    image === null
+                                    ? <video className="features_img" onLoad={handleImg} loop muted autoPlay>
+                                        <source src={video} type="video/mp4"/>
+                                    </video>
+                                    : <img src={image} alt="features" className="features_img" onLoad={handleImg} />
+                                }
                             </div>
                             
                         }
@@ -49,7 +55,13 @@ function Features({ image, title, desc, reverse=false }) {
                         {
                             reverse && changing
                             ? <div className="features_wrapper FadeRight">
-                                <img src={image} alt="features" className="features_img" />
+                                {
+                                    image === null
+                                    ? <video className="features_img" onLoad={handleImg} loop muted autoPlay>
+                                        <source src={video} type="video/mp4"/>
+                                    </video>
+                                    : <img src={image} alt="features" className="features_img" onLoad={handleImg} />
+                                }
                             </div>
                             : <div className="FadeRight my-4">
                                 <h1>{title}</h1>
