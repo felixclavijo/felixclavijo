@@ -12,7 +12,8 @@ import "./News.scss";
 
 // prettier-ignore
 function News() {
-const[imgp, setImgp] = useState({key:null, img:''});
+
+    const[imgp, setImgp] = useState({key:null, img:''});
     const { setApp_height } = useContext(ThemeContext)
 
     useEffect(() => {
@@ -99,17 +100,14 @@ const[imgp, setImgp] = useState({key:null, img:''});
                     <NewsDisplay data={projects_data} reverse={true} setImgp={setImgp}/>
                 </div>
                 <div className="news_commercial FadeIn">
-                    <div className="overlay_box_com" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={e => { setImgp({
-                                  key: null,
-                                  img:require('../../assets/ImagesGallery/test2.png')
-                                });
-                              }}></div>
+                    <div className="overlay_box_com"></div>
                     <img src={require('../../assets/ImagesGallery/test2.png')} alt="new_keys" className="new_com_img" onLoad={image_resize2} />
                     <h1>Galeria comercial</h1>
                 </div>
  
                 <NewsDisplay data={projects_data} setImgp={setImgp} />
             </div>
+            {console.log('imgp', imgp)}
             <ModalProject imgp={imgp} />
         </div>
     );
