@@ -32,9 +32,9 @@ function Home() {
                     <h1 className="text-theme LeftIn">Diseñando lugares que inspiran alegría y bienestar desde 1935.</h1>
                 </div>
             </div>
-            <Features image={features_data[0].image} title={features_data[0].title} desc={features_data[0].desc} />
+            <Features image={features_data[0].image} video={features_data[0].video} title={features_data[0].title} desc={features_data[0].desc} />
             <ImagesDisplay />
-            <Features image={features_data[1].image} title={features_data[1].title} desc={features_data[1].desc} reverse={true} />
+            <Features image={features_data[1].image} video={features_data[1].video} title={features_data[1].title} desc={features_data[1].desc} reverse={true} />
         </div>
     );
 }
