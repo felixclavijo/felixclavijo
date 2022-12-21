@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-
+import ModalProject from "../ModalProject/ModalProject";
 import "./NewsDisplay.scss";
 
 // prettier-ignore
-function NewsDisplay({ data, reverse=false }) {
+function NewsDisplay({ data, reverse=false, setImgp }) {
 
     const image_resize = (e, i) => {
         var all_col = document.getElementsByClassName('newsdisplay_img_container')
@@ -46,13 +46,20 @@ function NewsDisplay({ data, reverse=false }) {
         return () => window.removeEventListener('resize', image_resize)
     }, [])
 
+
+
     return (
         <div className="newsdisplay">
             <div className="container-fluid">
+           
                 <div className="row">
                     {
                         data?.map((item, i) => 
-                            <div className="col-md-6" key={i}>
+                            <div className="col-md-6" key={i} data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={e => { setImgp({
+                                  key: i,
+                                  img: item.img
+                                });
+                              }}>
                                 <div className={`newsdisplay_details ${i%2 === 0 ? 'FadeLeft' : 'FadeRight'}`} style={{ top: reverse ? i%2 === 0 ? '150px' : '0px' : i%2 !== 0 ? '150px' : '0px' }}>
                                     <div className="newsdisplay_img_container">
                                         <img src={item.img} alt="newsdisplay" className="newsdisplay_img" onLoad={image_resize} />
@@ -66,6 +73,7 @@ function NewsDisplay({ data, reverse=false }) {
                     }
                 </div>
             </div>
+            <ModalProject />
         </div>
     );
 }

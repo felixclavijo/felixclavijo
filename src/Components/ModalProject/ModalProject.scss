@@ -1,0 +1,57 @@
+@use '../../styles/abstract/colors' as *;
+@import "../../responsive/mixin";
+
+.m-project{
+ 
+   
+        .project_modal_img {
+      
+            @include respond(tab-port) {
+                width: 100%;
+            }
+        }
+        
+        .title-project {
+margin-top: 10%;
+text-align: -webkit-center;
+            .line_hr {
+                width: 350px;
+                @include respond(tab-port) {
+                    width: 200px;
+                }
+                border-width: 5px;
+                margin: 0;
+                margin-bottom: 10px;
+                color: $primary;
+                opacity: 1;
+                border-radius: 5px;
+               
+            }
+        }
+
+ .box-modal-datap{
+
+    text-align: -webkit-center;
+    .box-subdiv-modal-datap{
+ margin-top: 3%;
+ width: 50%;
+ @include respond(tab-port) {
+    margin-top: 2em;
+    width: 100%;
+}
+    }
+    .rowdata{
+        display: flex;
+   
+   
+        justify-content: space-between;
+        .datap1{
+            color: rgba(0, 0, 0, 0.593);
+        }
+   
+        
+           }
+       
+   }
+
+ }     

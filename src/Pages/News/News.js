@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NewsDisplay from "../../Components/NewsDisplay/NewsDisplay";
 import { ThemeContext } from "../../context/ThemeContext";
 import { projects_data } from "../../Data/Projects_data";
@@ -7,12 +7,12 @@ import {
     AnimationIn,
     FadeIn,
 } from "../../styles/animations/fadein";
-
+import ModalProject from "../../Components/ModalProject/ModalProject";
 import "./News.scss";
 
 // prettier-ignore
 function News() {
-
+const[imgp, setImgp] = useState({key:null, img:''});
     const { setApp_height } = useContext(ThemeContext)
 
     useEffect(() => {
@@ -55,7 +55,7 @@ function News() {
                 <div className="hr_top LeftIn">
                     <hr className="line_top" />
                 </div>
-                <h2 className="FadeIn">¡ Inverti en el mundo de las ocnstrucciones !</h2>
+                <h2 className="FadeIn">¡ Inverti en el mundo de las construcciones !</h2>
                 <p className="FadeIn">Invertí en desarrollos de la más alta calidad, de forma transparente y profesional</p>
                 <div className="hr_bottom RightIn">
                     <hr className="line_bottom" />
@@ -96,15 +96,21 @@ function News() {
                 <img src={require('../../assets/Hero.png')} alt="new_keys" className="new_img" />
                 <div className="keys_projects">
                     <h1>PROYECTOS</h1>
-                    <NewsDisplay data={projects_data} reverse={true} />
+                    <NewsDisplay data={projects_data} reverse={true} setImgp={setImgp}/>
                 </div>
                 <div className="news_commercial FadeIn">
-                    <div className="overlay_box_com"></div>
+                    <div className="overlay_box_com" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={e => { setImgp({
+                                  key: null,
+                                  img:require('../../assets/ImagesGallery/test2.png')
+                                });
+                              }}></div>
                     <img src={require('../../assets/ImagesGallery/test2.png')} alt="new_keys" className="new_com_img" onLoad={image_resize2} />
                     <h1>Galeria comercial</h1>
                 </div>
-                <NewsDisplay data={projects_data} />
+ 
+                <NewsDisplay data={projects_data} setImgp={setImgp} />
             </div>
+            <ModalProject imgp={imgp} />
         </div>
     );
 }
