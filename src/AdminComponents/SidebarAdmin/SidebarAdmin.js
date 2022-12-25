@@ -91,7 +91,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow }) {
                         </NavLink>
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <NavLink to="/logout"  className="nav-link">
                         <div className="icon_box">
                             <FontAwesomeIcon icon="right-from-bracket" fontSize={25} />
@@ -100,7 +100,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow }) {
                             <span>Logout</span>
                         </div>
                     </NavLink>
-                </div>
+                </div> */}
             </nav>
             <Outlet />
         </div>
