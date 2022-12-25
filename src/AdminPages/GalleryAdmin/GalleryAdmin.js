@@ -6,7 +6,10 @@ import "./GalleryAdmin.scss";
 function GalleryAdmin({ sidebarshow }) {
     return (
         <div className={!sidebarshow ? "page" : "page page-with-navbar"}>
-            <h3>GalleryAdmin</h3>
+            <div className="title">
+                <h3>Gallery</h3>
+                <hr className="line_hr" />
+            </div>
         </div>
     );
 }

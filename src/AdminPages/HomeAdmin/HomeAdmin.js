@@ -5,8 +5,11 @@ import "./HomeAdmin.scss";
 // prettier-ignore
 function HomeAdmin({ sidebarshow }) {
     return (
-        <div className={!sidebarshow ? "page" : "page page-with-navbar"}>
-            <h3>HomeAdmin</h3>
+        <div className={`homeadmin ${!sidebarshow ? "page" : "page page-with-navbar"}`}>
+            <div className="title">
+                <h3>Home</h3>
+                <hr className="line_hr" />
+            </div>
         </div>
     );
 }

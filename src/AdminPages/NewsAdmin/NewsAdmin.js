@@ -6,7 +6,10 @@ import "./NewsAdmin.scss";
 function NewsAdmin({ sidebarshow }) {
     return (
         <div className={!sidebarshow ? "page" : "page page-with-navbar"}>
-            <h3>NewsAdmin</h3>
+            <div className="title">
+                <h3>News</h3>
+                <hr className="line_hr" />
+            </div>
         </div>
     );
 }

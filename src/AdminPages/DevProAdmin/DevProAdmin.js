@@ -6,7 +6,10 @@ import "./DevProAdmin.scss";
 function DevProAdmin({ sidebarshow }) {
     return (
         <div className={!sidebarshow ? "page" : "page page-with-navbar"}>
-            <h3>DevProAdmin</h3>
+            <div className="title">
+                <h3>DevPro</h3>
+                <hr className="line_hr" />
+            </div>
         </div>
     );
 }

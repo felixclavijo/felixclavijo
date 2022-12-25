@@ -6,7 +6,10 @@ import "./AboutUsAdmin.scss";
 function AboutUsAdmin({ sidebarshow }) {
     return (
         <div className={!sidebarshow ? "page" : "page page-with-navbar"}>
-            <h3>AboutUsAdmin</h3>
+            <div className="title">
+                <h3>About Us</h3>
+                <hr className="line_hr" />
+            </div>
         </div>
     );
 }
