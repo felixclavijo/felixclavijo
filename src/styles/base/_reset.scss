@@ -350,6 +350,31 @@ body {
     }
 }
 
+
+/* --------------- Admin Styles ----------- */
+
+.page {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: margin-left 1s;
+}
+.nav-resize {
+    transition: margin-left 1s;
+}
+
+.page-with-navbar {
+    margin-left: 20%;
+
+    @include respond(tab-port) {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* --------------- End Admin Styles ----------- */
+
 /* width */
 ::-webkit-scrollbar {
     width: 8px;

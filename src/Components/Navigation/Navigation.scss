@@ -1,57 +1,60 @@
 @use '../../styles/abstract/colors' as *;
 @import '../../responsive/mixin';
 
-.navbar {
-    padding: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 5;
-    transition: ease-in-out 0.2s;
-    
-    // &.nav_deactive {
-    //     padding: 50px;
-    // }
-    
-    // &.nav_active {
-    //     padding: 0px;
-    // }
+.front {
 
-    .navbar-toggler {
+    .navbar {
+        padding: 0;
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        transition: ease-in-out 0.2s;
+        
+        // &.nav_deactive {
+        //     padding: 50px;
+        // }
+        
+        // &.nav_active {
+        //     padding: 0px;
+        // }
 
-        &:focus {
-            box-shadow: 0;
-        }
-    }
+        .navbar-toggler {
 
-    .navbar-nav {
-        justify-content: end;
-        width: 100%;
-
-        .nav-item {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 5px 5px;
-
-            @include respond(tab-port) {
-                display: block;
+            &:focus {
+                box-shadow: 0;
             }
         }
 
-        .active {
-            color: white;
-            border-radius: 5px;
+        .navbar-nav {
+            justify-content: end;
+            width: 100%;
+
+            .nav-item {
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 5px 5px;
+
+                @include respond(tab-port) {
+                    display: block;
+                }
+            }
+
+            .active {
+                color: white;
+                border-radius: 5px;
+            }
         }
-    }
 
-    .navbar-toggler-icon {
-        width: 1em;
-        height: 1em;
-    }
+        .navbar-toggler-icon {
+            width: 1em;
+            height: 1em;
+        }
 
-    .navbar-brand {
-        margin: 1px 0px;
+        .navbar-brand {
+            margin: 1px 0px;
+        }
     }
 }

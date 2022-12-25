@@ -13,11 +13,18 @@ import News from "./Pages/News/News";
 import "./styles/_main.scss";
 import Footer from "./Components/Footer/Footer";
 import GoToTop from "./Components/GoToTop/GoToTop";
+import HomeAdmin from "./AdminPages/HomeAdmin/HomeAdmin";
+import GalleryAdmin from "./AdminPages/GalleryAdmin/GalleryAdmin";
+import NewsAdmin from "./AdminPages/NewsAdmin/NewsAdmin";
+import DevProAdmin from "./AdminPages/DevProAdmin/DevProAdmin";
+import AboutUsAdmin from "./AdminPages/AboutUsAdmin/AboutUsAdmin";
+import SidebarAdmin from "./AdminComponents/SidebarAdmin/SidebarAdmin";
 
 // prettier-ignore
 function App() {
 
     const [height_arr, setHeight_arr] = useState([])
+    const [sidebarshow, setSidebarShow] = useState(true)
 
     const { theme, img_height, app_height } = useContext(ThemeContext)
 
@@ -39,16 +46,22 @@ function App() {
     
     return (
         <div className={`App ${theme} d-flex flex-column justify-content-between`} >
-            <div className="design">
-                {
-                    height_arr?.map((he,i) => 
-                        i%2 === 0
-                        ? <div className="liquid_shape" style={{ top: he, right: 0 }} key={i}></div>
-                        : <div className="liquid_shape" style={{ top: he, left: 0 }} key={i}></div>
-                    )
-                }
-            </div>
-            <Navigation />
+            {
+                window.location.pathname.split('/').includes('felixclavijoadmin')
+                ? null
+                : <>
+                    <div className="design">
+                        {
+                            height_arr?.map((he,i) => 
+                                i%2 === 0
+                                ? <div className="liquid_shape" style={{ top: he, right: 0 }} key={i}></div>
+                                : <div className="liquid_shape" style={{ top: he, left: 0 }} key={i}></div>
+                            )
+                        }
+                    </div>
+                    <Navigation />
+                </>
+            }
             <div className="main-content-theme">
                 <GoToTop />
                 <Routes>
@@ -77,9 +90,24 @@ function App() {
                             <AboutUs />
                         </Suspense>
                     } />
+                    <Route path="/felixclavijoadmin" element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <SidebarAdmin sidebarshow={sidebarshow} setSidebarShow={setSidebarShow} />
+                        </Suspense>
+                    }>
+                        <Route path="/felixclavijoadmin/home" element={<HomeAdmin sidebarshow={sidebarshow} />} />
+                        <Route path="/felixclavijoadmin/gallery" element={<GalleryAdmin sidebarshow={sidebarshow} />} />
+                        <Route path="/felixclavijoadmin/news" element={<NewsAdmin sidebarshow={sidebarshow} />} />
+                        <Route path="/felixclavijoadmin/devpro" element={<DevProAdmin sidebarshow={sidebarshow} />} />
+                        <Route path="/felixclavijoadmin/aboutus" element={<AboutUsAdmin sidebarshow={sidebarshow} />} />
+                    </Route>
                 </Routes>
             </div>
-            <Footer />
+            {
+                window.location.pathname.split('/').includes('felixclavijoadmin')
+                ? null
+                : <Footer />
+            }
         </div>
     );
 }
