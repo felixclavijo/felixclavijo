@@ -355,6 +355,7 @@ body {
 
 .page {
     flex-basis: 100%;
+    overflow-y: scroll;
     transition: margin-left 1s;
 }
 .nav-resize {
