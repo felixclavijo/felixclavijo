@@ -32,6 +32,8 @@ import {
     faFeatherPointed,
     faPerson,
     faRightFromBracket,
+    faMinus,
+    faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -53,7 +55,9 @@ library.add(
     faBookOpen,
     faFeatherPointed,
     faPerson,
-    faRightFromBracket
+    faRightFromBracket,
+    faMinus,
+    faPlus
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

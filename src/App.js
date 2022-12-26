@@ -31,7 +31,7 @@ function App() {
     useEffect(() => {
         // console.log(img_height, app_height)
         if(img_height !== 0 || app_height !== 0) {
-            var height_design = document.getElementsByClassName('design')[0].clientHeight === 0 ? 500 : document.getElementsByClassName('design')[0].clientHeight
+            var height_design = document.getElementsByClassName('design')[0]?.clientHeight === 0 ? 500 : document.getElementsByClassName('design')[0]?.clientHeight
             var total_circle = Math.round(document.getElementsByClassName('App')[0].clientHeight / height_design)
             var overall = []
             var tot_overall = 0
