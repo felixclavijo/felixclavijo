@@ -29,7 +29,7 @@ function Home() {
             <Services />
             <div className="padding-whole-theme">
                 <div className="side_border">
-                    <h1 className="text-theme LeftIn">Diseñando lugares que inspiran alegría y bienestar desde 1935.</h1>
+                    <h1 className="text-theme LeftIn">Diseñando lugares que inspiran alegría y bienestar desde 1990.</h1>
                 </div>
             </div>
             <Features image={features_data[0].image} video={features_data[0].video} title={features_data[0].title} desc={features_data[0].desc} />
