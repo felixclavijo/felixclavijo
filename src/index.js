@@ -24,6 +24,16 @@ import {
     faBars,
     faCircleCheck,
     faDownload,
+    faAngleRight,
+    faAngleLeft,
+    faHome,
+    faGripVertical,
+    faBookOpen,
+    faFeatherPointed,
+    faPerson,
+    faRightFromBracket,
+    faMinus,
+    faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -37,7 +47,17 @@ library.add(
     faWhatsapp,
     faBars,
     faCircleCheck,
-    faDownload
+    faDownload,
+    faAngleRight,
+    faAngleLeft,
+    faHome,
+    faGripVertical,
+    faBookOpen,
+    faFeatherPointed,
+    faPerson,
+    faRightFromBracket,
+    faMinus,
+    faPlus
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

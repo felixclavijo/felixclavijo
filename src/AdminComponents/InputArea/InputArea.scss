@@ -1,0 +1,14 @@
+.inputarea {
+
+    textarea {
+        width: 100%;
+        border: 0;
+        padding: 10px;
+        border-radius: 5px;
+
+        &::placeholder {
+            color: #989898;
+            font-style: italic;
+        }
+    }
+}

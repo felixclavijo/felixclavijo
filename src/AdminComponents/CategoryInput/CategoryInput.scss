@@ -1,0 +1,49 @@
+@use '../../styles/abstract/colors' as *;
+
+.categoriesinput {
+    margin: 10px 0px;
+    
+    .title_box {
+        background-color: $primary;
+        color: white;
+        font-weight: 600;
+        padding: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .input_box {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        overflow: hidden;
+        position: relative;
+
+        input {
+            border: 0;
+            padding: 0px 10px;
+
+            &:focus {
+                outline: none;
+            }
+
+            &::placeholder {
+                color: #989898;
+                font-style: italic;
+            }
+        }
+
+        .icon_box {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            cursor: pointer;
+
+            .icon_style {
+                color: $primary;
+                font-size: 20px;
+            }
+        }
+    }
+}

@@ -1,0 +1,168 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
+.sidebaradmin {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+    nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 20%;
+        min-height: 100vh;
+        background-color: white;
+        padding: 2rem 1rem 1rem 1rem;
+        box-shadow: 4px 0px 40px rgba(0, 0, 0, 0.25);
+        transition: transform 1s;
+    }
+    
+    .navbar2 {
+        transform: translateX(-100%);
+    }
+
+    .logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .main_logo {
+            width: 150px;
+        }
+    }
+
+    .nav-top {
+        margin-top: 20px;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        color: black;
+        text-decoration: none;
+        padding: 10px 1rem;
+        border-radius: 5px;
+        margin-bottom: 5px;
+
+        &:hover {
+            background-color: $primary;
+            color: white;
+        }
+
+        span {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+
+    .active {
+        background-color: $primary;
+        color: white;
+    }
+
+    .icon_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: fit-content;
+        margin-right: 10px;
+    }
+    
+    .nav-resize {
+        z-index: 1;
+    }
+
+    .mobile-nav {
+        background-color: white;
+        width: 100%;
+        height: 50px;
+        padding: 8px 0px;
+        display: flex;
+        align-items: center;
+        box-shadow: 35px 4px 40px rgba(0, 0, 0, 0.25);
+
+        .mobile-nav-btn {
+            color: black;
+            background: transparent;
+            outline: none;
+            border: none;
+            display: none;
+            margin: 0 10px;
+            font-size: 20px;
+
+            @include respond(tab-port) {
+                display: flex;
+            }
+        }
+
+        .nav-logo {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0px 30px;
+
+            .main_logo {
+                height:50px;
+            }
+
+            .btn-box {
+                margin-right: 15px;
+                height: 100%;
+
+                .btn {
+                    width: 120px;
+                    background-color: $primary;
+                    color: white;
+                    padding: 0;
+                    font-weight: 600;
+                    margin: 0px 5px;
+                    height: 100%;
+                }
+            }
+            @include respond(tab-port) {
+                padding: 0px 15px;
+
+                .btn-box {
+                    margin-right: 0px;
+                    .btn {
+                        width: 70px;
+                    }
+                }
+            }
+        }
+
+    }
+
+    @include respond(tab-port) {
+
+        .nav-resize {
+            z-index: 0;
+        }
+
+        nav {
+            width: 50%;
+            top: 49px;
+            min-height: calc(100vh - 49px);
+            box-shadow: 4px 40px 40px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    @include respond(phone) {
+        nav {
+            width: 70%;
+            top: 49px;
+            min-height: calc(100vh - 49px);
+            box-shadow: 4px 40px 40px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+}

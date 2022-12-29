@@ -1,0 +1,75 @@
+@import '../../responsive/mixin';
+
+.homeadmin {
+
+    .hero_section, .category_section, .phrase_section, .feature_section, .imagedisplay_section {
+        padding: 10px;
+        background-color: #EDEDED;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .hero_section {
+
+        .container-fluid, .row, .col-md {
+            height: 100%;
+
+        }
+        
+        .col-md {
+            @include respond(tab-port) {
+                padding: 0px;
+            }
+        }
+
+        .hero_box {
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+
+            .hero_admin {
+                height: 460px;
+                @include respond(tab-port) {
+                    height: 300px;
+                }
+            }
+        }
+
+    }
+
+    .category_section {
+
+        .service_box {
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+
+            .service_admin {
+                background-color: white;
+                height: 460px;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @include respond(tab-port) {
+                    height: 300px;
+                }
+            }
+        }
+    }
+
+    .feature_section {
+
+        .feature_box {
+            background-color: white;
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .padding-whole-theme {
+            padding: 20px;
+        }
+    }
+}
