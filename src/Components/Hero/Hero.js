@@ -1,18 +1,30 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./Hero.scss";
 
 // prettier-ignore
-function Hero() {
+function Hero(props) {
+
+    const { onlineAdmin } = props
+
     return (
         <div className="hero">
             <div className="hero_wrapper">
-                <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM (1).jpeg')} alt="Hero" className="hero_img" />
+                <img src={onlineAdmin?.home.hero.backgroundImg} alt="Hero" className="hero_img" />
             </div>
             <div className="hero_title">
-                <img src={require('../../assets/5.png')} style={{ height: 150, borderRadius: 5, marginRight: 5 }} alt="Logo" />
-                <h1>FELIX <span className="format_clavijo">CLAVIJO</span></h1>
-                <p className="text-center">Somos un estudio de arquitectura que ha evolucionando hasta convertirse en una empresa pensada por y para inversores.</p>
+                <img src={onlineAdmin?.home.hero.logoImg} style={{ height: 150, borderRadius: 5, marginRight: 5 }} alt="Logo" />
+                <h1>
+                    {
+                        onlineAdmin?.home.hero.title.split(' ').map((t, i) => 
+                            i%2
+                            ? <span className="format_clavijo" key={i}> {t} </span>
+                            : t
+                        )
+                    }
+                </h1>
+                <p className="text-center">{onlineAdmin?.home.hero.phrase}</p>
             </div>
             <div className="mouse">
                 <div className="mouse_outer"></div>
@@ -22,4 +34,10 @@ function Hero() {
     );
 }
 
-export default Hero;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+export default connect(mapStateToProps)(Hero);

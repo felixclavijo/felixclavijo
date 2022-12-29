@@ -1,5 +1,5 @@
 // prettier-ignore
-import { Suspense, useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { ThemeContext } from "./context/ThemeContext";
@@ -19,17 +19,27 @@ import NewsAdmin from "./AdminPages/NewsAdmin/NewsAdmin";
 import DevProAdmin from "./AdminPages/DevProAdmin/DevProAdmin";
 import AboutUsAdmin from "./AdminPages/AboutUsAdmin/AboutUsAdmin";
 import SidebarAdmin from "./AdminComponents/SidebarAdmin/SidebarAdmin";
+import { GetDocuments } from "./AdminFunctions/AdminFunctions";
+import { connect } from "react-redux";
 
 // prettier-ignore
-function App() {
+function App(props) {
+
+    const { onlineAdmin, onlineAdminInsert } = props
 
     const [height_arr, setHeight_arr] = useState([])
     const [sidebarshow, setSidebarShow] = useState(true)
 
     const { theme, img_height, app_height } = useContext(ThemeContext)
 
+    const loop = useRef(true)
+
     useEffect(() => {
         // console.log(img_height, app_height)
+        if(loop.current && onlineAdmin === null) {
+            GetDocuments().then((data) => onlineAdminInsert(data))
+            loop.current = false
+        }
         if(img_height !== 0 || app_height !== 0) {
             var height_design = document.getElementsByClassName('design')[0]?.clientHeight === 0 ? 500 : document.getElementsByClassName('design')[0]?.clientHeight
             var total_circle = Math.round(document.getElementsByClassName('App')[0].clientHeight / height_design)
@@ -41,7 +51,7 @@ function App() {
             }
             setHeight_arr(overall)
         }
-    }, [img_height, app_height])
+    }, [img_height, app_height, onlineAdminInsert, onlineAdmin])
     // console.log(height_arr)
     
     return (
@@ -112,4 +122,21 @@ function App() {
     );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onlineAdminInsert: (val) => {
+            dispatch({
+                type: "ONLINEADMIN",
+                item: val,
+            });
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

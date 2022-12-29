@@ -63,12 +63,11 @@ function HomeAdmin({ sidebarshow, ...props }) {
         // localStorage.removeItem('admin')
         if(onlineAdmin === null && loop.current) {
             window.addEventListener('resize', image_resize)
-            // adminInsert(GetDocuments())
 
-            GetDocuments().then(data => {
-                onlineAdminInsert(data)
-                // console.log(data)
-            })
+            // GetDocuments().then(data => {
+            //     onlineAdminInsert(data)
+            //     // console.log(data)
+            // })
             
             if(localStorage.getItem('admin') === null) {
                 GetDocuments().then(data => {
@@ -200,7 +199,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                             ...admin.home,
                                             hero: {
                                                 ...admin.home.hero, 
-                                                title: e.target.value
+                                                phrase: e.target.value
                                             }
                                         } 
                                     })

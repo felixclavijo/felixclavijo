@@ -53,15 +53,15 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                     setSaveProgress(true)
                                     if(typeof admin?.home.hero.backgroundImg === 'object') {
                                         let path = `Home/Hero/BackgroundImage`
-                                        let fullpath = path+'/'+admin?.home.hero.backgroundImg.name
                                         await DeleteImage(path)
+                                        let fullpath = path+'/'+admin?.home.hero.backgroundImg.name
                                         let url = await UploadImg(admin?.home.hero.backgroundImg, fullpath)
                                         admin.home.hero.backgroundImg = url
                                     }
                                     if(typeof admin?.home.hero.logoImg === 'object') {
                                         let path = `Home/Hero/LogoImg`
-                                        let fullpath = path+'/'+admin?.home.hero.logoImg.name
                                         await DeleteImage(path)
+                                        let fullpath = path+'/'+admin?.home.hero.logoImg.name
                                         let url = await UploadImg(admin?.home.hero.logoImg, fullpath)
                                         admin.home.hero.logoImg = url
                                     }
