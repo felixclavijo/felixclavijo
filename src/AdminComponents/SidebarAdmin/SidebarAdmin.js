@@ -15,7 +15,7 @@ import {
 function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
 
     const { admin, onlineAdmin, prevAdmin, prevAdminUpdate, onlineAdminInsert } = props
-    // console.log(admin, prevAdmin)
+    // console.log(admin?.home.services, prevAdmin?.home.services, onlineAdmin?.home.services)
     
     const [saveprogress, setSaveProgress] = useState(false)
     const [publishprogress, setPublishProgress] = useState(false)
@@ -48,6 +48,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                     </button>
                     <div className="nav-logo">
                         <div className="btn-box">
+                            {/* {console.log(JSON.parse(localStorage.getItem('admin')).home.services.length, JSON.parse(localStorage.getItem('prevAdmin')).home.services.length)} */}
                             <button className="btn" disabled={_.isEqual(prevAdmin, admin) || saveprogress}
                                 onClick={async() => {
                                     setSaveProgress(true)

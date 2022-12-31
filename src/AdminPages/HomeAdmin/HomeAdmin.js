@@ -8,7 +8,7 @@ import Inputbox from "../../AdminComponents/Inputbox/Inputbox";
 import Features from "../../Components/Features/Features";
 // import { admin } from "../../Data/Admin_data";
 import { features_data } from "../../Data/Features_data";
-import { services_data } from "../../Data/Services_data";
+// import { services_data } from "../../Data/Services_data";
 
 import { CheckImage, GetDocuments } from "../../AdminFunctions/AdminFunctions";
 
@@ -104,6 +104,18 @@ function HomeAdmin({ sidebarshow, ...props }) {
         }
     }
 
+    const removeCat = (id) => {
+        // admin?.home.services.splice(id, 1)
+        var removeupd = {
+            ...admin,
+            home: {
+                ...admin.home,
+                services: admin.home.services.filter((el, i) => i !== id),
+            }
+        }
+        adminInsert(removeupd)
+    }
+
     return (
         <div className={`homeadmin ${!sidebarshow ? "page" : "page page-with-navbar"}`}>
             <div className="title">
@@ -145,7 +157,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                 onChange={(e) => {
                                     var val = CheckImage(e)
                                     if(val !== null) {
-                                        let upd = {
+                                        var bgupd = {
                                             ...admin,
                                             home: {
                                                 ...admin.home,
@@ -155,7 +167,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                                 }
                                             } 
                                         }
-                                        adminInsert(upd)
+                                        adminInsert(bgupd)
                                     }
                                 }} 
                             />
@@ -163,7 +175,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                 onChange={(e) => {
                                     var val = CheckImage(e)
                                     if(val !== null) {
-                                        let upd = {
+                                        var lgupd = {
                                             ...admin,
                                             home: {
                                                 ...admin.home,
@@ -173,7 +185,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                                 }
                                             } 
                                         }
-                                        adminInsert(upd)
+                                        adminInsert(lgupd)
                                     }
                                 }} 
                             />
@@ -219,7 +231,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     <div className="container-fluid">
                                         <div className="row">
                                             {
-                                                services_data?.map((service, i) => 
+                                                admin?.home.services.map((service, i) => 
                                                     <div className="col-md-4 FadeLeft" key={i}>
                                                         <div className="d-flex align-items-center justify-content-center my-2">
                                                             <FontAwesomeIcon icon='circle-check' className="check_icon" />
@@ -234,12 +246,52 @@ function HomeAdmin({ sidebarshow, ...props }) {
                             </div>
                         </div>
                         <div className="col-md">
+                            <div className="d-flex justify-content-end">
+                                <button className="btn add_btn"
+                                    onClick={(e) => {
+                                        // admin.home.services.push("")
+                                        var addupd = {
+                                            ...admin,
+                                            home: {
+                                                ...admin.home,
+                                                services: [...admin.home.services, ""],
+                                            }
+                                        }
+                                        adminInsert(addupd)
+                                    }} 
+                                >Add</button>
+                            </div>
                             {
-                                services_data?.map((ser, i) => 
-                                    <Categories name={`c${i+1}`} type='text' defaultValue={ser} placeholder="Type Here" key={i}/>
+                                admin?.home.services.map((ser, i) => 
+                                    <Categories name={`c${i+1}`} id={i} type='text' defaultValue={ser} placeholder="Type Here" key={i} removeCat={removeCat} 
+                                        onChange={(e) => {
+                                            var updinside = {
+                                                ...admin,
+                                                home: {
+                                                    ...admin.home,
+                                                    services: admin.home.services.map((u, index) => index === i ? e.target.value : u),
+                                                }
+                                            }
+                                            adminInsert(updinside)
+                                        }}
+                                    />
                                 )
                             }
-                            <Categories name="new" type='text' placeholder="Type Here" add={true} />
+                            {/* <Categories name="new" id="new" type='text' placeholder="Type Here" addCat={addCat} add={true}
+                                onChange={(e) => {
+                                    admin.home.services.push(e.target.value)
+                                    let upd = {
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            services: admin.home.services,
+                                        }
+                                    }
+                                    adminInsert(upd)
+                                    console.log(document.getElementsByName('c7'))
+                                    document.getElementsByName('c'+admin?.home.services.length-1).focus();
+                                }} 
+                            /> */}
                         </div>
                     </div>
                 </div>

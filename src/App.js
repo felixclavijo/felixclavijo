@@ -21,6 +21,7 @@ import AboutUsAdmin from "./AdminPages/AboutUsAdmin/AboutUsAdmin";
 import SidebarAdmin from "./AdminComponents/SidebarAdmin/SidebarAdmin";
 import { GetDocuments } from "./AdminFunctions/AdminFunctions";
 import { connect } from "react-redux";
+// import _ from "lodash";
 
 // prettier-ignore
 function App(props) {
@@ -37,7 +38,13 @@ function App(props) {
     useEffect(() => {
         // console.log(img_height, app_height)
         if(loop.current && onlineAdmin === null) {
-            GetDocuments().then((data) => onlineAdminInsert(data))
+            GetDocuments().then((data) => {
+                onlineAdminInsert(data)
+                // if(!_.isEqual(JSON.parse(localStorage.getItem("admin")), data)) {
+                //     localStorage.setItem("admin", JSON.stringify(data))
+                //     localStorage.setItem("prevAdmin", JSON.stringify(data))
+                // }
+            })
             loop.current = false
         }
         if(img_height !== 0 || app_height !== 0) {
