@@ -66,6 +66,32 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                         let url = await UploadImg(admin?.home.hero.logoImg, fullpath)
                                         admin.home.hero.logoImg = url
                                     }
+                                    for(var j=0; j < admin?.home.features.length; j++) {
+                                        // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
+                                        if(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object') {
+                                            let path = `Home/Features/${j+1}`
+                                            await DeleteImage(path)
+                                            if(admin?.home.features[j].image !== null) {
+                                                let fullpath = path+'/'+admin?.home.features[j].image.name
+                                                let url = await UploadImg(admin?.home.features[j].image, fullpath)
+                                                admin.home.features[j].image = url
+                                            } else {
+                                                let fullpath = path+'/'+admin?.home.features[j].video.name
+                                                let url = await UploadImg(admin?.home.features[j].video, fullpath)
+                                                admin.home.features[j].video = url
+                                            }
+                                        }
+                                    }
+                                    for(var p=0; p < admin?.home.imageDisplay.length; p++) {
+                                        // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
+                                        if(typeof admin?.home.imageDisplay[p].image === 'object') {
+                                            let path = `Home/ImageDisplay/${p+1}`
+                                            await DeleteImage(path)
+                                            let fullpath = path+'/'+admin?.home.imageDisplay[p].image.name
+                                            let url = await UploadImg(admin?.home.imageDisplay[p].image, fullpath)
+                                            admin.home.imageDisplay[p].image = url
+                                        }
+                                    }
                                     localStorage.setItem('admin', JSON.stringify(admin))
                                     localStorage.setItem('prevAdmin', JSON.stringify(admin))
                                     prevAdminUpdate(admin)

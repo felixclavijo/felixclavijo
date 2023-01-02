@@ -4,7 +4,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import "./Features.scss";
 
 // prettier-ignore
-function Features({ image, video, title, desc, reverse=false }) {
+function Features({ id, image, video, title, desc, reverse=false }) {
 
     const [changing, setChanging] = useState(true)
 
@@ -27,6 +27,19 @@ function Features({ image, video, title, desc, reverse=false }) {
         
         return () => window.removeEventListener('resize', interChange)
     }, [])
+
+    function readURL(input, id) {
+        if (input) {
+            var reader = new FileReader();
+        
+            reader.onload = function (e) {
+                document.getElementById(id).src = e.target.result;
+            };
+        
+            reader.readAsDataURL(input);
+        }
+    }
+
     return (
         <div className="features padding-whole-theme">
             <div className="container-fluid">
@@ -42,10 +55,10 @@ function Features({ image, video, title, desc, reverse=false }) {
                             : <div className="features_wrapper FadeLeft">
                                 {
                                     image === null
-                                    ? <video className="features_img" onLoad={handleImg} loop muted autoPlay>
-                                        <source src={video} type="video/mp4"/>
+                                    ? <video className="features_img" onLoad={handleImg} id={id} loop muted autoPlay>
+                                        <source src={typeof video === 'object' ? readURL(video, id) : video} type="video/mp4" />
                                     </video>
-                                    : <img src={image} alt="features" className="features_img" onLoad={handleImg} />
+                                    : <img src={typeof image === 'object' ? readURL(image, id) : image} alt="features" className="features_img" id={id} onLoad={handleImg} />
                                 }
                             </div>
                             
@@ -57,10 +70,10 @@ function Features({ image, video, title, desc, reverse=false }) {
                             ? <div className="features_wrapper FadeRight">
                                 {
                                     image === null
-                                    ? <video className="features_img" onLoad={handleImg} loop muted autoPlay>
-                                        <source src={video} type="video/mp4"/>
+                                    ? <video className="features_img" onLoad={handleImg} id={id} loop muted autoPlay>
+                                        <source src={typeof video === 'object' ? readURL(video, id) : video} type="video/mp4"/>
                                     </video>
-                                    : <img src={image} alt="features" className="features_img" onLoad={handleImg} />
+                                    : <img src={typeof image === 'object' ? readURL(image, id) : image} alt="features" className="features_img" id={id} onLoad={handleImg} />
                                 }
                             </div>
                             : <div className="FadeRight my-4">
