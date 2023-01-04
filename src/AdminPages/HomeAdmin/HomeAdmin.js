@@ -10,7 +10,7 @@ import Features from "../../Components/Features/Features";
 import { features_data } from "../../Data/Features_data";
 // import { services_data } from "../../Data/Services_data";
 
-import { CheckImage, GetDocuments } from "../../AdminFunctions/AdminFunctions";
+import { CheckImage, readURL } from "../../AdminFunctions/AdminFunctions";
 
 import "./HomeAdmin.scss";
 import { connect } from "react-redux";
@@ -63,46 +63,10 @@ function HomeAdmin({ sidebarshow, ...props }) {
         // localStorage.removeItem('admin')
         if(onlineAdmin === null && loop.current) {
             window.addEventListener('resize', image_resize)
-
-            // GetDocuments().then(data => {
-            //     onlineAdminInsert(data)
-            //     // console.log(data)
-            // })
-            
-            if(localStorage.getItem('admin') === null) {
-                GetDocuments().then(data => {
-                    console.log(data)
-                    adminInsert(data)
-                    onlineAdminInsert(data)
-                    prevAdminUpdate(data)
-                    localStorage.setItem('admin', JSON.stringify(data))
-                })
-            } else {
-                adminInsert(JSON.parse(localStorage.getItem('admin')))
-                if(localStorage.getItem('prevAdmin') === null) {
-                    prevAdminUpdate(JSON.parse(localStorage.getItem('admin')))
-                    localStorage.setItem('prevAdmin', localStorage.getItem('admin'))
-                } else {
-                    prevAdminUpdate(JSON.parse(localStorage.getItem('prevAdmin')))
-                }
-            }
-            // console.log(alldata)
             loop.current = false
         }
         return () => window.removeEventListener('resize', image_resize)
-    }, [onlineAdmin, adminInsert, prevAdminUpdate, onlineAdminInsert])
-
-    function readURL(input, id) {
-        if (input) {
-            var reader = new FileReader();
-        
-            reader.onload = function (e) {
-                document.getElementById(id).src = e.target.result;
-            };
-        
-            reader.readAsDataURL(input);
-        }
-    }
+    }, [onlineAdmin, prevAdminUpdate, onlineAdminInsert])
 
     const removeCat = (id) => {
         // admin?.home.services.splice(id, 1)

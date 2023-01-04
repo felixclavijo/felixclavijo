@@ -99,6 +99,20 @@ export const CheckImage = (e, video=false) => {
     return null
 };
 
+// ------------------------- Read Image -------------------------
+// prettier-ignore
+export const readURL = (input, id) => {
+    if (input) {
+        var reader = new FileReader();
+    
+        reader.onload = function (e) {
+            document.getElementById(id).src = e.target.result;
+        };
+    
+        reader.readAsDataURL(input);
+    }
+}
+
 // ------------------------- Upload Image -------------------------
 // prettier-ignore
 export const UploadImg = async (val, path) => {

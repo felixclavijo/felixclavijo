@@ -9,9 +9,12 @@ import {
 } from "../../styles/animations/fadein";
 import ModalProject from "../../Components/ModalProject/ModalProject";
 import "./News.scss";
+import { connect } from "react-redux";
 
 // prettier-ignore
-function News() {
+function News(props) {
+
+    const { onlineAdmin }= props
 
     const[imgp, setImgp] = useState({key:null, img:''});
     const { setApp_height } = useContext(ThemeContext)
@@ -56,39 +59,32 @@ function News() {
                 <div className="hr_top LeftIn">
                     <hr className="line_top" />
                 </div>
-                <h2 className="FadeIn">¡ Inverti en el mundo de las construcciones !</h2>
-                <p className="FadeIn">Invertí en desarrollos de la más alta calidad, de forma transparente y profesional</p>
+                <h2 className="FadeIn">{onlineAdmin?.news.phrase.title}</h2>
+                <p className="FadeIn">{onlineAdmin?.news.phrase.description}</p>
                 <div className="hr_bottom RightIn">
                     <hr className="line_bottom" />
                 </div>
             </div>
             <div className="keys_on_hand">
-                <img src={require('../../assets/NewsImg.png')} alt="new_keys" className="new_img FadeIn" />
+                <img src={onlineAdmin?.news.imagestore.image} alt="new_keys" className="new_img FadeIn" />
                 <div className="details">
-                    <p className="text-center">
-                        Nos tomamos cada proyecto como un desafío, y buscamos que el cliente sea parte activa en el desarrollo de la idea para brindarles 
-                        un servicio totalmente personalizado
-                    </p>
+                    <p className="text-center">{onlineAdmin?.news.imagestore.description}</p>
                     <div className="py-4">
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-md-6">
                                     <ul>
-                                        <li className="FadeLeft">Evaluación de Proyectos / Estudios de Factibilidad.</li>
-                                        <li className="FadeLeft">Proyectos y Pliegos Licitatorios.</li>
-                                        <li className="FadeLeft">Estimaciones de Costos y Tiempos de ejecución de Obras</li>
-                                        <li className="FadeLeft">Evaluación Técnica - Económica de Ofertas de Construcción</li>
-                                        <li className="FadeLeft">Gestión y Aprobación Municipal</li>
-                                        <li className="FadeLeft">Dirección y Administración de Obras</li>
+                                        {
+                                            onlineAdmin?.news.productservices.map((pro, index) => 
+                                                <li key={index}>{pro}</li>
+                                            )
+                                        }
                                     </ul>
                                 </div>
                                 <div className="col-md-6">
-                                    <h2 className="FadeIn">LLAVE EN MANO</h2>
+                                    <h2 className="FadeIn">{onlineAdmin?.news.keyonhand.title}</h2>
                                     <hr className="line_details FadeIn" />
-                                    <p className="FadeIn">
-                                        Trabajamos también bajo la modalidad “llave en mano” donde nos encargamos de las 
-                                        diferentes fases del proceso, desde el inicio proyectual hasta la entrega final de la obra terminada.
-                                    </p>
+                                    <p className="FadeIn">{onlineAdmin?.news.keyonhand.description}</p>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +103,15 @@ function News() {
  
                 <NewsDisplay data={projects_data} setImgp={setImgp} />
             </div>
-            {console.log('imgp', imgp)}
             <ModalProject imgp={imgp} />
         </div>
     );
 }
 
-export default News;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+export default connect(mapStateToProps)(News);
