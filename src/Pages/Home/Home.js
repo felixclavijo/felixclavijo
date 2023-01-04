@@ -1,17 +1,20 @@
 import React, { useContext, useEffect } from "react";
+import { connect } from "react-redux";
 import Features from "../../Components/Features/Features";
 
 import Hero from "../../Components/Hero/Hero";
 import ImagesDisplay from "../../Components/ImagesDisplay/ImagesDisplay";
 import Services from "../../Components/Services/Services";
 import { ThemeContext } from "../../context/ThemeContext";
-import { features_data } from "../../Data/Features_data";
+// import { features_data } from "../../Data/Features_data";
 import { AnimationFade, AnimationIn } from "../../styles/animations/fadein";
 
 import "./Home.scss";
 
 // prettier-ignore
-function Home() {
+function Home(props) {
+
+    const { onlineAdmin } = props
 
     const { setApp_height } = useContext(ThemeContext)
 
@@ -29,14 +32,20 @@ function Home() {
             <Services />
             <div className="padding-whole-theme">
                 <div className="side_border">
-                    <h1 className="text-theme LeftIn">Diseñando lugares que inspiran alegría y bienestar desde 1990.</h1>
+                    <h1 className="text-theme LeftIn">{onlineAdmin?.home.phrase}</h1>
                 </div>
             </div>
-            <Features image={features_data[0].image} video={features_data[0].video} title={features_data[0].title} desc={features_data[0].desc} />
+            <Features id="feature1" image={onlineAdmin?.home.features[0].image} video={onlineAdmin?.home.features[0].video} title={onlineAdmin?.home.features[0].title} desc={onlineAdmin?.home.features[0].desc} />
             <ImagesDisplay />
-            <Features image={features_data[1].image} video={features_data[1].video} title={features_data[1].title} desc={features_data[1].desc} reverse={true} />
+            <Features id="feature2" image={onlineAdmin?.home.features[1].image} video={onlineAdmin?.home.features[1].video} title={onlineAdmin?.home.features[1].title} desc={onlineAdmin?.home.features[1].desc} reverse={true} />
         </div>
     );
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+export default connect(mapStateToProps)(Home);

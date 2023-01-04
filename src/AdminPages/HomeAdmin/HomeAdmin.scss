@@ -1,3 +1,4 @@
+@use '../../styles/abstract/colors' as *;
 @import '../../responsive/mixin';
 
 .homeadmin {
@@ -56,6 +57,12 @@
                     height: 300px;
                 }
             }
+        }
+
+        .add_btn {
+            background-color: $primary;
+            color: white;
+            font-weight: 600;
         }
     }
 

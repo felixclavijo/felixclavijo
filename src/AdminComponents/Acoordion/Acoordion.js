@@ -4,7 +4,7 @@ import img from "./../../assets/arrowdown.png";
 import { FaTrash } from "react-icons/fa";
 import Inputbox from "../Inputbox/Inputbox";
 import ChooseFile from "../ChooseFile/ChooseFile";
-export default function Accordion({name}) {
+export default function Accordion({ name }) {
   const [toggle, setToggle] = useState(false);
   const [heightEl, setHeightEl] = useState();
 
@@ -36,85 +36,100 @@ export default function Accordion({name}) {
         ref={refHeight}
       >
         <div aria-hidden={toggle ? "true" : "false"} className="accordion-body">
-          <div style={{ padding: "5px"}}>
-            <div style={{width: "50%" }}>
-            <Inputbox
-              stylei={true}
-              name="title"
-              type="text"
-              defaultValue={"equis"}
-              placeholder="Type Here"
-              onChange={(e) => e}
-            />
-
+          <div style={{ padding: "5px" }}>
+            <div style={{ width: "49%" }}>
+              <Inputbox
+                stylei={true}
+                name="title"
+                type="text"
+                defaultValue={"equis"}
+                placeholder="Type Here"
+                onChange={(e) => e}
+              />
             </div>
-          
-        
+
             <div>slice images</div>
 
             <div className="row">
               <div className="col">
-                <Inputbox
-                  stylei={true}
-                  name="title"
-                  type="text"
-                  defaultValue={"equis"}
-                  placeholder="Type Here"
-                  onChange={(e) => e}
-                />
-                    <Inputbox
-              stylei={true}
-              name="title"
-              type="text"
-              defaultValue={"equis"}
-              placeholder="Type Here"
-              onChange={(e) => e}
-            />
-            <Inputbox
-              stylei={true}
-              name="title"
-              type="text"
-              defaultValue={"equis"}
-              placeholder="Type Here"
-              onChange={(e) => e}
-            />
-            <Inputbox
-              stylei={true}
-              name="title"
-              type="text"
-              defaultValue={"equis"}
-              placeholder="Type Here"
-              onChange={(e) => e}
-            />
+                <div style={{ marginBottom: "2%" }}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
+
+                <div style={{ marginBottom: "2%" }}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
+                <div style={{ marginBottom: "2%" }}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
+                <div style={{  marginBottom: "2%"}}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
               </div>
               <div className="col">
-                <Inputbox
-                  stylei={true}
-                  name="title"
-                  type="text"
-                  defaultValue={"equis"}
-                  placeholder="Type Here"
+              <div style={{ marginBottom: "2%"}}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
+                <div style={{ marginBottom: "2%" }}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
+                <div style={{marginBottom: "2%" }}>
+                  <Inputbox
+                    stylei={true}
+                    name="title"
+                    type="text"
+                    defaultValue={""}
+                    placeholder="Type Here"
+                    onChange={(e) => e}
+                  />
+                </div>
+                <ChooseFile
+                  name="Choose Image"
+                  id="bgimg"
                   onChange={(e) => e}
                 />
-                <Inputbox
-                  stylei={true}
-                  name="title"
-                  type="text"
-                  defaultValue={"equis"}
-                  placeholder="Type Here"
-                  onChange={(e) => e}
-                />
-                <Inputbox
-                  stylei={true}
-                  name="title"
-                  type="text"
-                  defaultValue={"equis"}
-                  placeholder="Type Here"
-                  onChange={(e) => e}
-                />
-                       <ChooseFile name="Background Image" id="bgimg" 
-                                onChange={(e) => e} 
-                            />
               </div>
             </div>
           </div>

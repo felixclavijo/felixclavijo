@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context/ThemeContext";
 
 import "./ImagesDisplay.scss";
 
 // prettier-ignore
-function ImagesDisplay() {
+function ImagesDisplay(props) {
+
+    const { onlineAdmin } = props
 
     const { setPathname } = useContext(ThemeContext)
 
@@ -59,10 +62,10 @@ function ImagesDisplay() {
                         <Link to='/gallery' onClick={() => setPathname('/gallery')}>
                             <div className="image_container">
                                 <div className="title">
-                                    <h2>ARQUITECTURA</h2>
+                                    <h2>{onlineAdmin?.home.imageDisplay[0].title}</h2>
                                 </div>
                                 <div className="img_wrapper">
-                                    <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.48 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 0)}/>
+                                    <img src={onlineAdmin?.home.imageDisplay[0].image} alt="display" className="img_img" onLoad={(e) => image_resize(e, 0)}/>
                                 </div>
                             </div>
                         </Link>
@@ -71,10 +74,10 @@ function ImagesDisplay() {
                         <Link to='/devpro' onClick={() => setPathname('/devpro')}>
                             <div className="image_container">
                                 <div className="title">
-                                    <h2>DESARROLLO</h2>
+                                    <h2>{onlineAdmin?.home.imageDisplay[1].title}</h2>
                                 </div>
                                 <div className="img_wrapper">
-                                    <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 1)} />
+                                    <img src={onlineAdmin?.home.imageDisplay[1].image} alt="display" className="img_img" onLoad={(e) => image_resize(e, 1)} />
                                 </div>
                             </div>
                         </Link>
@@ -85,4 +88,10 @@ function ImagesDisplay() {
     );
 }
 
-export default ImagesDisplay;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+export default connect(mapStateToProps)(ImagesDisplay);

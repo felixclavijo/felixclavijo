@@ -8,9 +8,9 @@ import Inputbox from "../../AdminComponents/Inputbox/Inputbox";
 import Features from "../../Components/Features/Features";
 // import { admin } from "../../Data/Admin_data";
 import { features_data } from "../../Data/Features_data";
-import { services_data } from "../../Data/Services_data";
+// import { services_data } from "../../Data/Services_data";
 
-import { CheckImage, GetDocuments } from "../../AdminFunctions/AdminFunctions";
+import { CheckImage, readURL } from "../../AdminFunctions/AdminFunctions";
 
 import "./HomeAdmin.scss";
 import { connect } from "react-redux";
@@ -63,45 +63,21 @@ function HomeAdmin({ sidebarshow, ...props }) {
         // localStorage.removeItem('admin')
         if(onlineAdmin === null && loop.current) {
             window.addEventListener('resize', image_resize)
-
-            // GetDocuments().then(data => {
-            //     onlineAdminInsert(data)
-            //     // console.log(data)
-            // })
-            
-            if(localStorage.getItem('admin') === null) {
-                GetDocuments().then(data => {
-                    console.log(data)
-                    adminInsert(data)
-                    onlineAdminInsert(data)
-                    prevAdminUpdate(data)
-                    localStorage.setItem('admin', JSON.stringify(data))
-                })
-            } else {
-                adminInsert(JSON.parse(localStorage.getItem('admin')))
-                if(localStorage.getItem('prevAdmin') === null) {
-                    prevAdminUpdate(JSON.parse(localStorage.getItem('admin')))
-                    localStorage.setItem('prevAdmin', localStorage.getItem('admin'))
-                } else {
-                    prevAdminUpdate(JSON.parse(localStorage.getItem('prevAdmin')))
-                }
-            }
-            // console.log(alldata)
             loop.current = false
         }
         return () => window.removeEventListener('resize', image_resize)
-    }, [onlineAdmin, adminInsert, prevAdminUpdate, onlineAdminInsert])
+    }, [onlineAdmin, prevAdminUpdate, onlineAdminInsert])
 
-    function readURL(input, id) {
-        if (input) {
-            var reader = new FileReader();
-        
-            reader.onload = function (e) {
-                document.getElementById(id).src = e.target.result;
-            };
-        
-            reader.readAsDataURL(input);
+    const removeCat = (id) => {
+        // admin?.home.services.splice(id, 1)
+        var removeupd = {
+            ...admin,
+            home: {
+                ...admin.home,
+                services: admin.home.services.filter((el, i) => i !== id),
+            }
         }
+        adminInsert(removeupd)
     }
 
     return (
@@ -145,7 +121,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                 onChange={(e) => {
                                     var val = CheckImage(e)
                                     if(val !== null) {
-                                        let upd = {
+                                        var bgupd = {
                                             ...admin,
                                             home: {
                                                 ...admin.home,
@@ -155,7 +131,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                                 }
                                             } 
                                         }
-                                        adminInsert(upd)
+                                        adminInsert(bgupd)
                                     }
                                 }} 
                             />
@@ -163,7 +139,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                 onChange={(e) => {
                                     var val = CheckImage(e)
                                     if(val !== null) {
-                                        let upd = {
+                                        var lgupd = {
                                             ...admin,
                                             home: {
                                                 ...admin.home,
@@ -173,7 +149,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                                 }
                                             } 
                                         }
-                                        adminInsert(upd)
+                                        adminInsert(lgupd)
                                     }
                                 }} 
                             />
@@ -219,7 +195,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     <div className="container-fluid">
                                         <div className="row">
                                             {
-                                                services_data?.map((service, i) => 
+                                                admin?.home.services.map((service, i) => 
                                                     <div className="col-md-4 FadeLeft" key={i}>
                                                         <div className="d-flex align-items-center justify-content-center my-2">
                                                             <FontAwesomeIcon icon='circle-check' className="check_icon" />
@@ -234,19 +210,69 @@ function HomeAdmin({ sidebarshow, ...props }) {
                             </div>
                         </div>
                         <div className="col-md">
+                            <div className="d-flex justify-content-end">
+                                <button className="btn add_btn"
+                                    onClick={(e) => {
+                                        // admin.home.services.push("")
+                                        var addupd = {
+                                            ...admin,
+                                            home: {
+                                                ...admin.home,
+                                                services: [...admin.home.services, ""],
+                                            }
+                                        }
+                                        adminInsert(addupd)
+                                    }} 
+                                >Add</button>
+                            </div>
                             {
-                                services_data?.map((ser, i) => 
-                                    <Categories name={`c${i+1}`} type='text' defaultValue={ser} placeholder="Type Here" key={i}/>
+                                admin?.home.services.map((ser, i) => 
+                                    <Categories name={`c${i+1}`} id={i} type='text' defaultValue={ser} placeholder="Type Here" key={i} removeCat={removeCat} 
+                                        onChange={(e) => {
+                                            var updinside = {
+                                                ...admin,
+                                                home: {
+                                                    ...admin.home,
+                                                    services: admin.home.services.map((u, index) => index === i ? e.target.value : u),
+                                                }
+                                            }
+                                            adminInsert(updinside)
+                                        }}
+                                    />
                                 )
                             }
-                            <Categories name="new" type='text' placeholder="Type Here" add={true} />
+                            {/* <Categories name="new" id="new" type='text' placeholder="Type Here" addCat={addCat} add={true}
+                                onChange={(e) => {
+                                    admin.home.services.push(e.target.value)
+                                    let upd = {
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            services: admin.home.services,
+                                        }
+                                    }
+                                    adminInsert(upd)
+                                    console.log(document.getElementsByName('c7'))
+                                    document.getElementsByName('c'+admin?.home.services.length-1).focus();
+                                }} 
+                            /> */}
                         </div>
                     </div>
                 </div>
             </div>
             {/* ----------------- Phrase -------------------- */}
             <div className="phrase_section">
-                <InputArea name='Phrase' type='text' defaultValue='Diseñando lugares que inspiran alegría y bienestar desde 1935.' placeholder='Type Here' rows={5} />
+                <InputArea name='Phrase' type='text' defaultValue={admin?.home.phrase} placeholder='Type Here' rows={5} 
+                    onChange={(e) => {
+                        adminInsert({
+                            ...admin,
+                            home: {
+                                ...admin.home,
+                                phrase: e.target.value
+                            } 
+                        })
+                    }}
+                />
             </div>
             {/* ----------------- Feature 1 -------------------- */}
             <div className="feature_section">
@@ -254,13 +280,88 @@ function HomeAdmin({ sidebarshow, ...props }) {
                     <div className="row">
                         <div className="col-md p-0">
                             <div className="feature_box">
-                                <Features image={features_data[0].image} video={features_data[0].video} title={features_data[0].title} desc={features_data[0].desc} />
+                                <Features id="adminfeature1" image={admin?.home.features[0].image} video={admin?.home.features[0].video} title={admin?.home.features[0].title} desc={admin?.home.features[0].desc} />
                             </div>
                         </div>
                         <div className="col-md">
-                            <ChooseFile name="Select Image" />
-                            <Inputbox name="title" type='text' defaultValue={features_data[0].title} placeholder="Type Here" />
-                            <InputArea name='Description' type='text' defaultValue={features_data[0].desc} placeholder='Type Here' rows={5} />
+                            <ChooseFile name="Select Image" id="feature1img"
+                                onChange={(e) => {
+                                    var val = CheckImage(e, true)
+                                    var feat1upd
+                                    if(val !== null) {
+                                        if(e.target.files[0]['type'].split('/')[0] === 'image') {
+                                            feat1upd = {
+                                                ...admin,
+                                                home: {
+                                                    ...admin.home,
+                                                    features: admin.home.features.map((u, index) => 
+                                                        index === 0 
+                                                        ? {
+                                                            ...admin.home.features[0],
+                                                            image: val,
+                                                            video: null
+                                                        } 
+                                                        : u
+                                                    )
+                                                } 
+                                            }
+                                        } else {
+                                            feat1upd = {
+                                                ...admin,
+                                                home: {
+                                                    ...admin.home,
+                                                    features: admin.home.features.map((u, index) => 
+                                                        index === 0 
+                                                        ? {
+                                                            ...admin.home.features[0],
+                                                            video: val,
+                                                            image: null,
+                                                        } 
+                                                        : u
+                                                    )
+                                                } 
+                                            }
+                                        }
+                                        adminInsert(feat1upd)
+                                    }
+                                }}
+                            />
+                            <Inputbox name="title" type='text' defaultValue={admin?.home.features[0].title} placeholder="Type Here" 
+                                onChange={(e) => {
+                                    adminInsert({
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            features: admin.home.features.map((u, index) => 
+                                                index === 0 
+                                                ? {
+                                                    ...admin.home.features[0],
+                                                    title: e.target.value
+                                                } 
+                                                : u
+                                            )
+                                        } 
+                                    })
+                                }}
+                            />
+                            <InputArea name='Description' type='text' defaultValue={admin?.home.features[0].desc} placeholder='Type Here' rows={5} 
+                                onChange={(e) => {
+                                    adminInsert({
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            features: admin.home.features.map((u, index) => 
+                                                index === 0 
+                                                ? {
+                                                    ...admin.home.features[0],
+                                                    desc: e.target.value
+                                                } 
+                                                : u
+                                            )
+                                        } 
+                                    })
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -271,7 +372,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                     <div className="row">
                         <div className="col-md p-0">
                             <div className="imagedisplay_box">
-                                <div className="imagesdisplay padding-whole-theme">
+                                <div className="imagesdisplay">
                                     <div className="container-fluid">
                                         <div className="row">
                                             <div className="col-md">
@@ -280,7 +381,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                                             <h4>ARQUITECTURA</h4>
                                                         </div>
                                                         <div className="img_wrapper">
-                                                            <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.48 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 0)}/>
+                                                            <img id="imageDisplayAdmin1" src={typeof admin?.home.imageDisplay[0].image === 'object' ? readURL(admin?.home.imageDisplay[0].image, "imageDisplayAdmin1") : admin?.home.imageDisplay[0].image} alt="display1" className="img_img" onLoad={(e) => image_resize(e, 0)}/>
                                                         </div>
                                                     </div>
                                             </div>
@@ -290,7 +391,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                                             <h4>DESARROLLO</h4>
                                                         </div>
                                                         <div className="img_wrapper">
-                                                            <img src={require('../../assets/Images/WhatsApp Image 2022-12-08 at 6.05.47 PM.jpeg')} alt="display" className="img_img" onLoad={(e) => image_resize(e, 1)} />
+                                                            <img id="imageDisplayAdmin2" src={typeof admin?.home.imageDisplay[1].image === 'object' ? readURL(admin?.home.imageDisplay[1].image, "imageDisplayAdmin2") : admin?.home.imageDisplay[1].image} alt="display2" className="img_img" onLoad={(e) => image_resize(e, 1)} />
                                                         </div>
                                                     </div>
                                             </div>
@@ -300,10 +401,86 @@ function HomeAdmin({ sidebarshow, ...props }) {
                             </div>
                         </div>
                         <div className="col-md">
-                            <Inputbox name="title" type='text' defaultValue='ARQUITECTURA' placeholder="Type Here" />
-                            <ChooseFile name="Select Image" />
-                            <Inputbox name="title" type='text' defaultValue='DESARROLLO' placeholder="Type Here" />
-                            <ChooseFile name="Select Image" />
+                            <Inputbox name="title" type='text' defaultValue={admin?.home.imageDisplay[0].title} placeholder="Type Here"
+                                onChange={(e) => 
+                                    adminInsert({
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            imageDisplay: admin.home.imageDisplay.map((u, index) => 
+                                                index === 0 
+                                                ? {
+                                                    ...admin.home.imageDisplay[0],
+                                                    title: e.target.value
+                                                } 
+                                                : u
+                                            )
+                                        } 
+                                    })
+                                } 
+                            />
+                            <ChooseFile name="Select Image" id="navimg1" 
+                                onChange={(e) => {
+                                    var val = CheckImage(e)
+                                    if(val !== null) {
+                                        var nav1upd = {
+                                            ...admin,
+                                            home: {
+                                                ...admin.home,
+                                                imageDisplay: admin.home.imageDisplay.map((u, index) => 
+                                                    index === 0 
+                                                    ? {
+                                                        ...admin.home.imageDisplay[0],
+                                                        image: val
+                                                    } 
+                                                    : u
+                                                )
+                                            } 
+                                        }
+                                        adminInsert(nav1upd)
+                                    }
+                                }} 
+                            />
+                            <Inputbox name="title" type='text' defaultValue={admin?.home.imageDisplay[1].title} placeholder="Type Here" 
+                                onChange={(e) => 
+                                    adminInsert({
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            imageDisplay: admin.home.imageDisplay.map((u, index) => 
+                                                index === 1 
+                                                ? {
+                                                    ...admin.home.imageDisplay[1],
+                                                    title: e.target.value
+                                                } 
+                                                : u
+                                            )
+                                        } 
+                                    })
+                                }
+                            />
+                            <ChooseFile name="Select Image" id="navimg2" 
+                                onChange={(e) => {
+                                    var val = CheckImage(e)
+                                    if(val !== null) {
+                                        var nav2upd = {
+                                            ...admin,
+                                            home: {
+                                                ...admin.home,
+                                                imageDisplay: admin.home.imageDisplay.map((u, index) => 
+                                                    index === 1 
+                                                    ? {
+                                                        ...admin.home.imageDisplay[1],
+                                                        image: val
+                                                    } 
+                                                    : u
+                                                )
+                                            } 
+                                        }
+                                        adminInsert(nav2upd)
+                                    }
+                                }} 
+                            />
                         </div>
                     </div>
                 </div>
@@ -314,13 +491,88 @@ function HomeAdmin({ sidebarshow, ...props }) {
                     <div className="row">
                         <div className="col-md p-0">
                             <div className="feature_box">
-                                <Features image={features_data[1].image} video={features_data[1].video} title={features_data[1].title} desc={features_data[1].desc} />
+                                <Features id="adminfeature2" image={features_data[1].image} video={features_data[1].video} title={features_data[1].title} desc={features_data[1].desc} />
                             </div>
                         </div>
                         <div className="col-md">
-                            <ChooseFile name="Select Image" />
-                            <Inputbox name="title" type='text' defaultValue={features_data[1].title} placeholder="Type Here" />
-                            <InputArea name='Description' type='text' defaultValue={features_data[1].desc} placeholder='Type Here' rows={5} />
+                            <ChooseFile name="Select Image" id="feature2img"
+                                onChange={(e) => {
+                                    var val = CheckImage(e, true)
+                                    var feat2upd
+                                    if(val !== null) {
+                                        if(e.target.files[0]['type'].split('/')[0] === 'image') {
+                                            feat2upd = {
+                                                ...admin,
+                                                home: {
+                                                    ...admin.home,
+                                                    features: admin.home.features.map((u, index) => 
+                                                        index === 1 
+                                                        ? {
+                                                            ...admin.home.features[1],
+                                                            image: val,
+                                                            video: null
+                                                        } 
+                                                        : u
+                                                    )
+                                                } 
+                                            }
+                                        } else {
+                                            feat2upd = {
+                                                ...admin,
+                                                home: {
+                                                    ...admin.home,
+                                                    features: admin.home.features.map((u, index) => 
+                                                        index === 1
+                                                        ? {
+                                                            ...admin.home.features[1],
+                                                            video: val,
+                                                            image: null,
+                                                        } 
+                                                        : u
+                                                    )
+                                                } 
+                                            }
+                                        }
+                                        adminInsert(feat2upd)
+                                    }
+                                }}
+                            />
+                            <Inputbox name="title" type='text' defaultValue={admin?.home.features[1].title} placeholder="Type Here" 
+                                onChange={(e) => {
+                                    adminInsert({
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            features: admin.home.features.map((u, index) => 
+                                                index === 1
+                                                ? {
+                                                    ...admin.home.features[1],
+                                                    title: e.target.value
+                                                } 
+                                                : u
+                                            )
+                                        } 
+                                    })
+                                }}
+                            />
+                            <InputArea name='Description' type='text' defaultValue={admin?.home.features[1].desc} placeholder='Type Here' rows={5} 
+                                onChange={(e) => {
+                                    adminInsert({
+                                        ...admin,
+                                        home: {
+                                            ...admin.home,
+                                            features: admin.home.features.map((u, index) => 
+                                                index === 1
+                                                ? {
+                                                    ...admin.home.features[1],
+                                                    desc: e.target.value
+                                                } 
+                                                : u
+                                            )
+                                        } 
+                                    })
+                                }}
+                            />
                         </div>
                     </div>
                 </div>

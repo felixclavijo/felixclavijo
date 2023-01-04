@@ -1,0 +1,199 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
+.newsadmin {
+
+    .newsphrase_section, .imagedetails_section, .productservice_section, .keyonhand_section, .projectdisplay_section {
+        padding: 10px;
+        background-color: #EDEDED;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .newsphrase_section {
+        .phrase_title {
+            width: 50%;
+    
+            @include respond(tab-port) {
+                width: 100%;
+            }
+        }
+    }
+
+    .imagedetails_section {
+
+        .image_box {
+            background-color: white;
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+    }
+
+    .productservice_section {
+        .productservice_box {
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+
+            .productservice_admin {
+                background-color: white;
+                height: 460px;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @include respond(tab-port) {
+                    height: 300px;
+                }
+            }
+        }
+
+        .add_btn {
+            background-color: $primary;
+            color: white;
+            font-weight: 600;
+        }
+    }
+
+    .keyonhand_section {
+
+        .keyonhand_box {
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+            overflow: hidden;
+            
+            .line_details {
+                width: 50%;
+                border-width: 5px;
+                margin: 0;
+                margin-bottom: 20px;
+                color: $primary;
+                opacity: 1;
+                border-radius: 5px;
+
+                @include respond(tab-port) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .projectdisplay_section {
+
+        h5 {
+            font-weight: 700;
+        }
+        
+        .container-fluid {
+            padding: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+    
+            @include respond(tab-port) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @include respond(phone) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+    
+            .col-md {
+                max-height: 350px;
+                overflow: hidden;
+    
+                @include respond(tab-land) {
+                    max-height: 180px;
+                }
+                
+                .overlay {
+                    overflow: hidden;
+                    border-radius: 10px;
+                    background-color: black;
+                    height: 100%;
+                    position: relative;
+            
+                    .img_container {
+                        height: 100%;
+                        width: 100%;
+                        overflow: hidden;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+            
+                        .gallery_img2 {
+                            cursor: pointer;
+                            transition: ease-in-out 0.2s;
+                            opacity: 0.5;
+            
+                            // &:hover {
+                            //     opacity: 1;
+                            //     transform: scale(1.1);
+                            // }
+                        }
+            
+                        @include respond(tab-port) {
+                            .gallery_img {
+                                width: auto;
+                            }
+                        }
+                    }
+            
+                    .gallery_text {
+                        width: 100%;
+                        text-align: center;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+            
+                        .title {
+                            color: $dark-text-87;
+    
+                            @include respond(tab-port) {
+                                font-size: 18px;
+                            }
+                        }
+
+                    }
+                    .check_box {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        z-index: 2;
+                        transform: translate(-50%, -50%);
+
+                        .check_icon {
+                            color: white;
+                            font-size: 50px;
+                        }
+                    }
+
+                    .overlay_active {
+                        width: 100%;
+                        height: 100%;
+                        background-color: $primary;
+                        opacity: 0.5;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        right: 0;
+                        left: 0;
+                        z-index: 1;
+                        // margin: 5px;
+                    }
+                }
+
+            }
+        }
+    }
+}

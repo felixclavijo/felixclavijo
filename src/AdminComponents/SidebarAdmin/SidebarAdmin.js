@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import _ from "lodash";
@@ -7,6 +7,7 @@ import "./SidebarAdmin.scss";
 import { connect } from "react-redux";
 import {
     DeleteImage,
+    GetDocuments,
     UpdateData,
     UploadImg,
 } from "../../AdminFunctions/AdminFunctions";
@@ -14,8 +15,8 @@ import {
 // prettier-ignore
 function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
 
-    const { admin, onlineAdmin, prevAdmin, prevAdminUpdate, onlineAdminInsert } = props
-    // console.log(admin, prevAdmin)
+    const { admin, adminInsert, onlineAdmin, prevAdmin, prevAdminUpdate, onlineAdminInsert } = props
+    // console.log(admin?.home.services, prevAdmin?.home.services, onlineAdmin?.home.services)
     
     const [saveprogress, setSaveProgress] = useState(false)
     const [publishprogress, setPublishProgress] = useState(false)
@@ -28,13 +29,43 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
         }
     }, [setSidebarShow])
 
+    const loop = useRef(true)
+
     useEffect(() => {
-        window.addEventListener('resize', sidebarupdate)
+
+        if(onlineAdmin === null && loop.current) {
+            window.addEventListener('resize', sidebarupdate)
+
+            // GetDocuments().then(data => {
+            //     onlineAdminInsert(data)
+            //     // console.log(data)
+            // })
+            
+            if(localStorage.getItem('admin') === null) {
+                GetDocuments().then(data => {
+                    console.log(data)
+                    adminInsert(data)
+                    onlineAdminInsert(data)
+                    prevAdminUpdate(data)
+                    localStorage.setItem('admin', JSON.stringify(data))
+                })
+            } else {
+                adminInsert(JSON.parse(localStorage.getItem('admin')))
+                if(localStorage.getItem('prevAdmin') === null) {
+                    prevAdminUpdate(JSON.parse(localStorage.getItem('admin')))
+                    localStorage.setItem('prevAdmin', localStorage.getItem('admin'))
+                } else {
+                    prevAdminUpdate(JSON.parse(localStorage.getItem('prevAdmin')))
+                }
+            }
+            // console.log(alldata)
+            loop.current = false
+        }
 
         return () => {
             window.removeEventListener('resize', sidebarupdate)
         }
-    }, [sidebarupdate])
+    }, [sidebarupdate, onlineAdmin, adminInsert, onlineAdminInsert, prevAdminUpdate])
 
     return (
         <div className="sidebaradmin">
@@ -48,6 +79,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                     </button>
                     <div className="nav-logo">
                         <div className="btn-box">
+                            {/* {console.log(JSON.parse(localStorage.getItem('admin')).home.services.length, JSON.parse(localStorage.getItem('prevAdmin')).home.services.length)} */}
                             <button className="btn" disabled={_.isEqual(prevAdmin, admin) || saveprogress}
                                 onClick={async() => {
                                     setSaveProgress(true)
@@ -64,6 +96,39 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                         let fullpath = path+'/'+admin?.home.hero.logoImg.name
                                         let url = await UploadImg(admin?.home.hero.logoImg, fullpath)
                                         admin.home.hero.logoImg = url
+                                    }
+                                    for(var j=0; j < admin?.home.features.length; j++) {
+                                        // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
+                                        if(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object') {
+                                            let path = `Home/Features/${j+1}`
+                                            await DeleteImage(path)
+                                            if(admin?.home.features[j].image !== null) {
+                                                let fullpath = path+'/'+admin?.home.features[j].image.name
+                                                let url = await UploadImg(admin?.home.features[j].image, fullpath)
+                                                admin.home.features[j].image = url
+                                            } else {
+                                                let fullpath = path+'/'+admin?.home.features[j].video.name
+                                                let url = await UploadImg(admin?.home.features[j].video, fullpath)
+                                                admin.home.features[j].video = url
+                                            }
+                                        }
+                                    }
+                                    for(var p=0; p < admin?.home.imageDisplay.length; p++) {
+                                        // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
+                                        if(typeof admin?.home.imageDisplay[p].image === 'object') {
+                                            let path = `Home/ImageDisplay/${p+1}`
+                                            await DeleteImage(path)
+                                            let fullpath = path+'/'+admin?.home.imageDisplay[p].image.name
+                                            let url = await UploadImg(admin?.home.imageDisplay[p].image, fullpath)
+                                            admin.home.imageDisplay[p].image = url
+                                        }
+                                    }
+                                    if(typeof admin?.news.imagestore.image === 'object') {
+                                        let path = `Home/News/Imagestore`
+                                        await DeleteImage(path)
+                                        let fullpath = path+'/'+admin?.news.imagestore.image.name
+                                        let url = await UploadImg(admin?.news.imagestore.image, fullpath)
+                                        admin.news.imagestore.image = url
                                     }
                                     localStorage.setItem('admin', JSON.stringify(admin))
                                     localStorage.setItem('prevAdmin', JSON.stringify(admin))
@@ -87,6 +152,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                     setPublishProgress(true)
                                     // console.log(admin)
                                     await UpdateData(admin, "home")
+                                    await UpdateData(admin, "news")
                                     onlineAdminInsert(admin)
                                     prevAdminUpdate(admin)
                                     setPublishProgress(false)

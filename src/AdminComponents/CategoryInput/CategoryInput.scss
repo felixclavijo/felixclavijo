@@ -13,8 +13,8 @@
     }
 
     .input_box {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
+        // border-top-right-radius: 5px;
+        // border-bottom-right-radius: 5px;
         overflow: hidden;
         position: relative;
 
@@ -32,18 +32,20 @@
             }
         }
 
-        .icon_box {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            height: 100%;
-            cursor: pointer;
+    }
+    .icon_box2 {
+        // position: absolute;
+        // top: 0;
+        // bottom: 0;
+        // right: 0;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: white;
+        cursor: pointer;
 
-            .icon_style {
-                color: $primary;
-                font-size: 20px;
-            }
+        .icon_style {
+            color: $primary;
+            font-size: 20px;
         }
     }
 }
