@@ -4,6 +4,18 @@ import "./GalleryAdmin.scss";
 import Accordion from "../../AdminComponents/Acoordion/Acoordion";
 // prettier-ignore
 function GalleryAdmin({ sidebarshow }) {
+
+
+const returnProject= ()=>{
+ return (
+            <div>
+              EmployeeManagement
+            </div>
+          );
+    }
+
+
+
     return (
         <div className={`galleryadmin ${!sidebarshow ? "page" : "page page-with-navbar"}`}>
             <div className="title">
@@ -12,9 +24,9 @@ function GalleryAdmin({ sidebarshow }) {
 
 
                 <div>
-                <button className="btn">Add project</button>
-                <Accordion/>
-                <Accordion/>
+                <button className="btn" onClick={()=>returnProject()}>Add project</button>
+                <Accordion name={"Project 1"}/>
+       
                 </div>
             </div>
         </div>

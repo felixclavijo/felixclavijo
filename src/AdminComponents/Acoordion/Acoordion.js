@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Acoordion.scss";
 import img from "./../../assets/arrowdown.png";
 import { FaTrash } from "react-icons/fa";
-
-export default function Accordion() {
+import Inputbox from "../Inputbox/Inputbox";
+import ChooseFile from "../ChooseFile/ChooseFile";
+export default function Accordion({name}) {
   const [toggle, setToggle] = useState(false);
   const [heightEl, setHeightEl] = useState();
 
@@ -22,12 +23,11 @@ export default function Accordion() {
   return (
     <div className="accordion">
       <button onClick={toggleState} className="accordion-visible">
-        <span>Lorem ipsum dolor sit amet.</span>
-<div>
-<FaTrash className="icon-trash"/>
-        <img className={toggle && "activei"} src={img} />
-</div>
-       
+        <span>{name}</span>
+        <div>
+          <FaTrash className="icon-trash" />
+          <img className={toggle && "activei"} src={img} />
+        </div>
       </button>
 
       <div
@@ -35,12 +35,90 @@ export default function Accordion() {
         style={{ height: toggle ? `${heightEl}` : "0px" }}
         ref={refHeight}
       >
-        <p aria-hidden={toggle ? "true" : "false"}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore,
-          suscipit quae maiores sunt ducimus est dolorem perspiciatis earum
-          corporis unde, dicta quibusdam aut placeat dignissimos distinctio vel
-          quo eligendi ipsam.
-        </p>
+        <div aria-hidden={toggle ? "true" : "false"} className="accordion-body">
+          <div style={{ padding: "5px"}}>
+            <div style={{width: "50%" }}>
+            <Inputbox
+              stylei={true}
+              name="title"
+              type="text"
+              defaultValue={"equis"}
+              placeholder="Type Here"
+              onChange={(e) => e}
+            />
+
+            </div>
+          
+        
+            <div>slice images</div>
+
+            <div className="row">
+              <div className="col">
+                <Inputbox
+                  stylei={true}
+                  name="title"
+                  type="text"
+                  defaultValue={"equis"}
+                  placeholder="Type Here"
+                  onChange={(e) => e}
+                />
+                    <Inputbox
+              stylei={true}
+              name="title"
+              type="text"
+              defaultValue={"equis"}
+              placeholder="Type Here"
+              onChange={(e) => e}
+            />
+            <Inputbox
+              stylei={true}
+              name="title"
+              type="text"
+              defaultValue={"equis"}
+              placeholder="Type Here"
+              onChange={(e) => e}
+            />
+            <Inputbox
+              stylei={true}
+              name="title"
+              type="text"
+              defaultValue={"equis"}
+              placeholder="Type Here"
+              onChange={(e) => e}
+            />
+              </div>
+              <div className="col">
+                <Inputbox
+                  stylei={true}
+                  name="title"
+                  type="text"
+                  defaultValue={"equis"}
+                  placeholder="Type Here"
+                  onChange={(e) => e}
+                />
+                <Inputbox
+                  stylei={true}
+                  name="title"
+                  type="text"
+                  defaultValue={"equis"}
+                  placeholder="Type Here"
+                  onChange={(e) => e}
+                />
+                <Inputbox
+                  stylei={true}
+                  name="title"
+                  type="text"
+                  defaultValue={"equis"}
+                  placeholder="Type Here"
+                  onChange={(e) => e}
+                />
+                       <ChooseFile name="Background Image" id="bgimg" 
+                                onChange={(e) => e} 
+                            />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

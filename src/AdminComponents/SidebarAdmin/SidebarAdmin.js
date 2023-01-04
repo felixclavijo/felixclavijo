@@ -1,11 +1,24 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import _ from "lodash";
 
 import "./SidebarAdmin.scss";
+import { connect } from "react-redux";
+import {
+    DeleteImage,
+    UpdateData,
+    UploadImg,
+} from "../../AdminFunctions/AdminFunctions";
 
 // prettier-ignore
-function SidebarAdmin({ sidebarshow, setSidebarShow }) {
+function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
+
+    const { admin, onlineAdmin, prevAdmin, prevAdminUpdate, onlineAdminInsert } = props
+    // console.log(admin, prevAdmin)
+    
+    const [saveprogress, setSaveProgress] = useState(false)
+    const [publishprogress, setPublishProgress] = useState(false)
 
     const sidebarupdate = useCallback(() => {
         if(window.innerWidth < 900) {
@@ -22,6 +35,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow }) {
             window.removeEventListener('resize', sidebarupdate)
         }
     }, [sidebarupdate])
+
     return (
         <div className="sidebaradmin">
             <div className={!sidebarshow ? "nav-resize" : "nav-resize page-with-navbar"}>
@@ -34,8 +48,60 @@ function SidebarAdmin({ sidebarshow, setSidebarShow }) {
                     </button>
                     <div className="nav-logo">
                         <div className="btn-box">
-                            <button className="btn">Save</button>
-                            <button className="btn">Publish</button>
+                            <button className="btn" disabled={_.isEqual(prevAdmin, admin) || saveprogress}
+                                onClick={async() => {
+                                    setSaveProgress(true)
+                                    if(typeof admin?.home.hero.backgroundImg === 'object') {
+                                        let path = `Home/Hero/BackgroundImage`
+                                        await DeleteImage(path)
+                                        let fullpath = path+'/'+admin?.home.hero.backgroundImg.name
+                                        let url = await UploadImg(admin?.home.hero.backgroundImg, fullpath)
+                                        admin.home.hero.backgroundImg = url
+                                    }
+                                    if(typeof admin?.home.hero.logoImg === 'object') {
+                                        let path = `Home/Hero/LogoImg`
+                                        await DeleteImage(path)
+                                        let fullpath = path+'/'+admin?.home.hero.logoImg.name
+                                        let url = await UploadImg(admin?.home.hero.logoImg, fullpath)
+                                        admin.home.hero.logoImg = url
+                                    }
+                                    localStorage.setItem('admin', JSON.stringify(admin))
+                                    localStorage.setItem('prevAdmin', JSON.stringify(admin))
+                                    prevAdminUpdate(admin)
+                                    setSaveProgress(false)
+                                }}
+                            >
+                                {
+                                    saveprogress
+                                    ? <div className="d-flex justify-content-center">
+                                        <div className="spinner-border" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    : <span>Save</span>
+                                }
+                            </button>
+                            {/* <button className="btn" disabled={JSON.stringify(onlineAdmin) === JSON.stringify(admin)}> */}
+                            <button className="btn" disabled={_.isEqual(onlineAdmin, admin) || publishprogress}
+                                onClick={async () => {
+                                    setPublishProgress(true)
+                                    // console.log(admin)
+                                    await UpdateData(admin, "home")
+                                    onlineAdminInsert(admin)
+                                    prevAdminUpdate(admin)
+                                    setPublishProgress(false)
+                                }}
+                            >
+                                {
+                                    publishprogress
+                                    ? <div className="d-flex justify-content-center">
+                                        <div className="spinner-border" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                    : <span>Publish</span>
+                                }
+                            </button>
                         </div>
                         <img src={require('../../assets/Removal-623 1.png')} alt="nav-logo" className="main_logo" />
                     </div>
@@ -107,4 +173,35 @@ function SidebarAdmin({ sidebarshow, setSidebarShow }) {
     );
 }
 
-export default SidebarAdmin;
+const mapStateToProps = (state) => {
+    return {
+        admin: state.admin,
+        prevAdmin: state.prevAdmin,
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        prevAdminUpdate: (val) => {
+            dispatch({
+                type: "PREVADMIN",
+                item: val,
+            });
+        },
+        adminInsert: (val) => {
+            dispatch({
+                type: "ADMIN",
+                item: val,
+            });
+        },
+        onlineAdminInsert: (val) => {
+            dispatch({
+                type: "ONLINEADMIN",
+                item: val,
+            });
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarAdmin);
