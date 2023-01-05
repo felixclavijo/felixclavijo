@@ -1,140 +1,117 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import "./Acoordion.scss";
-import img from "./../../assets/arrowdown.png";
-import { FaTrash } from "react-icons/fa";
+// import { FaTrash } from "react-icons/fa";
 import Inputbox from "../Inputbox/Inputbox";
 import ChooseFile from "../ChooseFile/ChooseFile";
-export default function Accordion({ name }) {
-  const [toggle, setToggle] = useState(false);
-  const [heightEl, setHeightEl] = useState();
+import ImageSlider from "../ImageSlider/ImageSlider";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-  const refHeight = useRef();
+// prettier-ignore
+export default function Accordion({ gallery }) {
+    // const [toggle, setToggle] = useState(false);
+    // const [heightEl, setHeightEl] = useState();
 
-  useEffect(() => {
-    console.log(refHeight);
-    setHeightEl(`${refHeight.current.scrollHeight}px`);
-  }, []);
+    // const refHeight = useRef();
 
-  const toggleState = () => {
-    setToggle(!toggle);
-  };
+    useEffect(() => {
+        // console.log(refHeight);
+        // setHeightEl(`${refHeight.current.scrollHeight}px`);
+    }, []);
 
-  console.log(toggle);
-  return (
-    <div className="accordion">
-      <button onClick={toggleState} className="accordion-visible">
-        <span>{name}</span>
-        <div>
-          <FaTrash className="icon-trash" />
-          <img className={toggle && "activei"} src={img} />
+    // const toggleState = () => {
+    //     setToggle(!toggle);
+    // };
+
+    // console.log(toggle);
+    return (
+        <div className="accordion">
+            {/* <button onClick={toggleState} className="accordion-visible">
+                <span>{name}</span>
+                <div>
+                    <FaTrash className="icon-trash" />
+					<FontAwesomeIcon icon="trash" className="mx-3 icon-trash" />
+					<FontAwesomeIcon icon="angle-down" className={toggle ? "activei" : ""} />
+                    <img className={toggle && "activei"} src={img} />
+                </div>
+            </button> */}
+
+            {/* <div className={toggle ? "accordion-toggle animated" : "accordion-toggle"} style={{ height: toggle ? `${heightEl}` : "0px" }} ref={refHeight}> */}
+                {/* <div aria-hidden={toggle ? "true" : "false"} className="accordion-body"> */}
+					<div className="container-fluid">
+						<div className="title_accordion">
+							<Inputbox
+								stylei={true}
+								name="title"
+								type="text"
+								defaultValue={gallery.title}
+								placeholder="Type Here"
+								onChange={(e) => e}
+							/>
+						</div>
+                        <ImageSlider id={gallery.id} images={gallery.image} />
+						<div className="row">
+							<div className="col-md">
+								<Inputbox
+									name="Direccion"
+									type="text"
+									defaultValue={gallery.Direccion}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+								<Inputbox
+									name="Ciudad"
+									type="text"
+									defaultValue={gallery.Ciudad}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+								<Inputbox
+									name="Año"
+									type="text"
+									defaultValue={gallery.Año}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+								<Inputbox
+									name="Local"
+									type="text"
+									defaultValue={gallery.Local}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+							</div>
+							<div className="col-md">
+								<Inputbox
+									name="Estado"
+									type="text"
+									defaultValue={gallery.Estado}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+								<Inputbox
+									name="Superficie"
+									type="text"
+									defaultValue={gallery.Superficie}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+								<Inputbox
+									name="Unidades"
+									type="text"
+									defaultValue={gallery.Unidades}
+									placeholder="Type Here"
+									onChange={(e) => e}
+								/>
+								<ChooseFile
+                                    name="Choose Image"
+                                    id="bgimg"
+                                    onChange={(e) => e}
+                                />
+							</div>
+						</div>
+					</div>
+                {/* </div> */}
+            {/* </div> */}
         </div>
-      </button>
-
-      <div
-        className={toggle ? "accordion-toggle animated" : "accordion-toggle"}
-        style={{ height: toggle ? `${heightEl}` : "0px" }}
-        ref={refHeight}
-      >
-        <div aria-hidden={toggle ? "true" : "false"} className="accordion-body">
-          <div style={{ padding: "5px" }}>
-            <div style={{ width: "49%" }}>
-              <Inputbox
-                stylei={true}
-                name="title"
-                type="text"
-                defaultValue={"equis"}
-                placeholder="Type Here"
-                onChange={(e) => e}
-              />
-            </div>
-
-            <div>slice images</div>
-
-            <div className="row">
-              <div className="col">
-                <div style={{ marginBottom: "2%" }}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-
-                <div style={{ marginBottom: "2%" }}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-                <div style={{ marginBottom: "2%" }}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-                <div style={{  marginBottom: "2%"}}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-              </div>
-              <div className="col">
-              <div style={{ marginBottom: "2%"}}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-                <div style={{ marginBottom: "2%" }}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-                <div style={{marginBottom: "2%" }}>
-                  <Inputbox
-                    stylei={true}
-                    name="title"
-                    type="text"
-                    defaultValue={""}
-                    placeholder="Type Here"
-                    onChange={(e) => e}
-                  />
-                </div>
-                <ChooseFile
-                  name="Choose Image"
-                  id="bgimg"
-                  onChange={(e) => e}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
