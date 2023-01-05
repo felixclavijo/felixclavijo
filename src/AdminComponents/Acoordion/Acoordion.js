@@ -25,93 +25,79 @@ export default function Accordion({ gallery }) {
     // console.log(toggle);
     return (
         <div className="accordion">
-            {/* <button onClick={toggleState} className="accordion-visible">
-                <span>{name}</span>
-                <div>
-                    <FaTrash className="icon-trash" />
-					<FontAwesomeIcon icon="trash" className="mx-3 icon-trash" />
-					<FontAwesomeIcon icon="angle-down" className={toggle ? "activei" : ""} />
-                    <img className={toggle && "activei"} src={img} />
-                </div>
-            </button> */}
-
-            {/* <div className={toggle ? "accordion-toggle animated" : "accordion-toggle"} style={{ height: toggle ? `${heightEl}` : "0px" }} ref={refHeight}> */}
-                {/* <div aria-hidden={toggle ? "true" : "false"} className="accordion-body"> */}
-					<div className="container-fluid">
-						<div className="title_accordion">
-							<Inputbox
-								stylei={true}
-								name="title"
-								type="text"
-								defaultValue={gallery.title}
-								placeholder="Type Here"
-								onChange={(e) => e}
-							/>
-						</div>
-                        <ImageSlider id={gallery.id} images={gallery.image} />
-						<div className="row">
-							<div className="col-md">
-								<Inputbox
-									name="Direccion"
-									type="text"
-									defaultValue={gallery.Direccion}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-								<Inputbox
-									name="Ciudad"
-									type="text"
-									defaultValue={gallery.Ciudad}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-								<Inputbox
-									name="Año"
-									type="text"
-									defaultValue={gallery.Año}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-								<Inputbox
-									name="Local"
-									type="text"
-									defaultValue={gallery.Local}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-							</div>
-							<div className="col-md">
-								<Inputbox
-									name="Estado"
-									type="text"
-									defaultValue={gallery.Estado}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-								<Inputbox
-									name="Superficie"
-									type="text"
-									defaultValue={gallery.Superficie}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-								<Inputbox
-									name="Unidades"
-									type="text"
-									defaultValue={gallery.Unidades}
-									placeholder="Type Here"
-									onChange={(e) => e}
-								/>
-								<ChooseFile
-                                    name="Choose Image"
-                                    id="bgimg"
-                                    onChange={(e) => e}
-                                />
-							</div>
-						</div>
+			<div className="container-fluid">
+				<div className="title_accordion">
+					<Inputbox
+						stylei={true}
+						name="title"
+						type="text"
+						defaultValue={gallery.title}
+						placeholder="Type Here"
+						onChange={(e) => e}
+					/>
+				</div>
+				<ImageSlider id={gallery.id} images={gallery.image} />
+				<div className="row">
+					<div className="col-md">
+						<Inputbox
+							name="Direccion"
+							type="text"
+							defaultValue={gallery.Direccion}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
+						<Inputbox
+							name="Ciudad"
+							type="text"
+							defaultValue={gallery.Ciudad}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
+						<Inputbox
+							name="Año"
+							type="text"
+							defaultValue={gallery.Año}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
+						<Inputbox
+							name="Local"
+							type="text"
+							defaultValue={gallery.Local}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
 					</div>
-                {/* </div> */}
-            {/* </div> */}
+					<div className="col-md">
+						<Inputbox
+							name="Estado"
+							type="text"
+							defaultValue={gallery.Estado}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
+						<Inputbox
+							name="Superficie"
+							type="text"
+							defaultValue={gallery.Superficie}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
+						<Inputbox
+							name="Unidades"
+							type="text"
+							defaultValue={gallery.Unidades}
+							placeholder="Type Here"
+							onChange={(e) => e}
+						/>
+						<ChooseFile
+							name="Choose Image"
+							id="bgimg"
+							onChange={(e) => e}
+						/>
+					</div>
+				</div>
+			</div>
         </div>
     );
 }
