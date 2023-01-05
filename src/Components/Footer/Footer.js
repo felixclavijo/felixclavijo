@@ -24,7 +24,7 @@ function Footer() {
                                     <img src={theme === 'light' ? require('../../assets/Light-ARQUITECTURA.png') : require('../../assets/Dark-ARQUITECTURA.png')} style={{ width: 90, borderRadius: 5 }} alt="Logo" />
                                 </div>
                             </div>
-                            <p className="my-4">Diseñamos personas inspiradas Experiencias que crean positivo cambio en la vida de las personas.</p>
+                            <p className="my-4">Diseñamos personas inspiradas, Experiencias que crean positivo cambio en la vida de las personas.</p>
                             <div className="image_align">
                                 <img src={require('../../assets/QR-code-obituary.svg.webp')} alt='footerLogo' style={{ height: 90, borderRadius: 5 }} />
                             </div>
