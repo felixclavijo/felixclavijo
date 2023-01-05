@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { connect } from "react-redux";
 import SingleNews from "../../Components/SingleNews/SingleNews";
 import SubTitle from "../../Components/SubTitle/SubTitle";
 import { ThemeContext } from "../../context/ThemeContext";
@@ -8,7 +9,9 @@ import { AnimationFade, AnimationIn } from "../../styles/animations/fadein";
 import "./DevPro.scss";
 
 // prettier-ignore
-function DevPro() {
+function DevPro(props) {
+
+    const { onlineAdmin } = props
 
     const { setApp_height } = useContext(ThemeContext)
 
@@ -23,10 +26,8 @@ function DevPro() {
     return (
         <div className="devpro padding-whole-theme">
             <SubTitle 
-                title="NUESTRA PROPUESTA PARA VOS !" 
-                desc="Brindamos un amplio servicio de arquitectura acompañando a nuestros clientes en todo el proceso 
-                de la obra, desde el comienzo en la concepción de la misma hasta una vez finalizada y ya en uso. Presentes 
-                desde la etapa inicial en la  coordinando las visitas necesarias hasta la elección definitiva." 
+                title={onlineAdmin?.devpro.phrase.title}
+                desc={onlineAdmin?.devpro.phrase.description}
             />
             <div className="devpro_features">
                 <div className="container-fluid my-5">
@@ -63,4 +64,10 @@ function DevPro() {
     );
 }
 
-export default DevPro;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+export default connect(mapStateToProps)(DevPro);

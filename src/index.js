@@ -39,6 +39,9 @@ import {
     faRightFromBracket,
     faMinus,
     faPlus,
+    faAngleDown,
+    faAngleUp,
+    faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -62,7 +65,10 @@ library.add(
     faPerson,
     faRightFromBracket,
     faMinus,
-    faPlus
+    faPlus,
+    faAngleDown,
+    faAngleUp,
+    faTrash
 );
 
 const store = createStore(

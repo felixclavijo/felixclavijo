@@ -153,6 +153,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                     // console.log(admin)
                                     await UpdateData(admin, "home")
                                     await UpdateData(admin, "news")
+                                    await UpdateData(admin, "devpro")
                                     onlineAdminInsert(admin)
                                     prevAdminUpdate(admin)
                                     setPublishProgress(false)

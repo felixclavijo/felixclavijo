@@ -1,0 +1,28 @@
+@use '../../styles/abstract/colors' as *;
+@import '../../responsive/mixin';
+
+.devproadmin {
+
+    .devprotitle_sections {
+        padding: 10px;
+        background-color: #EDEDED;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .devprotitle_sections {
+        .phrase_title {
+            width: 50%;
+    
+            @include respond(tab-port) {
+                width: 100%;
+            }
+        }
+    }
+
+    .add_btn {
+        background-color: $primary;
+        color: white;
+        font-weight: 600;
+    }
+}
