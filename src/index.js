@@ -42,6 +42,7 @@ import {
     faAngleDown,
     faAngleUp,
     faTrash,
+    faClose,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -68,7 +69,8 @@ library.add(
     faPlus,
     faAngleDown,
     faAngleUp,
-    faTrash
+    faTrash,
+    faClose
 );
 
 const store = createStore(

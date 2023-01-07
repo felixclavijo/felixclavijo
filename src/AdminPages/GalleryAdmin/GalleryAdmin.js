@@ -2,14 +2,14 @@ import React from "react";
 
 import "./GalleryAdmin.scss";
 import Accordion from "../../AdminComponents/Acoordion/Acoordion";
-import { gallery_data } from "../../Data/Gallery_data";
 import Dropdown from "../../AdminComponents/Dropdown/Dropdown";
+import AddProject from "../../AdminComponents/AddProject/AddProject";
+import { connect } from "react-redux";
 
 // prettier-ignore
-function GalleryAdmin({ sidebarshow }) {
-    const returnProject = () => {
-        return <div>EmployeeManagement</div>;
-    };
+function GalleryAdmin({ sidebarshow, ...props }) {
+
+    const { admin } = props
 
     return (
         <div className={`galleryadmin ${!sidebarshow ? "page" : "page page-with-navbar"}`}>
@@ -18,11 +18,12 @@ function GalleryAdmin({ sidebarshow }) {
                 <hr className="line_hr" />
 
                 <div>
-                    <button className="btn" onClick={() => returnProject()}>
+                    <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#addproject">
                         Add project
                     </button>
+                    <AddProject />
                     {
-                        gallery_data?.map((gallery, index) =>
+                        admin?.projects.data.map((gallery, index) =>
                             <Dropdown key={index} id={gallery.id} title={gallery.title} comp={<Accordion gallery={gallery} />} />
                         )
                     }
@@ -32,4 +33,10 @@ function GalleryAdmin({ sidebarshow }) {
     );
 }
 
-export default GalleryAdmin;
+const mapStateToProps = (state) => {
+    return {
+        admin: state.admin,
+    };
+};
+
+export default connect(mapStateToProps)(GalleryAdmin);

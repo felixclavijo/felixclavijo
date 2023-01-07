@@ -123,8 +123,24 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                             admin.home.imageDisplay[p].image = url
                                         }
                                     }
+                                    for(var r=0; r < admin?.projects.data.length; r++) {
+                                        // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
+                                        var loop = true
+                                        let path = `Projects/${admin?.projects.data[r].title}`
+                                        for(var u=0; u < admin?.projects.data[r].image.length; u++) {
+                                            if(typeof admin?.projects.data[r].image[u] === 'object') {
+                                                if(loop) {
+                                                    await DeleteImage(path)
+                                                    loop = false
+                                                }
+                                                let fullpath = path+'/'+admin?.projects.data[r].image[u].name
+                                                let url = await UploadImg(admin?.projects.data[r].image[u], fullpath)
+                                                admin.projects.data[r].image[u] = url
+                                            }
+                                        }
+                                    }
                                     if(typeof admin?.news.imagestore.image === 'object') {
-                                        let path = `Home/News/Imagestore`
+                                        let path = `News/Imagestore`
                                         await DeleteImage(path)
                                         let fullpath = path+'/'+admin?.news.imagestore.image.name
                                         let url = await UploadImg(admin?.news.imagestore.image, fullpath)
@@ -154,6 +170,7 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                     await UpdateData(admin, "home")
                                     await UpdateData(admin, "news")
                                     await UpdateData(admin, "devpro")
+                                    await UpdateData(admin, "projects")
                                     onlineAdminInsert(admin)
                                     prevAdminUpdate(admin)
                                     setPublishProgress(false)

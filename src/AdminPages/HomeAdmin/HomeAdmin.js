@@ -60,7 +60,6 @@ function HomeAdmin({ sidebarshow, ...props }) {
     const loop = useRef(true)
 
     useEffect(() => {
-        // localStorage.removeItem('admin')
         if(onlineAdmin === null && loop.current) {
             window.addEventListener('resize', image_resize)
             loop.current = false

@@ -1,0 +1,15 @@
+#addproject {
+    
+    .modal-body {
+        background-color: #EDEDED;
+    }
+
+    .modal-dialog {
+        max-width: 1000px;
+
+        .close {
+            border: 0;
+            background-color: transparent;
+        }
+    }
+}

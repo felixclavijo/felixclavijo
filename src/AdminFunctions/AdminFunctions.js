@@ -106,7 +106,7 @@ export const readURL = (input, id) => {
         var reader = new FileReader();
     
         reader.onload = function (e) {
-            document.getElementById(id).src = e.target.result;
+            if(document.getElementById(id)) document.getElementById(id).src = e.target.result;
         };
     
         reader.readAsDataURL(input);

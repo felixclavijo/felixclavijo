@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
 
+import { readURL } from "../../AdminFunctions/AdminFunctions";
+
 import "./ImageSlider.scss";
 
 // prettier-ignore
@@ -46,16 +48,18 @@ function ImageSlider({ id, images }) {
             <div className="slideshow-container">
                 {/* <!-- Full-width images with number and caption text --> */}
                 {
-                    images?.map((image, index) => 
+                    images?.length === 0
+                    ? <div className="d-flex justify-content-center align-items-center">No Images</div>
+                    : images?.map((image, index) => 
                         index === 0
-                        ? <div className={`mySlides mySlides${id} fade`} key={index} style={{ display: "flex" }}>
+                        ? <div className={`mySlides mySlides${id} fade1`} key={index} style={{ display: "flex" }}>
                             {/* <div className="numbertext">{index+1} / {images.length}</div> */}
-                            <img src={image} className="image_style" alt={`side${index+1}`} />
+                            <img id={'slider'+id+index} src={typeof image === 'object' ? readURL(image, 'slider'+id+index) : image} className="image_style" alt={`side${index}`} />
                             {/* <div className="text">Caption Text</div> */}
                         </div>
-                        : <div className={`mySlides mySlides${id} fade`} key={index} style={{ display: "none" }}>
+                        : <div className={`mySlides mySlides${id} fade1`} key={index} style={{ display: "none" }}>
                             {/* <div className="numbertext">{index+1} / {images.length}</div> */}
-                            <img src={image} className="image_style" alt={`side${index+1}`} />
+                            <img id={'slider'+id+index} src={typeof image === 'object' ? readURL(image, 'slider'+id+index) : image} className="image_style" alt={`side${index}`} />
                             {/* <div className="text">Caption Text</div> */}
                         </div>
                     )
@@ -74,10 +78,10 @@ function ImageSlider({ id, images }) {
                 </div> */}
 
                 {/* <!-- Next and previous buttons --> */}
-                <button className="prev" onClick={() => plusSlides(-1)}>
+                <button type="button" className="prev" onClick={() => plusSlides(-1)}>
                     <FontAwesomeIcon icon="angle-left" className="icon_lr" />
                 </button>
-                <button className="next" onClick={() => plusSlides(1)}>
+                <button type="button" className="next" onClick={() => plusSlides(1)}>
                     <FontAwesomeIcon icon="angle-right" className="icon_lr" />
                 </button>
             </div>

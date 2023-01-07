@@ -22,13 +22,12 @@ export default function Accordion({ gallery }) {
     //     setToggle(!toggle);
     // };
 
-    // console.log(toggle);
+    // console.log(selected_images);
     return (
         <div className="accordion">
 			<div className="container-fluid">
 				<div className="title_accordion">
 					<Inputbox
-						stylei={true}
 						name="title"
 						type="text"
 						defaultValue={gallery.title}

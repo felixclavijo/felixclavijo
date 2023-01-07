@@ -40,6 +40,7 @@ function App(props) {
         if(loop.current && onlineAdmin === null) {
             GetDocuments().then((data) => {
                 onlineAdminInsert(data)
+                // localStorage.removeItem('admin')
                 // if(!_.isEqual(JSON.parse(localStorage.getItem("admin")), data)) {
                 //     localStorage.setItem("admin", JSON.stringify(data))
                 //     localStorage.setItem("prevAdmin", JSON.stringify(data))
