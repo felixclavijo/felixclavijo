@@ -24,7 +24,7 @@ function GalleryAdmin({ sidebarshow, ...props }) {
                     <AddProject />
                     {
                         admin?.projects.data.map((gallery, index) =>
-                            <Dropdown key={index} id={gallery.id} title={gallery.title} comp={<Accordion gallery={gallery} />} />
+                            <Dropdown key={index} id={gallery.id} title={gallery.title} comp={<Accordion id={gallery.id} gallery={gallery} />} />
                         )
                     }
                 </div>

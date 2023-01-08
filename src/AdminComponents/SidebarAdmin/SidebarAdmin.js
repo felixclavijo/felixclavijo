@@ -7,6 +7,7 @@ import "./SidebarAdmin.scss";
 import { connect } from "react-redux";
 import {
     DeleteImage,
+    DeleteSingleImage,
     GetDocuments,
     UpdateData,
     UploadImg,
@@ -125,17 +126,22 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                     }
                                     for(var r=0; r < admin?.projects.data.length; r++) {
                                         // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
-                                        var loop = true
-                                        let path = `Projects/${admin?.projects.data[r].title}`
-                                        for(var u=0; u < admin?.projects.data[r].image.length; u++) {
-                                            if(typeof admin?.projects.data[r].image[u] === 'object') {
-                                                if(loop) {
-                                                    await DeleteImage(path)
-                                                    loop = false
+                                        var admin_len = admin?.projects.data[r].image.length
+                                        var onlineAdmin_len = onlineAdmin?.projects.data[r].image.length
+                                        if(admin_len < onlineAdmin_len) {
+                                            // var filter_val = onlineAdmin?.projects.data[r].image.filter(ele => !admin?.projects.data[r].image.includes(ele))
+                                            var filter_val = _.difference(onlineAdmin?.projects.data[r].image, admin?.projects.data[r].image)
+                                            var image_name = filter_val[0].split("%2F")[2].split("?")[0].replace(/%20/g, " ")
+                                            let path = `Projects/${onlineAdmin?.projects.data[r].title}/${image_name}`
+                                            await DeleteSingleImage(path)
+                                        } else {
+                                            let path = `Projects/${admin?.projects.data[r].title}`
+                                            for(var u=0; u < admin?.projects.data[r].image.length; u++) {
+                                                if(typeof admin?.projects.data[r].image[u] === 'object') {
+                                                    let fullpath = path+'/'+admin?.projects.data[r].image[u].name
+                                                    let url = await UploadImg(admin?.projects.data[r].image[u], fullpath)
+                                                    admin.projects.data[r].image[u] = url
                                                 }
-                                                let fullpath = path+'/'+admin?.projects.data[r].image[u].name
-                                                let url = await UploadImg(admin?.projects.data[r].image[u], fullpath)
-                                                admin.projects.data[r].image[u] = url
                                             }
                                         }
                                     }

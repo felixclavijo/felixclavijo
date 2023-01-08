@@ -163,3 +163,17 @@ export const DeleteImage = async (imagePath) => {
         console.log(error);
     });
 }
+
+export const DeleteSingleImage = async (imagePath) => {
+    // Create a reference to the file to delete
+    const desertRef = ref(storage, imagePath);
+
+    // Delete the file
+    deleteObject(desertRef)
+        .then(() => {
+            // console.log("Success");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};

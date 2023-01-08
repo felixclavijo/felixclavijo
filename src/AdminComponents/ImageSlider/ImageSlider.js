@@ -1,12 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 
 import { readURL } from "../../AdminFunctions/AdminFunctions";
 
 import "./ImageSlider.scss";
 
 // prettier-ignore
-function ImageSlider({ id, images }) {
+function ImageSlider({ id, images, ...props }) {
+
+    const { admin, adminInsert } = props
 
     const slideIndex = useRef(1);
 
@@ -42,6 +45,24 @@ function ImageSlider({ id, images }) {
         showSlides(n);
     }
 
+    const remove_image = (index) => {
+        var update = {
+			...admin,
+			projects: {
+				...admin.projects,
+				data: admin.projects.data.map((el) => 
+					el.id === id
+					? {
+						...el,
+						image: el.image.filter((element, i) => i !== index)
+					}
+					: el
+				),
+			}
+		}
+		adminInsert(update)
+    }
+
     return (
         <div className="imageslider">
             {/* <!-- Slideshow container --> */}
@@ -55,11 +76,21 @@ function ImageSlider({ id, images }) {
                         ? <div className={`mySlides mySlides${id} fade1`} key={index} style={{ display: "flex" }}>
                             {/* <div className="numbertext">{index+1} / {images.length}</div> */}
                             <img id={'slider'+id+index} src={typeof image === 'object' ? readURL(image, 'slider'+id+index) : image} className="image_style" alt={`side${index}`} />
+                            {
+                                images.length === 1
+                                ? null
+                                : <button type="button"className="remove_icon_btn" onClick={() => remove_image(index)}><FontAwesomeIcon icon="circle-xmark" fontSize={20} className="remove_icon" /></button>
+                            }
                             {/* <div className="text">Caption Text</div> */}
                         </div>
                         : <div className={`mySlides mySlides${id} fade1`} key={index} style={{ display: "none" }}>
                             {/* <div className="numbertext">{index+1} / {images.length}</div> */}
                             <img id={'slider'+id+index} src={typeof image === 'object' ? readURL(image, 'slider'+id+index) : image} className="image_style" alt={`side${index}`} />
+                            {
+                                images.length === 1
+                                ? null
+                                : <button type="button"className="remove_icon_btn" onClick={() => remove_image(index)}><FontAwesomeIcon icon="circle-xmark" fontSize={20} className="remove_icon" /></button>
+                            }
                             {/* <div className="text">Caption Text</div> */}
                         </div>
                     )
@@ -103,4 +134,21 @@ function ImageSlider({ id, images }) {
     );
 }
 
-export default ImageSlider;
+const mapStateToProps = (state) => {
+    return {
+        admin: state.admin,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        adminInsert: (val) => {
+            dispatch({
+                type: "ADMIN",
+                item: val,
+            });
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageSlider);
