@@ -102,6 +102,7 @@ export const CheckImage = (e, video=false) => {
 // ------------------------- Read Image -------------------------
 // prettier-ignore
 export const readURL = (input, id) => {
+    // console.log(id, input)
     if (input) {
         var reader = new FileReader();
     

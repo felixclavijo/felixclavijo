@@ -19,31 +19,39 @@
         font-size: 17px;
         font-weight: 700;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         position: relative;
         transition: 0.3s;
 
-        .side_icons {
-            position: absolute;
-            top: 0;
-            right: 20px;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-        }
+        
+    }
+    .side_icons {
+        position: absolute;
+        top: 0;
+        right: 20px;
+        padding: 17px;
+        // bottom: 0;
+        display: flex;
+        align-items: center;
+        transition: 0.3s;
+    }
 
-        .icon_style {
-            background-color: transparent;
-            border: 0;
-            z-index: 2;
-        }
-
+    .icon_style {
+        background-color: transparent;
+        border: 0;
+        z-index: 3;
     }
     .id_span, .icon_style {
         color: $primary;
     }
-    .active .id_span, .active .icon_style {
+    .active .icon_style {
         color: white;
+    }
+    .active .id_span {
+        color: white;
+    }
+    .active, .collapsible:hover ~ .side_icons {
+        background-color: #ccc;
     }
     
     /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */

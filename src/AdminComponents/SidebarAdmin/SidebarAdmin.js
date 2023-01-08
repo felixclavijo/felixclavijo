@@ -124,23 +124,45 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                             admin.home.imageDisplay[p].image = url
                                         }
                                     }
-                                    for(var r=0; r < admin?.projects.data.length; r++) {
-                                        // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
-                                        var admin_len = admin?.projects.data[r].image.length
-                                        var onlineAdmin_len = onlineAdmin?.projects.data[r].image.length
-                                        if(admin_len < onlineAdmin_len) {
-                                            // var filter_val = onlineAdmin?.projects.data[r].image.filter(ele => !admin?.projects.data[r].image.includes(ele))
-                                            var filter_val = _.difference(onlineAdmin?.projects.data[r].image, admin?.projects.data[r].image)
-                                            var image_name = filter_val[0].split("%2F")[2].split("?")[0].replace(/%20/g, " ")
-                                            let path = `Projects/${onlineAdmin?.projects.data[r].title}/${image_name}`
-                                            await DeleteSingleImage(path)
-                                        } else {
-                                            let path = `Projects/${admin?.projects.data[r].title}`
-                                            for(var u=0; u < admin?.projects.data[r].image.length; u++) {
-                                                if(typeof admin?.projects.data[r].image[u] === 'object') {
-                                                    let fullpath = path+'/'+admin?.projects.data[r].image[u].name
-                                                    let url = await UploadImg(admin?.projects.data[r].image[u], fullpath)
-                                                    admin.projects.data[r].image[u] = url
+                                    if(admin?.projects.data.length < onlineAdmin?.projects.data.length) {
+                                        var admin_id = admin?.projects.data.map(pro => pro.id)
+                                        var filtered_project = onlineAdmin?.projects.data.filter(ele => !admin_id.includes(ele.id))
+                                        console.log(filtered_project)
+                                        for(var f=0; f < filtered_project.length; f++) {
+                                            let path = `Projects/${filtered_project[f].title}`
+                                            await DeleteImage(path)
+                                        }
+                                    } else {
+                                        for(var r=0; r < admin?.projects.data.length; r++) {
+                                            // console.log(typeof admin?.home.features[j].image === 'object' && typeof admin?.home.features[j].video === 'object')
+                                            var adminImg_filter = admin?.projects.data[r].image.filter(ele => typeof ele !== 'object')
+                                            var admin_len = adminImg_filter.length
+                                            var onlineAdmin_len = onlineAdmin?.projects.data[r] ? onlineAdmin?.projects.data[r].image.length : 0
+                                            if(admin_len < onlineAdmin_len) {
+                                                var filter_val = _.difference(onlineAdmin?.projects.data[r].image, adminImg_filter)
+                                                for(var b=0; b < filter_val.length; b++) {
+                                                    var image_name = filter_val[b].split("%2F")[2].split("?")[0].replace(/%20/g, " ")
+                                                    let path = `Projects/${onlineAdmin?.projects.data[r].title}/${image_name}`
+                                                    await DeleteSingleImage(path)
+                                                }
+                                                // if(adminImg_filter.length !== admin?.projects.data[r].image.length) {
+                                                let path = `Projects/${admin?.projects.data[r].title}`
+                                                for(var l=0; l < admin?.projects.data[r].image.length; l++) {
+                                                    if(typeof admin?.projects.data[r].image[l] === 'object') {
+                                                        let fullpath = path+'/'+admin?.projects.data[r].image[l].name
+                                                        let url = await UploadImg(admin?.projects.data[r].image[l], fullpath)
+                                                        admin.projects.data[r].image[l] = url
+                                                    }
+                                                }
+                                                // }
+                                            } else {
+                                                let path = `Projects/${admin?.projects.data[r].title}`
+                                                for(var u=0; u < admin?.projects.data[r].image.length; u++) {
+                                                    if(typeof admin?.projects.data[r].image[u] === 'object') {
+                                                        let fullpath = path+'/'+admin?.projects.data[r].image[u].name
+                                                        let url = await UploadImg(admin?.projects.data[r].image[u], fullpath)
+                                                        admin.projects.data[r].image[u] = url
+                                                    }
                                                 }
                                             }
                                         }

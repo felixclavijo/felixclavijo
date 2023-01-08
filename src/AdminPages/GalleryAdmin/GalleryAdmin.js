@@ -23,9 +23,11 @@ function GalleryAdmin({ sidebarshow, ...props }) {
                     </button>
                     <AddProject />
                     {
-                        admin?.projects.data.map((gallery, index) =>
-                            <Dropdown key={index} id={gallery.id} title={gallery.title} comp={<Accordion id={gallery.id} gallery={gallery} />} />
+                        admin?.projects.data.length !== 0
+                        ? admin?.projects.data.map((gallery, index) =>
+                            <Dropdown key={index} id={index+1} title={gallery.title} comp={<Accordion id={gallery.id} gallery={gallery} />} />
                         )
+                        : <div className="d-flex justify-content-center" style={{fontWeight: '700', fontSize: 20}}>No Projects</div>
                     }
                 </div>
             </div>
