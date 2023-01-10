@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import NewsDisplay from "../../Components/NewsDisplay/NewsDisplay";
 import { ThemeContext } from "../../context/ThemeContext";
-import { projects_data } from "../../Data/Projects_data";
 import {
     AnimationFade,
     AnimationIn,
@@ -16,7 +15,7 @@ function News(props) {
 
     const { onlineAdmin }= props
 
-    const[imgp, setImgp] = useState({key:null, img:''});
+    const[imgp, setImgp] = useState();
     const { setApp_height } = useContext(ThemeContext)
 
     useEffect(() => {
@@ -28,24 +27,47 @@ function News(props) {
         setApp_height(document.getElementsByClassName('App')[0].clientHeight)
     }, [setApp_height])
 
-    const image_resize2 = () => {
-        var all_col2 = document.getElementsByClassName('news_commercial')
-        var all_img2 = document.getElementsByClassName('new_com_img')
-        var p=0
-        // for(var p=0; p < all_col2.length; p++) {
-            // console.log(all_col[j].clientHeight, all_img[j].clientHeight)
-            if(all_col2[p].clientHeight > all_img2[p].clientHeight) {
-                all_img2[p].style.height = '100%'
-                all_img2[p].style.width = null
-            } else {
-                all_img2[p].style.width = '100%'
-                all_img2[p].style.height = null
+    const image_resize2 = (e, i) => {
+        if(e.target.clientHeight) {
+			if(e.target.clientHeight < document.getElementsByClassName('center_image')[i].clientHeight) {
+				e.target.style.height = '100%'
+				e.target.style.width = null
+			} else {
+				e.target.style.width = '100%'
+				e.target.style.height = null
+			}
+			if(e.target.clientHeight < document.getElementsByClassName('center_image')[i].clientHeight) {
+				e.target.style.width = null
+				e.target.style.height = '100%'
+			}
+			if(e.target.clientWidth < document.getElementsByClassName('center_image')[i].clientWidth) {
+				e.target.style.width = '100%'
+				e.target.style.height = null
+			}
+		} else {
+            var all_col3 = document.getElementsByClassName('center_image')
+            var all_img3 = document.getElementsByClassName('new_img')
+            // var p=0
+            // console.log('Height', all_col3[0].clientHeight > all_img3[0].clientHeight, all_col3[0].clientHeight, all_img3[0].clientHeight)
+            // console.log('Width', all_col3[0].clientWidth > all_img3[0].clientWidth, all_col3[0].clientWidth, all_img3[0].clientWidth)
+            for(var p=0; p < all_col3.length; p++) {
+                if(all_col3[p].clientHeight > all_img3[p].clientHeight) {
+                    all_img3[p].style.height = '100%'
+                    all_img3[p].style.width = null
+                } else {
+                    all_img3[p].style.width = '100%'
+                    all_img3[p].style.height = null
+                }
+                if(all_col3[p].clientHeight > all_img3[p].clientHeight) {
+                    all_img3[p].style.width = null
+                    all_img3[p].style.height = '100%'
+                }
+                if(all_col3[p].clientWidth > all_img3[p].clientWidth) {
+                    all_img3[p].style.width = '100%'
+                    all_img3[p].style.height = null
+                }
             }
-            if(all_col2[p].clientWidth > all_img2[p].clientWidth) {
-                all_img2[p].style.width = '100%'
-                all_img2[p].style.height = null
-            }
-        // }
+        }
     }
 
     useEffect(() => {
@@ -66,7 +88,11 @@ function News(props) {
                 </div>
             </div>
             <div className="keys_on_hand">
-                <img src={onlineAdmin?.news.imagestore.image} alt="new_keys" className="new_img FadeIn" />
+                <div className="center_image">
+                    <div className="back_cont">
+                        <img src={onlineAdmin?.news.imagestore.image} alt="new_keys" className="new_img FadeIn" onLoad={(e) => image_resize2(e, 0)} />
+                    </div>
+                </div>
                 <div className="details">
                     <p className="text-center">{onlineAdmin?.news.imagestore.description}</p>
                     <div className="py-4">
@@ -90,18 +116,17 @@ function News(props) {
                         </div>
                     </div>
                 </div>
-                <img src={require('../../assets/Hero.png')} alt="new_keys" className="new_img" />
+                <div className="center_image">
+                    <div className="back_cont">
+                        <img src={require('../../assets/Hero.png')} alt="new_keys" className="new_img" onLoad={(e) => image_resize2(e, 1)} />
+                    </div>
+                </div>
                 <div className="keys_projects">
                     <h1>PROYECTOS</h1>
-                    <NewsDisplay data={projects_data} reverse={true} setImgp={setImgp}/>
-                </div>
-                <div className="news_commercial FadeIn">
-                    <div className="overlay_box_com"></div>
-                    <img src={require('../../assets/ImagesGallery/test2.png')} alt="new_keys" className="new_com_img" onLoad={image_resize2} />
-                    <h1>Galeria comercial</h1>
+                    <NewsDisplay data={onlineAdmin?.projects.data} reverse={true} setImgp={setImgp}/>
                 </div>
  
-                <NewsDisplay data={projects_data} setImgp={setImgp} />
+                {/* <NewsDisplay data={projects_data} setImgp={setImgp} /> */}
             </div>
             <ModalProject imgp={imgp} />
         </div>

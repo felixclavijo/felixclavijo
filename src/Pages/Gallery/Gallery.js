@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import ModalGallery from "../../Components/ModalGallery/ModalGallery";
 import { ThemeContext } from "../../context/ThemeContext";
-import { gallery_data } from "../../Data/Gallery_data";
 import "./Gallery.scss";
 
 // prettier-ignore
-function Gallery() {
+function Gallery(props) {
+
+	const { onlineAdmin } = props
+
 	const [modal, setModal] = useState(false);
 	const [imageindex, setImageIndex] = useState();
 
@@ -70,7 +73,7 @@ function Gallery() {
 		<div className="container-fluid">
 			<div className="grid">
 				{
-					gallery_data?.map((d, i) => 
+					onlineAdmin?.projects.data.map((d, i) => 
 						<div className="col-md p-1" key={i}>
 							<div className="overlay" onClick={() => getImage(i)}>
 								<div className="img_container">
@@ -78,7 +81,7 @@ function Gallery() {
 								</div>
 								<div className="gallery_text">
 									<h3 className="title">{d.title}</h3>
-									<p className="p-subtitle">{d.subtitle}</p>
+									{/* <p className="p-subtitle">{d.subtitle}</p> */}
 								</div>
 							</div>
 						</div>
@@ -87,7 +90,7 @@ function Gallery() {
 			</div>
 		</div>
 		<ModalGallery
-			data={gallery_data[imageindex]?.image}
+			data={onlineAdmin?.projects.data[imageindex]?.image}
 			setModal={setModal}
 			modal={modal}
 			imageindex={imageindex}
@@ -96,4 +99,10 @@ function Gallery() {
 	);
 }
 
-export default Gallery;
+const mapStateToProps = (state) => {
+    return {
+        onlineAdmin: state.onlineAdmin,
+    };
+};
+
+export default connect(mapStateToProps)(Gallery);

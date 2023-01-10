@@ -5,17 +5,15 @@ import InputArea from "../../AdminComponents/InputArea/InputArea";
 import Inputbox from "../../AdminComponents/Inputbox/Inputbox";
 import { CheckImage, readURL } from "../../AdminFunctions/AdminFunctions";
 import Categories from "../../AdminComponents/CategoryInput/CategoryInput";
-// import { readURL } from "../../AdminFunctions/AdminFunctions";
 
 import "./NewsAdmin.scss";
-import { gallery_data } from "../../Data/Gallery_data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // prettier-ignore
 function NewsAdmin({ sidebarshow, ...props }) {
 
     const { admin, adminInsert } = props
-    const active_project = [1,2,3,7]
+    const active_project = [1,2,3,4]
 
     const removeCat = (id) => {
         // admin?.home.services.splice(id, 1)
@@ -266,7 +264,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                 <div className="container-fluid">
                     <div className="grid">
                         {
-                            gallery_data?.map((d, i) => 
+                            admin?.projects.data.map((d, i) => 
                                 <div className="col-md gallery_pro p-1" key={i}>
                                     <div className="overlay">
                                         {

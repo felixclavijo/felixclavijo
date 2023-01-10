@@ -8,6 +8,7 @@ import ChooseFile from "../ChooseFile/ChooseFile";
 import Inputbox from "../Inputbox/Inputbox";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import { Formik } from "formik";
+import { CheckImage } from "../../AdminFunctions/AdminFunctions";
 
 // prettier-ignore
 function AddProject(props) {
@@ -171,8 +172,13 @@ function AddProject(props) {
                                                             name="Choose Image"
                                                             id="bgimg"
                                                             onChange={(e) => {
-                                                                setImgError(false)
-                                                                setSelectedImages([...selected_images, e.target.files[0]])
+                                                                var val = CheckImage(e)
+                                                                if(val !== null) {
+                                                                    if(e.target.files.length !== 0) {
+                                                                        setImgError(false)
+                                                                        setSelectedImages([...selected_images, e.target.files[0]])
+                                                                    }
+                                                                }
                                                             }}
                                                         />
                                                         {imgerror ? <div className="text-danger text-start">Required</div> : null}

@@ -23,61 +23,50 @@ function ModalProject({ imgp }) {
 						></button>
 					</div>
 					<div className="modal-body">
-						<div className="row">
-							<div >
-								<img
-								className="project_modal_img"
-									src={imgp?.img ? imgp?.img : "/static/media/test1.a999ca50641770d988dd.png"}
-									key={imgp?.key}
-									alt="img_modal"
-								/>
+							<div>
+								<img className="project_modal_img w-100" src={imgp ? imgp?.image[0] : null} key={imgp?.id} alt="img_modal" />
 							</div>
-							<div >
+							<div>
 								<div className="title-project">
 									<h4 style={{ fontSize: "30px" }}>
-										Proyecto Galeria Comercial
+										Proyecto {imgp?.title}
 									</h4>
 									<hr className="line_hr" />
 						
 								</div>
 								<div className="box-modal-datap">
-
-
-
-					
-								<div className="box-subdiv-modal-datap">
+									<div className="box-subdiv-modal-datap">
 										<div className="rowdata">
 											<p className="datap1">Dirección: </p>
-											<p className="datap2">Entre Rios 2162</p>
+											<p className="datap2">{imgp?.Direccion}</p>
 										</div>
 										<div className="rowdata">
 											<p className="datap1" >Ciudad: </p>
-											<p className="datap2">Buenos Aires, Argentina</p>
+											<p className="datap2">{imgp?.Ciudad}</p>
 										</div>
 										<div className="rowdata">
 											<p className="datap1">Año de proyecto: </p>
-											<p className="datap2">2017</p>
+											<p className="datap2">{imgp?.Año}</p>
 										</div>
 										<div className="rowdata">
 											<p className="datap1">Estado: </p>
-											<p className="datap2">En construcción</p>
+											<p className="datap2">{imgp?.Estado}</p>
 										</div>
 										<div className="rowdata">
 											<p className="datap1">Superficie: </p>
-											<p className="datap2">3412 m2</p>
+											<p className="datap2">{imgp?.Superficie}</p>
 										</div>
 										<div className="rowdata">
 											<p className="datap1">Unidades: </p>
-											<p className="datap2">63 viviendad</p>
+											<p className="datap2">{imgp?.Unidades}</p>
 										</div>
 										<div className="rowdata">
 											<p className="datap1">Local: </p>
-											<p className="datap2">1 local comercial</p>
+											<p className="datap2">{imgp?.Local}</p>
 										</div>
 									</div>
-									</div>
+								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>

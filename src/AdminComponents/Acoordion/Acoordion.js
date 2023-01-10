@@ -6,6 +6,7 @@ import ChooseFile from "../ChooseFile/ChooseFile";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import { connect } from "react-redux";
 import { Formik } from "formik";
+import { CheckImage } from "../../AdminFunctions/AdminFunctions";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // prettier-ignore
@@ -181,23 +182,28 @@ function Accordion({ gallery, ...props }) {
 											name="Choose Image"
 											id={`bgupd`+gallery.id}
 											onChange={(e) => {
-												setImgError(false)
-												var updImg = {
-													...admin,
-													projects: {
-														...admin.projects,
-														data: admin.projects.data.map((el, i) => 
-															i === gallery.id-1 
-															? {
-																...values,
-																image: [...el.image, e.target.files[0]]
+												var val = CheckImage(e)
+												if(val !== null) {
+													if(e.target.files.length !== 0) {
+														setImgError(false)
+														var updImg = {
+															...admin,
+															projects: {
+																...admin.projects,
+																data: admin.projects.data.map((el, i) => 
+																	i === gallery.id-1 
+																	? {
+																		...values,
+																		image: [...el.image, e.target.files[0]]
+																	}
+																	: el
+																),
 															}
-															: el
-														),
+														}
+														adminInsert(updImg)
+														setUpdImages([...values.image, e.target.files[0]])
 													}
 												}
-												adminInsert(updImg)
-												setUpdImages([...values.image, e.target.files[0]])
 											}}
 										/>
 										{imgerror ? <div className="text-danger text-start">Required</div> : null}
