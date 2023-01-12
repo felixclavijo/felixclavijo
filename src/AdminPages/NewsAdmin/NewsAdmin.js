@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function NewsAdmin({ sidebarshow, ...props }) {
 
     const { admin, adminInsert } = props
-    const active_project = [1,2,3,4]
 
     const removeCat = (id) => {
         // admin?.home.services.splice(id, 1)
@@ -64,6 +63,17 @@ function NewsAdmin({ sidebarshow, ...props }) {
         
         return () => window.removeEventListener('resize', galleryImg)
     }, [])
+
+    const activeProject = (id) => {
+        var upd = {
+            ...admin,
+            news: {
+                ...admin.news,
+                active_project: admin?.news.active_project.includes(id) ? admin?.news.active_project.filter(ele => ele !== id) : [...admin?.news.active_project, id].sort()
+            }
+        }
+        adminInsert(upd)
+    }
 
     return (
         <div className={`newsadmin ${!sidebarshow ? "page" : "page page-with-navbar"}`}>
@@ -265,10 +275,10 @@ function NewsAdmin({ sidebarshow, ...props }) {
                     <div className="grid">
                         {
                             admin?.projects.data.map((d, i) => 
-                                <div className="col-md gallery_pro p-1" key={i}>
+                                <div className="col-md gallery_pro p-1" onClick={() => activeProject(d.id)} key={i}>
                                     <div className="overlay">
                                         {
-                                            active_project.includes(d.id)
+                                            admin?.news.active_project.includes(d.id)
                                             ? <>
                                                 <div className="overlay_active"></div>
                                                 <div className="check_box">

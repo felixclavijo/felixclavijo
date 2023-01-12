@@ -123,7 +123,7 @@ function News(props) {
                 </div>
                 <div className="keys_projects">
                     <h1>PROYECTOS</h1>
-                    <NewsDisplay data={onlineAdmin?.projects.data} reverse={true} setImgp={setImgp}/>
+                    <NewsDisplay data={onlineAdmin?.projects.data.filter(ele => onlineAdmin?.news.active_project.includes(ele.id))} reverse={true} setImgp={setImgp}/>
                 </div>
  
                 {/* <NewsDisplay data={projects_data} setImgp={setImgp} /> */}
