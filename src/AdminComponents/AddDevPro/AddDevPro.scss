@@ -1,0 +1,36 @@
+@use '../../styles/abstract/colors' as *;
+
+#adddevpro {
+    
+    .modal-body {
+        background-color: #EDEDED;
+    }
+
+    .modal-dialog {
+        max-width: 1000px;
+
+        .close {
+            border: 0;
+            background-color: transparent;
+        }
+    }
+
+    .img_box {
+        height: 350px;
+        overflow: hidden;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn {
+        width: 140px;
+        background-color: $primary;
+        color: white;
+        padding: 0;
+        font-weight: 600;
+        margin: 0px 5px;
+        height: 4.5vh;
+    }
+}

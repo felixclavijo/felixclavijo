@@ -167,6 +167,16 @@ function SidebarAdmin({ sidebarshow, setSidebarShow, ...props }) {
                                             }
                                         }
                                     }
+                                    for(var x=0; x < admin?.devpro.data.length; x++) {
+                                        // console.log(typeof admin?.home.features[x].image === 'object' && typeof admin?.home.features[x].video === 'object')
+                                        if(typeof admin?.devpro.data[x].image === 'object') {
+                                            let path = `DevPro/${x+1}`
+                                            await DeleteImage(path)
+                                            let fullpath = path+'/'+admin?.devpro.data[x].image.name
+                                            let url = await UploadImg(admin?.devpro.data[x].image, fullpath)
+                                            admin.devpro.data[x].image = url
+                                        }
+                                    }
                                     if(typeof admin?.news.imagestore.image === 'object') {
                                         let path = `News/Imagestore`
                                         await DeleteImage(path)

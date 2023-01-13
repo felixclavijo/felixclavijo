@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import SingleNews from "../../Components/SingleNews/SingleNews";
 import SubTitle from "../../Components/SubTitle/SubTitle";
 import { ThemeContext } from "../../context/ThemeContext";
-import { news_data } from "../../Data/News_data";
 import { AnimationFade, AnimationIn } from "../../styles/animations/fadein";
 
 import "./DevPro.scss";
@@ -52,10 +51,10 @@ function DevPro(props) {
             </div>
             <div className="news_all">
                 {
-                    news_data?.map((news, i) => 
+                    onlineAdmin?.devpro.data.map((devpro, i) => 
                         i%2 === 0
-                        ? <SingleNews id={news.id} image={news.image} title={news.title} desc={news.desc} reverse={true} key={i} />
-                        : <SingleNews id={news.id} image={news.image} title={news.title} desc={news.desc} key={i} />
+                        ? <SingleNews id={devpro.id} image={devpro.image} title={devpro.title} desc={devpro.description} reverse={true} key={i} />
+                        : <SingleNews id={devpro.id} image={devpro.image} title={devpro.title} desc={devpro.description} key={i} />
                     )
                 }
                 {/* <SingleNews id={news_data[1].id} image={news_data[1].image} title={news_data[1].title} desc={news_data[1].desc} /> */}

@@ -76,7 +76,7 @@ function SingleNews({ id, image, title, desc, reverse=false }) {
                         {
                             reverse && changing
                             ? <div className="FadeLeft my-4">
-                                <h1><span className="news_id">{id}.</span> {title}</h1>
+                                <h1><span className="news_id">0{id}.</span> {title}</h1>
                                 {/* <hr className="line_hr" /> */}
                                 <span style={{fontSize: 18}}>{desc}</span>
                             </div>
@@ -93,7 +93,7 @@ function SingleNews({ id, image, title, desc, reverse=false }) {
                                 <img src={image} alt="news" className="news_img" onLoad={interChange} />
                             </div>
                             : <div className="FadeRight my-4">
-                                <h1><span className="news_id">{id}.</span> {title}</h1>
+                                <h1><span className="news_id">0{id}.</span> {title}</h1>
                                 {/* <hr className="line_hr" /> */}
                                 <span style={{fontSize: 18}}>{desc}</span>
                             </div>

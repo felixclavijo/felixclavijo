@@ -87,7 +87,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                     <div className="row">
                         <div className="col-md">
                             <div className="phrase_title">
-                                <Inputbox name="title" type='text' defaultValue={admin?.news.phrase.title} placeholder="Type Here" 
+                                <Inputbox name="title" type='text' value={admin?.news.phrase.title ? admin?.news.phrase.title : ''} placeholder="Type Here" 
                                     onChange={(e) => 
                                         adminInsert({
                                             ...admin,
@@ -102,7 +102,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                                     } 
                                 />
                             </div>
-                            <InputArea name='Phrase Description' type='text' defaultValue={admin?.news.phrase.description} placeholder='Type Here' rows={5}
+                            <InputArea name='Phrase Description' type='text' value={admin?.news.phrase.description ? admin?.news.phrase.description : ''} placeholder='Type Here' rows={5}
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,
@@ -151,7 +151,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                                     }
                                 }}
                             />
-                            <InputArea name='Description' type='text' defaultValue={admin?.news.imagestore.description} placeholder='Type Here' rows={5} 
+                            <InputArea name='Description' type='text' value={admin?.news.imagestore.description ? admin?.news.imagestore.description : ''} placeholder='Type Here' rows={5} 
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,
@@ -206,7 +206,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                             </div>
                             {
                                 admin?.news.productservices.map((pro, i) => 
-                                    <Categories name={`p${i+1}`} id={i} type='text' defaultValue={pro} placeholder="Type Here" key={i} removeCat={removeCat} 
+                                    <Categories name={`p${i+1}`} id={i} type='text' value={pro ? pro : ''} placeholder="Type Here" key={i} removeCat={removeCat} 
                                         onChange={(e) => {
                                             var updinside = {
                                                 ...admin,
@@ -236,7 +236,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                             </div>
                         </div>
                         <div className="col-md">
-                            <Inputbox name="title" type='text' defaultValue={admin?.news.keyonhand.title} placeholder="Type Here" 
+                            <Inputbox name="title" type='text' value={admin?.news.keyonhand.title ? admin?.news.keyonhand.title : ''} placeholder="Type Here" 
                                 onChange={(e) => 
                                     adminInsert({
                                         ...admin,
@@ -250,7 +250,7 @@ function NewsAdmin({ sidebarshow, ...props }) {
                                     })
                                 } 
                             />
-                            <InputArea name='Description' type='text' defaultValue={admin?.news.keyonhand.description} placeholder='Type Here' rows={5}
+                            <InputArea name='Description' type='text' value={admin?.news.keyonhand.description ? admin?.news.keyonhand.description : ''} placeholder='Type Here' rows={5}
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,

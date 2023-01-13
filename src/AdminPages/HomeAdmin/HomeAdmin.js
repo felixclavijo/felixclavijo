@@ -152,7 +152,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     }
                                 }} 
                             />
-                            <Inputbox name="title" type='text' defaultValue={admin?.home.hero.title} placeholder="Type Here" 
+                            <Inputbox name="title" type='text' value={admin?.home.hero.title ? admin?.home.hero.title : ''} placeholder="Type Here" 
                                 onChange={(e) => 
                                     adminInsert({
                                         ...admin,
@@ -166,7 +166,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     })
                                 } 
                             />
-                            <Inputbox name="phrase" type='text' defaultValue={admin?.home.hero.phrase} placeholder="Type Here" 
+                            <Inputbox name="phrase" type='text' value={admin?.home.hero.phrase ? admin?.home.hero.phrase : ''} placeholder="Type Here" 
                                 onChange={(e) => 
                                     adminInsert({
                                         ...admin, 
@@ -226,7 +226,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                             </div>
                             {
                                 admin?.home.services.map((ser, i) => 
-                                    <Categories name={`c${i+1}`} id={i} type='text' defaultValue={ser} placeholder="Type Here" key={i} removeCat={removeCat} 
+                                    <Categories name={`c${i+1}`} id={i} type='text' value={ser ? ser : ''} placeholder="Type Here" key={i} removeCat={removeCat} 
                                         onChange={(e) => {
                                             var updinside = {
                                                 ...admin,
@@ -261,7 +261,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
             </div>
             {/* ----------------- Phrase -------------------- */}
             <div className="phrase_section">
-                <InputArea name='Phrase' type='text' defaultValue={admin?.home.phrase} placeholder='Type Here' rows={5} 
+                <InputArea name='Phrase' type='text' value={admin?.home.phrase ? admin?.home.phrase : ''} placeholder='Type Here' rows={5} 
                     onChange={(e) => {
                         adminInsert({
                             ...admin,
@@ -325,7 +325,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     }
                                 }}
                             />
-                            <Inputbox name="title" type='text' defaultValue={admin?.home.features[0].title} placeholder="Type Here" 
+                            <Inputbox name="title" type='text' value={admin?.home.features[0].title ? admin?.home.features[0].title : ''} placeholder="Type Here" 
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,
@@ -343,7 +343,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     })
                                 }}
                             />
-                            <InputArea name='Description' type='text' defaultValue={admin?.home.features[0].desc} placeholder='Type Here' rows={5} 
+                            <InputArea name='Description' type='text' value={admin?.home.features[0].desc ? admin?.home.features[0].desc : ''} placeholder='Type Here' rows={5} 
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,
@@ -400,7 +400,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                             </div>
                         </div>
                         <div className="col-md">
-                            <Inputbox name="title" type='text' defaultValue={admin?.home.imageDisplay[0].title} placeholder="Type Here"
+                            <Inputbox name="title" type='text' value={admin?.home.imageDisplay[0].title ? admin?.home.imageDisplay[0].title : ''} placeholder="Type Here"
                                 onChange={(e) => 
                                     adminInsert({
                                         ...admin,
@@ -440,7 +440,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     }
                                 }} 
                             />
-                            <Inputbox name="title" type='text' defaultValue={admin?.home.imageDisplay[1].title} placeholder="Type Here" 
+                            <Inputbox name="title" type='text' value={admin?.home.imageDisplay[1].title ? admin?.home.imageDisplay[1].title : ''} placeholder="Type Here" 
                                 onChange={(e) => 
                                     adminInsert({
                                         ...admin,
@@ -536,7 +536,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     }
                                 }}
                             />
-                            <Inputbox name="title" type='text' defaultValue={admin?.home.features[1].title} placeholder="Type Here" 
+                            <Inputbox name="title" type='text' value={admin?.home.features[1].title ? admin?.home.features[1].title : ''} placeholder="Type Here" 
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,
@@ -554,7 +554,7 @@ function HomeAdmin({ sidebarshow, ...props }) {
                                     })
                                 }}
                             />
-                            <InputArea name='Description' type='text' defaultValue={admin?.home.features[1].desc} placeholder='Type Here' rows={5} 
+                            <InputArea name='Description' type='text' value={admin?.home.features[1].desc ? admin?.home.features[1].desc : ''} placeholder='Type Here' rows={5} 
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,

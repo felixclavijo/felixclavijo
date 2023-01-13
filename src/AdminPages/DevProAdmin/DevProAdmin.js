@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
+import AddDevPro from "../../AdminComponents/AddDevPro/AddDevPro";
+import DevProAcoordion from "../../AdminComponents/DevProAcoordion/DevProAcoordion";
 import Dropdown from "../../AdminComponents/Dropdown/Dropdown";
 import InputArea from "../../AdminComponents/InputArea/InputArea";
 import Inputbox from "../../AdminComponents/Inputbox/Inputbox";
-import { news_data } from "../../Data/News_data";
 
 import "./DevProAdmin.scss";
 
@@ -24,7 +25,7 @@ function DevProAdmin({ sidebarshow, ...props }) {
                     <div className="row">
                         <div className="col-md">
                             <div className="phrase_title">
-                                <Inputbox name="title" type='text' defaultValue={admin?.devpro.phrase.title} placeholder="Type Here" 
+                                <Inputbox name="title" type='text' value={admin?.devpro.phrase.title ? admin?.devpro.phrase.title : ''} placeholder="Type Here" 
                                     onChange={(e) => 
                                         adminInsert({
                                             ...admin,
@@ -39,7 +40,7 @@ function DevProAdmin({ sidebarshow, ...props }) {
                                     } 
                                 />
                             </div>
-                            <InputArea name='Phrase Description' type='text' defaultValue={admin?.devpro.phrase.description} placeholder='Type Here' rows={5}
+                            <InputArea name='Phrase Description' type='text' value={admin?.devpro.phrase.description} placeholder='Type Here' rows={5}
                                 onChange={(e) => {
                                     adminInsert({
                                         ...admin,
@@ -59,24 +60,15 @@ function DevProAdmin({ sidebarshow, ...props }) {
             </div>
             {/* ----------------- DevPro Add button -------------------- */}
             <div>
-                <button className="btn add_btn"
-                    // onClick={(e) => {
-                    //     // admin.home.services.push("")
-                    //     var addupd = {
-                    //         ...admin,
-                    //         news: {
-                    //             ...admin.news,
-                    //             productservices: [...admin.news.productservices, ""],
-                    //         }
-                    //     }
-                    //     adminInsert(addupd)
-                    // }} 
-                >Add DevPro</button>
+                <button className="btn add_btn"data-bs-toggle="modal" data-bs-target="#adddevpro">
+                    Add DevPro
+                </button>
+                <AddDevPro />
                 {/* ----------------- DevPro All DropDown -------------------- */}
                 <div>
                     {
-                        news_data?.map((news, index) => 
-                            <Dropdown key={index} id={news.id} title={news.title} desc={news.desc} />
+                        admin?.devpro.data.map((news, index) => 
+                            <Dropdown key={index} id={`0${news.id}`} title={news.title} desc={news.desc} comp={<DevProAcoordion devnews={news} />} />
                         )
                     }
                 </div>
